@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0e5ec;
+  font-family: "Vazir", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  direction: rtl;
+}
+
+.container {
+  background: #e0e5ec;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 10px 10px 20px #a3b1c6, -10px -10px 20px #ffffff;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 0 0 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.card h1 {
+  margin-bottom: 20px;
+  color: #6d7582;
+  font-size: 24px;
+  text-align: center;
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 20px;
+  background: #e0e5ec;
+  box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+  font-size: 16px;
+  color: #6d7582;
+  position: relative;
+  z-index: 1;
+}
+
+.form-input::placeholder {
+  color: #a3b1c6;
+}
+
+.form-button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 24px;
+  background: #e0e5ec;
+  color: #6d7582;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+  transition: all 0.3s ease;
+}
+
+.form-button:hover {
+  box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+  scale: 1.1;
+}
+
+.dots {
+  margin: 30px 0 10px 0;
+  background: #e0e5ec;
+  box-shadow: 10px 10px 20px #a3b1c6, -10px -10px 20px #ffffff;
+  padding: 5px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+textarea.form-input {
+  resize: vertical;
+  min-height: 50px;
+  max-height: 300px;
+  max-width: 100%;
+  overflow-y: auto;
+}
+
+canvas {
+  max-width: 100%;
+  border: 2px solid #000000;
+  border-radius: 12px;
+}
+
+.idError {
+  direction: rtl;
+  color: red;
+  font-weight: bold;
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .card h1 {
+    font-size: 20px;
+  }
+
+  .form-input,
+  .form-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .form-label {
+    font-size: 14px;
+  }
+
+  .form-label-forth {
+    top: 9%;
+  }
+}
