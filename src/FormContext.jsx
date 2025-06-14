@@ -294,6 +294,137 @@ function Provider({ children }) {
     (item) => item.symptom === selectedSymptom
   );
 
+  const earlyDiagnosisVitalSign = [
+    {
+      vitalSign: "فشار خون (SBP)",
+      warningCriteria: "< 90 mmHg یا افت ناگهانی ≥ 40 mmHg",
+    },
+
+    {
+      vitalSign: "تعداد تنفس",
+      warningCriteria: "> 30 یا < 8 در دقیقه",
+    },
+
+    {
+      vitalSign: "اشباع اکسیژن (SpO₂)",
+      warningCriteria: "< 90% علی‌رغم اکسیژن مکمل",
+    },
+
+    {
+      vitalSign: "ضربان قلب",
+      warningCriteria: "< 40 یا > 130 bpm",
+    },
+
+    {
+      vitalSign: "دمای بدن",
+      warningCriteria: "< 35°C یا > 40°C",
+    },
+
+    {
+      vitalSign: "GCS (سطح هوشیاری)",
+      warningCriteria: "≤ 8 یا کاهش سریع طی زمان کوتاه",
+    },
+  ];
+
+  const [vitalDiagnosis, setVitalDiagnosis] = useState("");
+
+  const handleVitalDiagnosis = (e) => {
+    setVitalDiagnosis(e.target.value);
+  };
+
+  const selectedVitalDiagnosis = earlyDiagnosisVitalSign.find(
+    (item) => item.vitalSign === selectedVitalDiagnosis
+  );
+
+  const earlyDiagnosisList = [
+    {
+      vitalSign: "معیارهای تنفسی (Respiratory Red Flags",
+      vitalSignExplaination: [
+        "دیسترس تنفسی شدید (retractions, accessory muscles use)",
+        "نیاز فوری به تهویه مکانیکی",
+        "برونشواسپاسم شدید مقاوم",
+        "پنوموتوراکس تحت فشار",
+        "صدای تنفس کاهش‌یافته یا غیاب صدا در یک ریه",
+        "بالا بودن PaCO₂ و اسیدوز در ABG",
+      ],
+    },
+
+    {
+      vitalSign: "معیارهای قلبی‌عروقی",
+      vitalSignExplaination: [
+        "شوک (سردی اندام، تاخیر پرشدن مویرگی، فشار پایین)",
+        "آریتمی تهدیدکننده زندگی (VF, VT, complete heart block)",
+        "درد قفسه سینه شدید با علائم ناپایداری",
+        "تنگی نفس با ادم حاد ریه",
+        "فشار خون مقاوم به درمان یا فشار پایین پایدار",
+      ],
+    },
+
+    {
+      vitalSign: "اختلالات هوشیاری و عصبی",
+      vitalSignExplaination: [
+        "GCS ≤ 8",
+        "تشنج ممتد یا برگشت‌پذیر نشده",
+        "تغییر ناگهانی در رفتار/وضعیت روانی",
+        "سکته مغزی مشکوک با ناپایداری",
+        "افت هوشیاری بدون دلیل واضح",
+        "سندرم Guillain-Barré با خطر درگیری تنفس",
+      ],
+    },
+
+    {
+      vitalSign: "شواهد سپسیس یا عفونت شدید",
+      vitalSignExplaination: [
+        "تب شدید با لرز و ناپایداری فشار",
+        "وجود منبع عفونی + اختلال در عملکرد ≥1 ارگان",
+        "لکوسیتوز شدید یا لکوپنی + علائم شوک",
+        "لکوسیتوز شدید یا لکوپنی + علائم شوک",
+        "نیاز به نرمال‌سالین > 2 لیتر بدون پاسخ همودینامیک",
+      ],
+    },
+
+    {
+      vitalSign: "معیارهای کلیوی / متابولیک",
+      vitalSignExplaination: [
+        "کراتینین ↑ سریع + کاهش ادرار (Oliguria/Anuria)",
+        "پتاسیم > 6.5 mEq/L همراه با ECG abnormal",
+        "اسیدوز شدید (pH < 7.2)",
+        "نارسایی چند ارگانی (MODS)",
+        "نیاز فوری به دیالیز اورژانسی",
+      ],
+    },
+
+    {
+      vitalSign: "تروما و خونریزی شدید",
+      vitalSignExplaination: [
+        "تروما با GCS پایین یا همودینامیک ناپایدار",
+        "خونریزی داخلی/خارجی شدید (Hb↓ + شوک)",
+        "هموپتیزی یا ملنا شدید با فشار پایین",
+        "بعد از CPR موفق (Post-ROSC care)",
+      ],
+    },
+
+    {
+      vitalSign: "سایر شرایط ضروری",
+      vitalSignExplaination: [
+        "مسمومیت با دارو یا سم با تهدید تنفس/قلب",
+        "سوختگی وسیع (>30%) یا همراه با استنشاق دود",
+        "هیپوترمی یا هیپرترمی شدید مقاوم",
+        "بعد از جراحی پرخطر همراه با بی‌ثباتی",
+      ],
+    },
+  ];
+
+  const [earlyDiagnosis, setEarlyDiagnosis] = useState("");
+
+  const handleEarlyDiagnosis = (e) => {
+    setEarlyDiagnosis(e.target.value);
+  };
+
+  const selectedEarlyDiagnosis = earlyDiagnosis.find(
+    (item) => item.vitalSign === selectedEarlyDiagnosis
+  );
+
   const sharedValues = {
     formData,
     handleInputChange,
@@ -313,6 +444,13 @@ function Provider({ children }) {
     selectedSymptom,
     handleSymptom,
     selectedItem,
+    earlyDiagnosisVitalSign,
+    vitalDiagnosis,
+    handleVitalDiagnosis,
+    selectedVitalDiagnosis,
+    earlyDiagnosisList,
+    earlyDiagnosis,
+    handleEarlyDiagnosis,
     idError,
     isAnyError,
   };
