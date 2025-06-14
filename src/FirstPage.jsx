@@ -2,6 +2,7 @@ import { GoDot, GoDotFill } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import FormContext from "./FormContext";
+import { useNavigate } from "react-router-dom";
 
 function FirstPage() {
   const {
@@ -12,10 +13,19 @@ function FirstPage() {
     handlePhoneNumber,
     handleHomePhoneNumber,
     idError,
+    isAnyError,
   } = useContext(FormContext);
+
+  const navigate = useNavigate();
 
   const handleForm = (e) => {
     e.preventDefault();
+    if (isAnyError) {
+      alert("sth is weeehhhh!");
+    } else {
+      alert("sth is wooohhhh");
+      navigate("/second");
+    }
   };
 
   ///
@@ -40,7 +50,7 @@ function FirstPage() {
 
   useEffect(() => {
     const yearList = [];
-    for (let y = 1300; y <= 1500; y++) {
+    for (let y = 1300; y <= 1404; y++) {
       yearList.push(y);
     }
     setYears(yearList);
@@ -58,7 +68,7 @@ function FirstPage() {
     if (selectedYear) updateDays(selectedYear, month);
   };
 
-  const handleDayChange = (e) => {
+  const handleDayChange = () => {
     // Optional: store the selected day if needed
   };
 
@@ -75,8 +85,8 @@ function FirstPage() {
     const dayList = Array.from({ length: numDays }, (_, i) => i + 1);
     setDays(dayList);
   };
-
   ///
+
   return (
     <>
       <form className="container card" onSubmit={handleForm} dir="rtl">
@@ -186,7 +196,6 @@ function FirstPage() {
             type="tel"
             id="homePhoneNumber"
             name="homePhoneNumber"
-            pattern="09\d{9}"
             className="form-input"
             value={formData.homePhoneNumber}
             onChange={handleHomePhoneNumber}

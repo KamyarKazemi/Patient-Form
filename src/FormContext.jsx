@@ -16,6 +16,7 @@ function Provider({ children }) {
   });
 
   const [idError, setIdError] = useState(false);
+  const [isAnyError, setIsAnyError] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,9 +42,11 @@ function Provider({ children }) {
     if (isTenDigits) {
       console.log("✌️ idCode is Valid");
       setIdError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 idCode is Invalid");
       setIdError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -60,9 +63,11 @@ function Provider({ children }) {
     if (isAgeValid) {
       console.log("✌️ age  is Valid");
       setIdError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 age is Invalid");
       setIdError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -80,9 +85,11 @@ function Provider({ children }) {
     if (isValid || isValid2) {
       console.log("✌️ phone  is Valid");
       setIdError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 phone is Invalid");
       setIdError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -117,9 +124,11 @@ function Provider({ children }) {
     if (isValid) {
       console.log("✌️ home  is Valid");
       setIdError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 home is Invalid");
       setIdError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -136,6 +145,7 @@ function Provider({ children }) {
     handlePhoneNumber,
     handleHomePhoneNumber,
     idError,
+    isAnyError,
   };
 
   return (
