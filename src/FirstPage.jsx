@@ -1,6 +1,6 @@
 import { GoDot, GoDotFill } from "react-icons/go";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import FormContext from "./FormContext";
 
 function FirstPage() {
@@ -8,16 +8,78 @@ function FirstPage() {
     formData,
     handleInputChange,
     handleIdCode,
-    handleName,
     handleAge,
     handlePhoneNumber,
     handleHomePhoneNumber,
     idError,
   } = useContext(FormContext);
 
+  const handleForm = (e) => {
+    e.preventDefault();
+  };
+
+  ///
+  const [years, setYears] = useState([]);
+  const [months] = useState([
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+    "آبان",
+    "آذر",
+    "دی",
+    "بهمن",
+    "اسفند",
+  ]);
+  const [days, setDays] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(null);
+
+  useEffect(() => {
+    const yearList = [];
+    for (let y = 1300; y <= 1500; y++) {
+      yearList.push(y);
+    }
+    setYears(yearList);
+  }, []);
+
+  const handleYearChange = (e) => {
+    const year = parseInt(e.target.value);
+    setSelectedYear(year);
+    if (selectedMonth) updateDays(year, selectedMonth);
+  };
+
+  const handleMonthChange = (e) => {
+    const month = parseInt(e.target.value);
+    setSelectedMonth(month);
+    if (selectedYear) updateDays(selectedYear, month);
+  };
+
+  const handleDayChange = (e) => {
+    // Optional: store the selected day if needed
+  };
+
+  const isLeapYearShamsi = (year) => {
+    // Simple approximation for leap year in Shamsi calendar
+    return ((year + 38) * 682) % 2816 < 682;
+  };
+
+  const updateDays = (year, month) => {
+    let numDays = 30;
+    if (month <= 6) numDays = 31;
+    else if (month === 12) numDays = isLeapYearShamsi(year) ? 30 : 29;
+
+    const dayList = Array.from({ length: numDays }, (_, i) => i + 1);
+    setDays(dayList);
+  };
+
+  ///
   return (
     <>
-      <form className="container card" dir="rtl">
+      <form className="container card" onSubmit={handleForm} dir="rtl">
         <h1>مرحله اول</h1>
         <h1>اطلاعات هویتی بیمار</h1>
 
@@ -31,7 +93,7 @@ function FirstPage() {
             name="firstName"
             className="form-input"
             value={formData.firstName}
-            onChange={handleName}
+            onChange={handleInputChange}
             required
           />
         </div>
@@ -46,7 +108,7 @@ function FirstPage() {
             name="lastName"
             className="form-input"
             value={formData.lastName}
-            onChange={handleName}
+            onChange={handleInputChange}
             required
           />
         </div>
@@ -117,12 +179,12 @@ function FirstPage() {
         </div>
 
         <div className="input-group">
-          <label htmlFor="phoneNumber" className="form-label">
+          <label htmlFor="homePhoneNumber" className="form-label">
             شماره تلفن
           </label>
           <input
             type="tel"
-            id="phoneNumber"
+            id="homePhoneNumber"
             name="homePhoneNumber"
             pattern="09\d{9}"
             className="form-input"
@@ -141,16 +203,44 @@ function FirstPage() {
           <label className="form-label date-label">تاریخ تولد (شمسی)</label>
 
           <div className="persian-date-container">
-            <select className="form-input date-select" required>
+            <select
+              className="form-input date-select"
+              required
+              onChange={handleYearChange}
+            >
               <option value="">سال</option>
+              {years.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
             </select>
 
-            <select className="form-input date-select" required>
+            <select
+              className="form-input date-select"
+              required
+              onChange={handleMonthChange}
+            >
               <option value="">ماه</option>
+              {months.map((m, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {m}
+                </option>
+              ))}
             </select>
 
-            <select className="form-input date-select" required disabled>
+            <select
+              className="form-input date-select"
+              required
+              disabled={!selectedMonth}
+              onChange={handleDayChange}
+            >
               <option value="">روز</option>
+              {days.map((d) => (
+                <option key={d} value={d}>
+                  {d}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -162,12 +252,13 @@ function FirstPage() {
           <textarea
             type="text"
             id="fullAddress"
-            name="fullAddress"
+            name="fullAdderess"
             className="form-input"
             value={formData.fullAdderess}
             onChange={handleInputChange}
             required
           />
+          <button className="form-button">مرحله بعد</button>
         </div>
         <div>
           <GoDot />

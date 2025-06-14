@@ -29,16 +29,16 @@ function Provider({ children }) {
 
     const isTenDigits = cleanedValue.length === 10;
 
-    let isUnique = true;
-    for (let i = 0; i < cleanedValue.length; i++) {
-      // ✅ condition fixed
-      if (cleanedValue.indexOf(cleanedValue[i]) !== i) {
-        isUnique = false;
-        break;
-      }
-    }
+    // let isUnique = true;
+    // for (let i = 0; i < cleanedValue.length; i++) {
+    //   // ✅ condition fixed
+    //   if (cleanedValue.indexOf(cleanedValue[i]) !== i) {
+    //     isUnique = false;
+    //     break;
+    //   }
+    // }
 
-    if (isTenDigits && isUnique) {
+    if (isTenDigits) {
       console.log("✌️ idCode is Valid");
       setIdError(false);
     } else {
