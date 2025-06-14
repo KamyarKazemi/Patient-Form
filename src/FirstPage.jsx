@@ -1,6 +1,5 @@
 import { GoDot, GoDotFill } from "react-icons/go";
-import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import FormContext from "./FormContext";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +11,14 @@ function FirstPage() {
     handleAge,
     handlePhoneNumber,
     handleHomePhoneNumber,
+    setYears,
+    handleYearChange,
+    years,
+    handleMonthChange,
+    months,
+    selectedMonth,
+    days,
+    handleDayChange,
     idError,
     isAnyError,
   } = useContext(FormContext);
@@ -28,26 +35,6 @@ function FirstPage() {
     }
   };
 
-  ///
-  const [years, setYears] = useState([]);
-  const [months] = useState([
-    "فروردین",
-    "اردیبهشت",
-    "خرداد",
-    "تیر",
-    "مرداد",
-    "شهریور",
-    "مهر",
-    "آبان",
-    "آذر",
-    "دی",
-    "بهمن",
-    "اسفند",
-  ]);
-  const [days, setDays] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState(null);
-
   useEffect(() => {
     const yearList = [];
     for (let y = 1300; y <= 1404; y++) {
@@ -56,35 +43,6 @@ function FirstPage() {
     setYears(yearList);
   }, []);
 
-  const handleYearChange = (e) => {
-    const year = parseInt(e.target.value);
-    setSelectedYear(year);
-    if (selectedMonth) updateDays(year, selectedMonth);
-  };
-
-  const handleMonthChange = (e) => {
-    const month = parseInt(e.target.value);
-    setSelectedMonth(month);
-    if (selectedYear) updateDays(selectedYear, month);
-  };
-
-  const handleDayChange = () => {
-    // Optional: store the selected day if needed
-  };
-
-  const isLeapYearShamsi = (year) => {
-    // Simple approximation for leap year in Shamsi calendar
-    return ((year + 38) * 682) % 2816 < 682;
-  };
-
-  const updateDays = (year, month) => {
-    let numDays = 30;
-    if (month <= 6) numDays = 31;
-    else if (month === 12) numDays = isLeapYearShamsi(year) ? 30 : 29;
-
-    const dayList = Array.from({ length: numDays }, (_, i) => i + 1);
-    setDays(dayList);
-  };
   ///
 
   return (

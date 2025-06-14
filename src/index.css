@@ -110,6 +110,45 @@ canvas {
   font-weight: bold;
 }
 
+.checkbox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 20px;
+  background: #e0e5ec;
+  box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+  font-size: 16px;
+  color: #6d7582;
+  position: relative;
+  z-index: 1;
+}
+
+.checkbox input {
+  margin: 0 0 0 5px;
+}
+
+.checkbox label {
+  margin: 0;
+}
+
+.checkbox-container {
+  flex-direction: row;
+  margin: 10px 0;
+  line-height: 1.8;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-item {
+  background: #d5dae0;
+  margin: 5px 0;
+  border-radius: 12px;
+  padding: 5px;
+}
+
 @media (max-width: 500px) {
   .container {
     padding: 20px;
