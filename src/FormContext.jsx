@@ -294,52 +294,36 @@ function Provider({ children }) {
     (item) => item.symptom === selectedSymptom
   );
 
-  const earlyDiagnosisVitalSign = [
+  const vitalSigns = [
     {
-      vitalSign: "فشار خون (SBP)",
-      warningCriteria: "< 90 mmHg یا افت ناگهانی ≥ 40 mmHg",
+      sign: "فشار خون (SBP)",
     },
 
     {
-      vitalSign: "تعداد تنفس",
-      warningCriteria: "> 30 یا < 8 در دقیقه",
+      sign: "تعداد تنفس	",
     },
 
     {
-      vitalSign: "اشباع اکسیژن (SpO₂)",
-      warningCriteria: "< 90% علی‌رغم اکسیژن مکمل",
+      sign: "اشباع اکسیژن (SpO₂)",
     },
 
     {
-      vitalSign: "ضربان قلب",
-      warningCriteria: "< 40 یا > 130 bpm",
+      sign: "ضربان قلب",
     },
 
     {
-      vitalSign: "دمای بدن",
-      warningCriteria: "< 35°C یا > 40°C",
+      sign: "دمای بدن",
     },
 
     {
-      vitalSign: "GCS (سطح هوشیاری)",
-      warningCriteria: "≤ 8 یا کاهش سریع طی زمان کوتاه",
+      sign: "GCS (سطح هوشیاری)",
     },
   ];
 
-  const [vitalDiagnosis, setVitalDiagnosis] = useState("");
-
-  const handleVitalDiagnosis = (e) => {
-    setVitalDiagnosis(e.target.value);
-  };
-
-  const selectedVitalDiagnosis = earlyDiagnosisVitalSign.find(
-    (item) => item.vitalSign === selectedVitalDiagnosis
-  );
-
-  const earlyDiagnosisList = [
+  const firstDiagnosis = [
     {
-      vitalSign: "معیارهای تنفسی (Respiratory Red Flags",
-      vitalSignExplaination: [
+      diagnosis: "معیارهای تنفسی (Respiratory Red Flags)",
+      subDiagnosis: [
         "دیسترس تنفسی شدید (retractions, accessory muscles use)",
         "نیاز فوری به تهویه مکانیکی",
         "برونشواسپاسم شدید مقاوم",
@@ -350,8 +334,8 @@ function Provider({ children }) {
     },
 
     {
-      vitalSign: "معیارهای قلبی‌عروقی",
-      vitalSignExplaination: [
+      diagnosis: "معیارهای قلبی‌عروقی",
+      subDiagnosis: [
         "شوک (سردی اندام، تاخیر پرشدن مویرگی، فشار پایین)",
         "آریتمی تهدیدکننده زندگی (VF, VT, complete heart block)",
         "درد قفسه سینه شدید با علائم ناپایداری",
@@ -361,8 +345,8 @@ function Provider({ children }) {
     },
 
     {
-      vitalSign: "اختلالات هوشیاری و عصبی",
-      vitalSignExplaination: [
+      diagnosis: "اختلالات هوشیاری و عصبی",
+      subDiagnosis: [
         "GCS ≤ 8",
         "تشنج ممتد یا برگشت‌پذیر نشده",
         "تغییر ناگهانی در رفتار/وضعیت روانی",
@@ -373,19 +357,19 @@ function Provider({ children }) {
     },
 
     {
-      vitalSign: "شواهد سپسیس یا عفونت شدید",
-      vitalSignExplaination: [
+      diagnosis: "شواهد سپسیس یا عفونت شدید",
+      subDiagnosis: [
         "تب شدید با لرز و ناپایداری فشار",
         "وجود منبع عفونی + اختلال در عملکرد ≥1 ارگان",
         "لکوسیتوز شدید یا لکوپنی + علائم شوک",
-        "لکوسیتوز شدید یا لکوپنی + علائم شوک",
+        "لاکتات سرم بالا > 2 mmol/L",
         "نیاز به نرمال‌سالین > 2 لیتر بدون پاسخ همودینامیک",
       ],
     },
 
     {
-      vitalSign: "معیارهای کلیوی / متابولیک",
-      vitalSignExplaination: [
+      diagnosis: "معیارهای کلیوی / متابولیک",
+      subDiagnosis: [
         "کراتینین ↑ سریع + کاهش ادرار (Oliguria/Anuria)",
         "پتاسیم > 6.5 mEq/L همراه با ECG abnormal",
         "اسیدوز شدید (pH < 7.2)",
@@ -395,8 +379,8 @@ function Provider({ children }) {
     },
 
     {
-      vitalSign: "تروما و خونریزی شدید",
-      vitalSignExplaination: [
+      diagnosis: "تروما و خونریزی شدید",
+      subDiagnosis: [
         "تروما با GCS پایین یا همودینامیک ناپایدار",
         "خونریزی داخلی/خارجی شدید (Hb↓ + شوک)",
         "هموپتیزی یا ملنا شدید با فشار پایین",
@@ -405,8 +389,8 @@ function Provider({ children }) {
     },
 
     {
-      vitalSign: "سایر شرایط ضروری",
-      vitalSignExplaination: [
+      diagnosis: "سایر شرایط ضروری",
+      subDiagnosis: [
         "مسمومیت با دارو یا سم با تهدید تنفس/قلب",
         "سوختگی وسیع (>30%) یا همراه با استنشاق دود",
         "هیپوترمی یا هیپرترمی شدید مقاوم",
@@ -415,14 +399,306 @@ function Provider({ children }) {
     },
   ];
 
-  const [earlyDiagnosis, setEarlyDiagnosis] = useState("");
+  const [selectedDiagnosis, setSelectedDiagnosis] = useState("");
 
-  const handleEarlyDiagnosis = (e) => {
-    setEarlyDiagnosis(e.target.value);
+  const handleDiagnosis = (e) => {
+    setSelectedDiagnosis(e.target.value);
   };
 
-  const selectedEarlyDiagnosis = earlyDiagnosis.find(
-    (item) => item.vitalSign === selectedEarlyDiagnosis
+  const selectedSubDiagnosis = firstDiagnosis.find(
+    (item) => item.diagnosis === selectedDiagnosis
+  );
+
+  const comorbidities = [
+    {
+      comorbiditie: "بیماری‌های قلبی و عروقی",
+      subComorbiditie: [
+        "فشار خون بالا (Hypertension)",
+        "نارسایی قلبی (Heart Failure)",
+        "بیماری عروق کرونر (Coronary Artery Disease)",
+        "آریتمی قلبی (Arrhythmia)",
+        "سکته قلبی (Myocardial Infarction)",
+        "بیماری دریچه‌ای قلب (Valvular Heart Disease)",
+        "کاردیومیوپاتی (Cardiomyopathy)",
+        "فشار خون ریوی (Pulmonary Hypertension)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های تنفسی",
+      subComorbiditie: [
+        "آسم (Asthma)",
+        "بیماری انسدادی مزمن ریه (COPD)",
+        "فیبروز ریوی (Pulmonary Fibrosis)",
+        "آمفیزم (Emphysema)",
+        "آپنه خواب (Sleep Apnea)",
+        "برونشکتازی (Bronchiectasis)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های متابولیک و غدد درون‌ریز",
+      subComorbiditie: [
+        "دیابت نوع ۱ و ۲ (Type 1 and 2 Diabetes Mellitus)",
+        "کم‌کاری یا پرکاری تیروئید (Hypo/Hyperthyroidism)",
+        "چاقی مفرط (Morbid Obesity)",
+        "سندرم متابولیک (Metabolic Syndrome)",
+        "بیماری کوشینگ (Cushing’s Syndrome)",
+        "بیماری آدیسون (Addison’s Disease)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های کلیوی",
+      subComorbiditie: [
+        "نارسایی مزمن کلیه (CKD)",
+        "سنگ کلیه مکرر (Recurrent Kidney Stones)",
+        "نفروپاتی دیابتی (Diabetic Nephropathy)",
+        "سندرم نفروتیک (Nephrotic Syndrome)",
+        "دیالیز (Hemodialysis / Peritoneal Dialysis)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های گوارشی و کبدی",
+      subComorbiditie: [
+        "هپاتیت مزمن B و C (Chronic Hepatitis B/C)",
+        "سیروز کبدی (Liver Cirrhosis)",
+        "بیماری کبد چرب غیرالکلی (NAFLD)",
+        "بیماری کرون (Crohn’s Disease)",
+        "کولیت اولسراتیو (Ulcerative Colitis)",
+        "زخم معده یا اثنی‌عشر (Peptic Ulcer Disease)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های عصبی و روانی",
+      subComorbiditie: [
+        "صرع (Epilepsy)",
+        "سکته مغزی (Stroke)",
+        "پارکینسون (Parkinson’s Disease)",
+        "آلزایمر و دمانس (Dementia / Alzheimer’s)",
+        "اختلال دو قطبی (Bipolar Disorder)",
+        "افسردگی مزمن (Chronic Depression)",
+        "اسکلروز متعدد (MS)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های ایمنی و خودایمنی",
+      subComorbiditie: [
+        "لوپوس (SLE)",
+        "آرتریت روماتوئید (Rheumatoid Arthritis)",
+        "اسکلرودرما",
+        "سندرم شوگرن (Sjögren’s Syndrome)",
+        "پسوریازیس شدید (Severe Psoriasis)",
+        "بیماری سلیاک",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های خونی و انکولوژیک",
+      subComorbiditie: [
+        "کم‌خونی داسی‌شکل (Sickle Cell Anemia)",
+        "تالاسمی ماژور (Thalassemia Major)",
+        "هموفیلی (Hemophilia)",
+        "سرطان‌های فعال یا درمان‌شده (Active or Treated Cancers)",
+        "لوسمی، لنفوم، میلوما",
+        "اختلالات انعقادی (Coagulopathy)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های عفونی مزمن",
+      subComorbiditie: [
+        "HIV/AIDS",
+        "سل فعال یا نهفته (TB)",
+        "بیماری لایم (Lyme Disease)",
+        "سیفلیس مزمن",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های پوستی شدید",
+      subComorbiditie: [
+        "اگزمای شدید (Severe Eczema)",
+        "پسوریازیس گسترده",
+        "پمفیگوس",
+      ],
+    },
+
+    {
+      comorbiditie: "سایر بیماری‌ها و شرایط خاص",
+      subComorbiditie: [
+        "پیوند عضو (Organ Transplant)",
+        "نقص سیستم ایمنی (Immunodeficiency)",
+        "حاملگی پرخطر (High-Risk Pregnancy)",
+        "بیماری‌های نادر ژنتیکی",
+        "اعتیاد مزمن (Chronic Substance Abuse)",
+        "ناباروری همراه با بیماری زمینه‌ای",
+      ],
+    },
+  ];
+
+  const [selectedComorbiditie, setSelectedComorbiditie] = useState("");
+
+  const handleComorbiditie = (e) => {
+    setSelectedComorbiditie(e.target.value);
+  };
+
+  const selectedSubComorbiditie = comorbidities.find(
+    (item) => item.comorbiditie === selectedComorbiditie
+  );
+
+  const surgicalHistories = [
+    {
+      history: "جراحی‌های قلب و عروق",
+      subHistory: [
+        "جراحی بای‌پس عروق کرونر (CABG)",
+        "آنژیوپلاستی یا استنت‌گذاری (Angioplasty / Stent)",
+        "تعویض یا ترمیم دریچه قلب (Valve Replacement / Repair)",
+        "کاردیومیوپاتی با دستگاه LVAD",
+        "تعبیه پیس‌میکر یا دفیبریلاتور (Pacemaker / ICD)",
+        "جراحی آئورت (Aortic Repair or Dissection Surgery)",
+      ],
+    },
+
+    {
+      history: "جراحی‌های مغز و اعصاب",
+      subHistory: [
+        "کرانیوتومی (Craniotomy)",
+        "جراحی تومور مغزی (Brain Tumor Resection)",
+        "جراحی ستون فقرات (Spinal Fusion / Discectomy / Laminectomy)",
+        "درمان هیدروسفالی (Shunt Placement)",
+        "درمان هیدروسفالی (Shunt Placement)",
+      ],
+    },
+
+    {
+      history: "جراحی‌های گوارشی",
+      subHistory: [
+        "آپاندکتومی (Appendectomy)",
+        "کله‌سیستکتومی (Cholecystectomy – برداشتن کیسه صفرا)",
+        "جراحی فتق (Hernia Repair – اینگوینال، نافی، فمورال)",
+        "هموروئیدکتومی (Hemorrhoidectomy)",
+        "کلکتومی (Colectomy – برداشتن بخشی از روده بزرگ)",
+        "گاسترکتومی (Gastrectomy – برداشتن بخشی یا کل معده)",
+        "جراحی رفلاکس (Fundoplication)",
+        "پانکراتکتومی (Pancreatectomy)",
+        "جراحی بای‌پس معده یا اسلیو معده (Gastric Bypass / Sleeve)",
+      ],
+    },
+
+    {
+      history: "جراحی‌های کبد، طحال و لوزالمعده",
+      subHistory: [
+        "برداشتن کیست کبدی",
+        "اسپلنکتومی (Splenectomy – برداشتن طحال)",
+        "رزکسیون پانکراس (Pancreatic Resection)",
+        "بیوپسی کبدی (Liver Biopsy)",
+      ],
+    },
+
+    {
+      history: "جراحی‌های کلیه و مجاری ادراری",
+      subHistory: [
+        "نفرکتومی (Nephrectomy – برداشتن کلیه)",
+        "سنگ‌شکنی یا برداشتن سنگ کلیه (PCNL / URS / Lithotripsy)",
+        "تعبیه دابل جی یا کاتتر کلیوی",
+        "پیوند کلیه (Kidney Transplant)",
+        "سیستکتومی (برداشتن مثانه)",
+        "پروستاتکتومی (برداشتن پروستات)",
+      ],
+    },
+
+    {
+      history: "جراحی‌های زنان و زایمان",
+      subHistory: [
+        "سزارین (C-Section)",
+        "هیسترکتومی (برداشتن رحم)",
+        "اوفورکتومی (برداشتن تخمدان)",
+        "لاپاراسکوپی تشخیصی یا درمانی",
+        "کورتاژ رحم (D&C)",
+        "جراحی اندومتریوز",
+        "جراحی بارداری خارج‌رحمی",
+      ],
+    },
+
+    {
+      history: "جراحی‌های ارتوپدی",
+      subHistory: [
+        "تعویض مفصل (هیپ، زانو، شانه) – Total Joint Replacement",
+        "فیکساسیون شکستگی (ORIF – Open Reduction Internal Fixation)",
+        "آرتروسکوپی زانو / شانه",
+        "جراحی رباط ACL / منیسک",
+        "آمنیوتومی ستون فقرات",
+      ],
+    },
+
+    {
+      history: "جراحی‌های گوش، حلق و بینی (ENT)",
+      subHistory: [
+        "تونسیلکتومی (برداشتن لوزه)",
+        "آدنوئیدکتومی (برداشتن لوزه سوم)",
+        "جراحی سینوس (Sinus Surgery)",
+        "سپتوپلاستی یا انحراف بینی",
+        "جراحی گوش میانی / کاشت حلزون",
+      ],
+    },
+
+    {
+      history: " جراحی‌های چشم",
+      subHistory: [
+        "عمل آب مروارید (Cataract Surgery)",
+        "عمل لازک یا لیزیک",
+        "جراحی گلوکوم",
+        "شبکیه‌برداری یا ترمیم پارگی شبکیه",
+      ],
+    },
+
+    {
+      history: "جراحی‌های پوست و زیبایی",
+      subHistory: [
+        "جراحی پلاستیک و ترمیمی (Reconstructive Surgery)",
+        "برداشت تومور یا کیست پوست",
+        "پیوند پوست (Skin Graft)",
+        "جراحی زیبایی بینی (Rhinoplasty)",
+        "لیپوساکشن / ابدومینوپلاستی (Liposuction / Tummy Tuck)",
+        "ماموپلاستی (افزایش/کاهش سینه)",
+      ],
+    },
+
+    {
+      history: "جراحی‌های انکولوژیک (سرطان‌ها)",
+      subHistory: [
+        "رزکسیون تومور (هر ناحیه)",
+        "ماستکتومی (برداشتن پستان)",
+        "جراحی کولورکتال برای سرطان روده",
+        "جراحی پروستات برای سرطان",
+        "برداشت غدد لنفاوی (Lymphadenectomy)",
+      ],
+    },
+
+    {
+      history: "سایر جراحی‌های رایج",
+      subHistory: [
+        "پیوند عضو (کلیه، کبد، قلب)",
+        "تعبیه پورت مرکزی (Port / Central Line Placement)",
+        "آمپوتاسیون عضو (Amputation)",
+        "ترمیم زخم‌های وسیع (Debridement)",
+        "جراحی آندوسکوپیک دستگاه گوارش",
+      ],
+    },
+  ];
+
+  const [selectedSurgicalHistory, setSelectedSurgicalHistory] = useState("");
+
+  const handleHistory = (e) => {
+    setSelectedSurgicalHistory(e.target.value);
+  };
+
+  const selectedSubSurgicalHistory = surgicalHistories.find(
+    (item) => item.history === selectedSurgicalHistory
   );
 
   const sharedValues = {
@@ -444,13 +720,19 @@ function Provider({ children }) {
     selectedSymptom,
     handleSymptom,
     selectedItem,
-    earlyDiagnosisVitalSign,
-    vitalDiagnosis,
-    handleVitalDiagnosis,
-    selectedVitalDiagnosis,
-    earlyDiagnosisList,
-    earlyDiagnosis,
-    handleEarlyDiagnosis,
+    vitalSigns,
+    firstDiagnosis,
+    selectedDiagnosis,
+    handleDiagnosis,
+    selectedSubDiagnosis,
+    comorbidities,
+    selectedComorbiditie,
+    handleComorbiditie,
+    selectedSubComorbiditie,
+    selectedSurgicalHistory,
+    surgicalHistories,
+    handleHistory,
+    selectedSubSurgicalHistory,
     idError,
     isAnyError,
   };

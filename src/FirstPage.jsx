@@ -225,13 +225,8 @@ function FirstPage() {
             onChange={handleInputChange}
             required
           />
-          <button className="form-button">مرحله بعد</button>
         </div>
-        <div>
-          <GoDot />
-          <GoDot />
-          <GoDotFill />
-        </div>
+        <button className="form-button">مرحله بعد</button>
       </form>
     </>
   );
