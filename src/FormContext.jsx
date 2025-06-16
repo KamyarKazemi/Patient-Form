@@ -701,6 +701,381 @@ function Provider({ children }) {
     (item) => item.history === selectedSurgicalHistory
   );
 
+  const icuAdmissionReasons = [
+    {
+      reason: "مشکلات قلبی و عروقی",
+      subReason: [
+        "سکته قلبی (Acute Myocardial Infarction – MI)",
+        "نارسایی شدید قلبی (Acute Heart Failure)",
+        "آریتمی‌های خطرناک (Life-threatening Arrhythmias)",
+        "شوک قلبی (Cardiogenic Shock)",
+        "تامپوناد قلبی (Cardiac Tamponade)",
+        "فشار خون بسیار بالا یا پایین (Hypertensive Crisis / Hypotension)",
+      ],
+    },
+
+    {
+      reason: "اختلالات تنفسی",
+      subReason: [
+        "نارسایی حاد تنفسی (Acute Respiratory Failure)",
+        "پنومونی شدید (Severe Pneumonia)",
+        "ARDS (سندرم دیسترس حاد تنفسی)",
+        "COPD شدید یا حمله آسم شدید",
+        "آمبولی ریه (Pulmonary Embolism)",
+        "نیاز به تهویه مکانیکی (Mechanical Ventilation)",
+      ],
+    },
+
+    {
+      reason: "بیماری‌های مغز و اعصاب",
+      subReason: [
+        "سکته مغزی (Stroke – ایسکمیک یا هموراژیک)",
+        "تشنج‌های مکرر یا استاتوس اپی‌لپتیکوس",
+        "افزایش فشار داخل جمجمه (ICP)",
+        "تروما یا ضربه به سر (Head Injury)",
+        "خونریزی ساب‌آراکنوئید",
+        "گیلن باره یا نوروپاتی‌های پیش‌رونده",
+      ],
+    },
+
+    {
+      reason: "شوک‌ها و وضعیت‌های اورژانسی",
+      subReason: [
+        "شوک سپتیک (Septic Shock)",
+        "شوک آنافیلاکسی (Anaphylactic Shock)",
+        "شوک هیپوولمیک (Hypovolemic Shock)",
+        "مولتی ارگان فیلر (MODS – Multi Organ Dysfunction Syndrome)",
+      ],
+    },
+
+    {
+      reason: "اختلالات متابولیک و کلیوی",
+      subReason: [
+        "اسیدوز یا آلکالوز شدید",
+        "دیابت کنترل‌نشده (Ketoacidosis / HHS)",
+        "نارسایی حاد کلیه (Acute Kidney Injury)",
+        "الکترولیت‌درهم‌ریختگی شدید (Hyperkalemia / Hyponatremia)",
+        "نیاز به دیالیز اورژانسی",
+      ],
+    },
+
+    {
+      reason: "مسمومیت‌ها و اختلالات دارویی",
+      subReason: [
+        "مصرف بیش از حد دارو (Overdose)",
+        "مسمومیت با مواد شیمیایی یا گازهای سمی",
+        "اعتیاد شدید همراه با علائم ترک",
+        "مصرف ترکیبی داروهای آرام‌بخش / مخدر / الکل",
+      ],
+    },
+
+    {
+      reason: "عفونت‌ها و بیماری‌های سیستمیک",
+      subReason: [
+        "سپسیس (Sepsis)",
+        "مننژیت باکتریایی یا ویروسی",
+        "اندوکاردیت عفونی",
+        "عفونت‌های سیستمیک با ارگانیسم‌های مقاوم",
+        "کوید-۱۹ با درگیری ریوی و هایپوکسی شدید",
+      ],
+    },
+
+    {
+      reason: "بعد از اعمال جراحی سنگین",
+      subReason: [
+        "جراحی قلب باز",
+        "جراحی مغز و اعصاب",
+        "پیوند عضو (کبد، قلب، کلیه)",
+        "جراحی‌های بزرگ شکمی (Colectomy, Whipple, etc.)",
+        "جراحی با خونریزی شدید یا عدم تعادل همودینامیک",
+      ],
+    },
+
+    {
+      reason: "تروما و صدمات شدید",
+      subReason: [
+        "تصادفات شدید رانندگی",
+        "سقوط از ارتفاع",
+        "سوختگی وسیع (Burn > 20% TBSA)",
+        "تروماهای نافذ (گلوله، چاقو)",
+        "شکستگی‌های باز و پیچیده همراه با شوک",
+      ],
+    },
+
+    {
+      reason: "وضعیت‌های زنان و زایمان در ICU",
+      subReason: [
+        "پره‌اکلامپسی / اکلامپسی شدید",
+        "خونریزی پس از زایمان (PPH)",
+        "شوک ناشی از بارداری خارج‌رحمی",
+        "سپسیس بعد از زایمان",
+        "عوارض ناشی از جراحی سزارین",
+      ],
+    },
+
+    {
+      reason: "وضعیت‌های خاص و نادر",
+      subReason: [
+        "هیپرترمی بدخیم (Malignant H,yperthermia)",
+        "سندرم آنتی‌فسفولیپید شدید",
+        "بحران میاستنی (Myasthenic Crisis)",
+        "سندرم گیلن‌باره پیشرونده",
+        "نارسایی کبدی حاد (Acute Liver Failure)",
+      ],
+    },
+  ];
+
+  const [selectedAdmissionReasons, setSelectedAdmissionReasons] = useState("");
+
+  const handleAdmissionReasons = (e) => {
+    setSelectedAdmissionReasons(e.target.value);
+  };
+
+  const selectedSubAdmissionReasons = icuAdmissionReasons.find(
+    (item) => item.reason === selectedAdmissionReasons
+  );
+
+  const usedDrugs = [
+    {
+      drug: "داروهای قلبی و عروقی",
+      subDrug: [
+        "Aspirin (آسپرین)",
+        "Clopidogrel (Plavix) – ضد پلاکت",
+        "Warfarin – ضد انعقاد",
+        "Heparin / Enoxaparin (Clexane) – ضد انعقاد",
+        "Nitroglycerin – نیتروگلیسیرین برای آنژین",
+        "Beta blockers: Metoprolol, Atenolol",
+        "ACE Inhibitors: Captopril, Enalapril, Lisinopril",
+        "ARBs: Losartan, Valsartan",
+        "Calcium Channel Blockers: Amlodipine, Diltiazem",
+        "Diuretics: Furosemide (Lasix), Spironolactone",
+        "Digoxin – برای نارسایی قلبی و آریتمی",
+      ],
+    },
+
+    {
+      drug: "داروهای تنفسی",
+      subDrug: [
+        "Salbutamol (Ventolin) – اسپری یا نبولایزر",
+        "Ipratropium (Atrovent",
+        "Theophylline",
+        "Corticosteroids: Prednisolone, Dexamethasone",
+        "Montelukast – ضد آسم",
+        "Oxygen Therapy (تجویزی)",
+        "Antibiotics for Pneumonia: Azithromycin, Ceftriaxone, Piperacillin-Tazobactam",
+      ],
+    },
+
+    {
+      drug: "داروهای اعصاب و روان",
+      subDrug: [
+        "Phenytoin, Levetiracetam (Keppra) – ضد تشنج",
+        "Diazepam / Lorazepam / Midazolam – آرام‌بخش/ضد اضطراب",
+        "Haloperidol – آنتی‌سایکوتیک",
+        "Risperidone, Olanzapine",
+        "Sertraline, Fluoxetine (SSRIs)",
+        "Lithium – در بیماران با اختلال دوقطبی",
+        "Morphine / Methadone / Buprenorphine – مسکن و جایگزین اپیوئید",
+      ],
+    },
+
+    {
+      drug: "داروهای دیابت و متابولیک",
+      subDrug: [
+        "Insulin (Humulin, Lantus, Novorapid)",
+        "Metformin",
+        "Gliclazide / Glibenclamide",
+        "SGLT2 inhibitors: Empagliflozin, Dapagliflozin",
+        "Corticosteroids – در موارد نارسایی آدرنال یا التهاب شدید",
+      ],
+    },
+
+    {
+      drug: "آنتی‌بیوتیک‌ها و داروهای ضد عفونت",
+      subDrug: [
+        "Ceftriaxone / Cefepime / Ceftazidime",
+        "Meropenem / Imipenem",
+        "Vancomycin",
+        "Linezolid",
+        "Azithromycin / Clarithromycin",
+        "Metronidazole",
+        "Fluconazole, Amphotericin B – ضد قارچ",
+        "Oseltamivir (Tamiflu) – آنفلوآنزا",
+        "Remdesivir, Favipiravir – کووید-۱۹",
+      ],
+    },
+
+    {
+      drug: "داروهای معده و گوارش",
+      subDrug: [
+        "Pantoprazole / Omeprazole (PPI)",
+        "Ranitidine / Famotidine",
+        "Lactulose – برای آنسفالوپاتی کبدی",
+        "Domperidone / Metoclopramide – ضد تهوع",
+        "Loperamide – ضد اسهال",
+        "Mesalazine – بیماری‌های التهابی روده",
+      ],
+    },
+
+    {
+      drug: "داروهای ضد انعقاد و ترومبولیتیک",
+      subDrug: [
+        "Warfarin, Heparin, Enoxaparin",
+        "Apixaban, Rivaroxaban, Dabigatran – ضد انعقاد خوراکی جدید",
+        "Alteplase (tPA) – ترومبولیتیک برای سکته",
+      ],
+    },
+
+    {
+      drug: "داروهای کلیوی و الکترولیتی",
+      subDrug: [
+        "Sodium bicarbonate",
+        "Potassium Chloride (خوراکی یا تزریقی)",
+        "Calcium Gluconate",
+        "Sodium Polystyrene Sulfonate (Kayexalate) – برای هایپرکالمی",
+        "Sevelamer, Calcitriol – بیماران دیالیزی",
+        "Erythropoietin (EPO) – در نارسایی مزمن کلیه",
+      ],
+    },
+
+    {
+      drug: "داروهای سرکوب ایمنی و سرطان",
+      subDrug: [
+        "Prednisolone / Methylprednisolone",
+        "Azathioprine",
+        "Mycophenolate Mofetil (CellCept)",
+        "Tacrolimus / Cyclosporine",
+        "Methotrexate, Cyclophosphamide",
+        "Chemotherapy agents – Cisplatin, Doxorubicin, etc.",
+      ],
+    },
+
+    {
+      drug: "داروهای دیگر مهم و خاص",
+      subDrug: [
+        "Naloxone – آنتاگونیست اپیوئید",
+        "Flumazenil – آنتاگونیست بنزودیازپین",
+        "IVIG (ایمونوگلوبولین تزریقی) – در بیماری‌های خودایمنی",
+        "Antihistamines – مانند Diphenhydramine, Loratadine",
+        "Adrenaline / Epinephrine – آنافیلاکسی یا CPR",
+        "Hydrocortisone – شوک آدرنال",
+      ],
+    },
+  ];
+
+  const [selectedDrugs, setSelectedDrugs] = useState("");
+
+  const handleDrugs = (e) => {
+    setSelectedDrugs(e.target.value);
+  };
+
+  const selectedSubDrugs = usedDrugs.find(
+    (item) => item.drug === selectedDrugs
+  );
+
+  const drugAllergies = [
+    {
+      allergy: "آنتی‌بیوتیک‌ها",
+      subAllergy: [
+        "Penicillin / Ampicillin / Amoxicillin",
+        "Cephalosporins: Cefalexin, Ceftriaxone, Cefepime",
+        "Carbapenems: Meropenem, Imipenem",
+        "Sulfonamides: Cotrimoxazole (Trimethoprim + Sulfamethoxazole)",
+        "Macrolides: Erythromycin, Azithromycin",
+        "Fluoroquinolones: Ciprofloxacin, Levofloxacin",
+        "Vancomycin",
+        "Clindamycin",
+        "Tetracyclines: Doxycycline",
+      ],
+    },
+
+    {
+      allergy: "مسکن‌ها و ضدالتهاب‌ها",
+      subAllergy: [
+        "NSAIDs: Ibuprofen, Diclofenac, Naproxen",
+        "Aspirin",
+        "Paracetamol (نادر، اما ممکن)",
+        "Opioids: Morphine, Codeine, Tramadol, Fentanyl",
+        "Ketorolac",
+      ],
+    },
+
+    {
+      allergy: "بی‌حس‌کننده‌ها و بیهوشی",
+      subAllergy: [
+        "Lidocaine (موضعی)",
+        "Bupivacaine",
+        "Propofol",
+        "Etomidate",
+        "Midazolam / Diazepam (بیشتر حساسیت‌های خفیف یا واکنش‌های شبه آلرژیک)",
+      ],
+    },
+
+    {
+      allergy: "ضدتشنج و روان‌پزشکی",
+      subAllergy: [
+        "Phenytoin",
+        "Carbamazepine – واکنش‌های شدید مانند SJS/TEN",
+        "Lamotrigine",
+        "Valproic acid",
+        "Haloperidol",
+        "Lithium",
+      ],
+    },
+
+    {
+      allergy: "انسولین‌ها و داروهای دیابت",
+      subAllergy: [
+        "Insulin human / analogs: ممکن است در برخی افراد حساسیت داده باشند",
+        "Metformin",
+        "Sulfonylureas: Gliclazide, Glibenclamide (ممکن است در بیماران حساس به سولفا مشکل ایجاد کنند)",
+      ],
+    },
+
+    {
+      allergy: "سرکوب‌کننده‌های ایمنی و ضدسرطان",
+      subAllergy: [
+        "Methotrexate",
+        "Cyclophosphamide",
+        "Azathioprine",
+        "Rituximab",
+        "IVIG (ایمونوگلوبولین تزریقی) – حساسیت شدید در برخی بیماران",
+      ],
+    },
+
+    {
+      allergy: "داروهای ضد HIV و ویروسی",
+      subAllergy: [
+        "Nevirapine",
+        "Abacavir – تست ژنتیکی HLA-B*5701 قبل از مصرف توصیه می‌شود",
+        "Efavirenz",
+        "Oseltamivir",
+      ],
+    },
+
+    {
+      allergy: "سایر موارد شایع یا خاص",
+      subAllergy: [
+        "Heparin / Enoxaparin – می‌توانند باعث HIT (Heparin-induced Thrombocytopenia) یا حساسیت شوند",
+        "Contrast media (مواد حاجب) – به‌خصوص در CT یا آنژیوگرافی",
+        "Protamine – در بیماران دیالیزی یا با سابقه ماهیگیری آلرژی‌زا",
+        "Vaccine-related allergies",
+        "Iron sucrose / Iron dextran",
+        "Thiamine",
+      ],
+    },
+  ];
+
+  const [selectedAllergies, setSelectedAllergies] = useState("");
+
+  const handleAllergies = (e) => {
+    setSelectedAllergies(e.target.value);
+  };
+
+  const selectedSubAllergies = drugAllergies.find(
+    (item) => item.allergy === selectedAllergies
+  );
+
   const sharedValues = {
     formData,
     handleInputChange,
@@ -733,6 +1108,18 @@ function Provider({ children }) {
     surgicalHistories,
     handleHistory,
     selectedSubSurgicalHistory,
+    icuAdmissionReasons,
+    selectedAdmissionReasons,
+    handleAdmissionReasons,
+    selectedSubAdmissionReasons,
+    usedDrugs,
+    selectedDrugs,
+    handleDrugs,
+    selectedSubDrugs,
+    drugAllergies,
+    selectedAllergies,
+    handleAllergies,
+    selectedSubAllergies,
     idError,
     isAnyError,
   };

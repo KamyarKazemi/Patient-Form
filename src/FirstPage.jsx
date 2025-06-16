@@ -49,7 +49,7 @@ function FirstPage() {
     <>
       <form className="container card" onSubmit={handleForm} dir="rtl">
         <h1>مرحله اول</h1>
-        <h1>اطلاعات هویتی بیمار</h1>
+        <h2 className="h2-form">اطلاعات هویتی بیمار</h2>
 
         <div className="input-group">
           <label htmlFor="firstName" className="form-label">
@@ -227,6 +227,11 @@ function FirstPage() {
           />
         </div>
         <button className="form-button">مرحله بعد</button>
+        <div className="dots">
+          <GoDot />
+          <GoDot />
+          <GoDotFill />
+        </div>
       </form>
     </>
   );

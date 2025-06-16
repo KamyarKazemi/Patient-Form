@@ -20,13 +20,24 @@ function SecondPage() {
     handleDiagnosis,
     selectedSubDiagnosis,
     comorbidities,
-    selectedComorbiditie,
+    // selectedComorbiditie,
     selectedSubComorbiditie,
     handleComorbiditie,
-    selectedSurgicalHistory,
+    // selectedSurgicalHistory,
     surgicalHistories,
     handleHistory,
     selectedSubSurgicalHistory,
+    icuAdmissionReasons,
+    // selectedAdmissionReasons,
+    handleAdmissionReasons,
+    selectedSubAdmissionReasons,
+    usedDrugs,
+    // selectedDrugs,
+    handleDrugs,
+    selectedSubDrugs,
+    drugAllergies,
+    handleAllergies,
+    selectedSubAllergies,
     // idError,
     isAnyError,
   } = useContext(FormContext);
@@ -47,9 +58,11 @@ function SecondPage() {
     <>
       <form className="container card" onSubmit={handleForm} dir="rtl">
         <h1>مرحله دوم</h1>
-        <h2>اطلاعات پزشکی بیمار</h2>
+        <h2 className="h2-form">اطلاعات پزشکی بیمار</h2>
         <div className="input-group">
-          <label htmlFor="icu-reason">علت ارجاع به ICU</label>
+          <label htmlFor="icu-reason" className="form-label">
+            علت ارجاع به ICU
+          </label>
           <select
             name="icu-reason"
             id="icu-reason"
@@ -186,8 +199,105 @@ function SecondPage() {
             </div>
           )}
         </div>
+
+        <div className="input-group">
+          <label htmlFor="usedDrugs">دارو های مصرفی</label>
+          <select
+            name="usedDrugs"
+            id="usedDrugs"
+            className="form-input"
+            onChange={handleDrugs}
+          >
+            {usedDrugs.map((item, index) => (
+              <option value={item.drug} key={index}>
+                {item.drug}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="checkbox">
+          {selectedSubDrugs && (
+            <div className="checkbox-container">
+              {selectedSubDrugs.subDrug.map((sub, index) => (
+                <div className="checkbox-item" key={index}>
+                  <input
+                    type="checkbox"
+                    name="subDrug"
+                    id={`subDrug-${index}`}
+                    value={sub}
+                  />
+                  <label htmlFor={`subDrug-${index}`}>{sub}</label>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="input-group">
+          <label htmlFor="drugAllergies">آلرژی دارویی</label>
+          <select
+            name="drugAllergies"
+            id="drugAllergies"
+            className="form-input"
+            onChange={handleAllergies}
+          >
+            {drugAllergies.map((item, index) => (
+              <option value={item.allergy} key={index}>
+                {item.allergy}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="checkbox">
+          {selectedSubAllergies && (
+            <div className="checkbox-container">
+              {selectedSubAllergies.subAllergy.map((sub, index) => (
+                <div className="checkbox-item" key={index}>
+                  <input
+                    type="checkbox"
+                    name="subAllergy"
+                    id={`subAllergy-${index}`}
+                    value={sub}
+                  />
+                  <label htmlFor={`subAllergy-${index}`}>{sub}</label>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="input-group">
+          <label htmlFor="icuAdmissionReasons">دلایل بستری در ICU</label>
+          <select
+            name="icuAdmissionReasons"
+            id="icuAdmissionReasons"
+            className="form-input"
+            onChange={handleAdmissionReasons}
+          >
+            {icuAdmissionReasons.map((item, index) => (
+              <option value={item.reason} key={index}>
+                {item.reason}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="checkbox">
+          {selectedSubAdmissionReasons && (
+            <div className="checkbox-container">
+              {selectedSubAdmissionReasons.subReason.map((sub, index) => (
+                <div className="checkbox-item" key={index}>
+                  <input
+                    type="checkbox"
+                    name="subReason"
+                    id={`subReason-${index}`}
+                    value={sub}
+                  />
+                  <label htmlFor={`subReason-${index}`}>{sub}</label>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         <button className="form-button">مرحله بعد</button>
-        <div>
+        <div className="dots">
           <GoDot />
           <GoDot />
           <GoDotFill />
