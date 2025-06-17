@@ -1,7 +1,7 @@
 import { GoDot, GoDotFill } from "react-icons/go";
 import { useContext, useEffect } from "react";
 import FormContext from "./FormContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function FirstPage() {
   const {
@@ -19,6 +19,10 @@ function FirstPage() {
     selectedMonth,
     days,
     handleDayChange,
+    genders,
+    handleGender,
+    isMarried,
+    handleMarriage,
     idError,
     isAnyError,
   } = useContext(FormContext);
@@ -127,6 +131,38 @@ function FirstPage() {
         </div>
 
         <div className="input-group">
+          <label htmlFor="gender">جنسیت</label>
+          <select
+            name="gender"
+            id="gender"
+            className="form-input"
+            onChange={handleGender}
+          >
+            {genders.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="gender">وضعیت تاهل</label>
+          <select
+            name="marriage"
+            id="marriage"
+            className="form-input"
+            onChange={handleMarriage}
+          >
+            {isMarried.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="input-group">
           <label htmlFor="phone" className="form-label">
             شماره تماس
           </label>
@@ -228,9 +264,15 @@ function FirstPage() {
         </div>
         <button className="form-button">مرحله بعد</button>
         <div className="dots">
-          <GoDot />
-          <GoDot />
-          <GoDotFill />
+          <Link to="/third">
+            <GoDot />
+          </Link>
+          <Link to="/second">
+            <GoDot />
+          </Link>
+          <Link to="/">
+            <GoDotFill />
+          </Link>
         </div>
       </form>
     </>

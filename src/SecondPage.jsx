@@ -1,7 +1,7 @@
 import { GoDot, GoDotFill } from "react-icons/go";
 import { useContext } from "react";
 import FormContext from "./FormContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function SecondPage() {
   const {
@@ -50,7 +50,7 @@ function SecondPage() {
       alert("sth is weeehhhh!");
     } else {
       alert("sth is wooohhhh");
-      navigate("/second");
+      navigate("/third");
     }
   };
 
@@ -298,9 +298,15 @@ function SecondPage() {
         </div>
         <button className="form-button">مرحله بعد</button>
         <div className="dots">
-          <GoDot />
-          <GoDot />
-          <GoDotFill />
+          <Link to="/third">
+            <GoDot />
+          </Link>
+          <Link to="/second">
+            <GoDotFill />
+          </Link>
+          <Link to="/">
+            <GoDot />
+          </Link>
         </div>
       </form>
     </>

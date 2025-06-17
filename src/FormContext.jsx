@@ -137,6 +137,22 @@ function Provider({ children }) {
     }));
   };
 
+  const genders = ["مرد", "زن"];
+
+  const [genderOptions, setGenderOptions] = useState("");
+
+  const handleGender = (e) => {
+    setGenderOptions(e.target.value);
+  };
+
+  const isMarried = ["متاهل", "مجرد"];
+
+  const [marriageOptions, setMarriageOptions] = useState("");
+
+  const handleMarriage = (e) => {
+    setMarriageOptions(e.target.value);
+  };
+
   const [years, setYears] = useState([]);
   const [months] = useState([
     "فروردین",
@@ -1120,6 +1136,12 @@ function Provider({ children }) {
     selectedAllergies,
     handleAllergies,
     selectedSubAllergies,
+    genders,
+    genderOptions,
+    handleGender,
+    isMarried,
+    marriageOptions,
+    handleMarriage,
     idError,
     isAnyError,
   };
