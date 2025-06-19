@@ -226,6 +226,136 @@ function Provider({ children }) {
         ],
       },
     ],
+    const comorbidities = [
+    {
+      comorbiditie: "بیماری‌های قلبی و عروقی",
+      subComorbiditie: [
+        "فشار خون بالا (Hypertension)",
+        "نارسایی قلبی (Heart Failure)",
+        "بیماری عروق کرونر (Coronary Artery Disease)",
+        "آریتمی قلبی (Arrhythmia)",
+        "سکته قلبی (Myocardial Infarction)",
+        "بیماری دریچه‌ای قلب (Valvular Heart Disease)",
+        "کاردیومیوپاتی (Cardiomyopathy)",
+        "فشار خون ریوی (Pulmonary Hypertension)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های تنفسی",
+      subComorbiditie: [
+        "آسم (Asthma)",
+        "بیماری انسدادی مزمن ریه (COPD)",
+        "فیبروز ریوی (Pulmonary Fibrosis)",
+        "آمفیزم (Emphysema)",
+        "آپنه خواب (Sleep Apnea)",
+        "برونشکتازی (Bronchiectasis)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های متابولیک و غدد درون‌ریز",
+      subComorbiditie: [
+        "دیابت نوع ۱ و ۲ (Type 1 and 2 Diabetes Mellitus)",
+        "کم‌کاری یا پرکاری تیروئید (Hypo/Hyperthyroidism)",
+        "چاقی مفرط (Morbid Obesity)",
+        "سندرم متابولیک (Metabolic Syndrome)",
+        "بیماری کوشینگ (Cushing’s Syndrome)",
+        "بیماری آدیسون (Addison’s Disease)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های کلیوی",
+      subComorbiditie: [
+        "نارسایی مزمن کلیه (CKD)",
+        "سنگ کلیه مکرر (Recurrent Kidney Stones)",
+        "نفروپاتی دیابتی (Diabetic Nephropathy)",
+        "سندرم نفروتیک (Nephrotic Syndrome)",
+        "دیالیز (Hemodialysis / Peritoneal Dialysis)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های گوارشی و کبدی",
+      subComorbiditie: [
+        "هپاتیت مزمن B و C (Chronic Hepatitis B/C)",
+        "سیروز کبدی (Liver Cirrhosis)",
+        "بیماری کبد چرب غیرالکلی (NAFLD)",
+        "بیماری کرون (Crohn’s Disease)",
+        "کولیت اولسراتیو (Ulcerative Colitis)",
+        "زخم معده یا اثنی‌عشر (Peptic Ulcer Disease)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های عصبی و روانی",
+      subComorbiditie: [
+        "صرع (Epilepsy)",
+        "سکته مغزی (Stroke)",
+        "پارکینسون (Parkinson’s Disease)",
+        "آلزایمر و دمانس (Dementia / Alzheimer’s)",
+        "اختلال دو قطبی (Bipolar Disorder)",
+        "افسردگی مزمن (Chronic Depression)",
+        "اسکلروز متعدد (MS)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های ایمنی و خودایمنی",
+      subComorbiditie: [
+        "لوپوس (SLE)",
+        "آرتریت روماتوئید (Rheumatoid Arthritis)",
+        "اسکلرودرما",
+        "سندرم شوگرن (Sjögren’s Syndrome)",
+        "پسوریازیس شدید (Severe Psoriasis)",
+        "بیماری سلیاک",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های خونی و انکولوژیک",
+      subComorbiditie: [
+        "کم‌خونی داسی‌شکل (Sickle Cell Anemia)",
+        "تالاسمی ماژور (Thalassemia Major)",
+        "هموفیلی (Hemophilia)",
+        "سرطان‌های فعال یا درمان‌شده (Active or Treated Cancers)",
+        "لوسمی، لنفوم، میلوما",
+        "اختلالات انعقادی (Coagulopathy)",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های عفونی مزمن",
+      subComorbiditie: [
+        "HIV/AIDS",
+        "سل فعال یا نهفته (TB)",
+        "بیماری لایم (Lyme Disease)",
+        "سیفلیس مزمن",
+      ],
+    },
+
+    {
+      comorbiditie: "بیماری‌های پوستی شدید",
+      subComorbiditie: [
+        "اگزمای شدید (Severe Eczema)",
+        "پسوریازیس گسترده",
+        "پمفیگوس",
+      ],
+    },
+
+    {
+      comorbiditie: "سایر بیماری‌ها و شرایط خاص",
+      subComorbiditie: [
+        "پیوند عضو (Organ Transplant)",
+        "نقص سیستم ایمنی (Immunodeficiency)",
+        "حاملگی پرخطر (High-Risk Pregnancy)",
+        "بیماری‌های نادر ژنتیکی",
+        "اعتیاد مزمن (Chronic Substance Abuse)",
+        "ناباروری همراه با بیماری زمینه‌ای",
+      ],
+    },
+  ],
 
     // Insurance Information
     insuranceCompany: "",
