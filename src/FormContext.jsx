@@ -226,136 +226,278 @@ function Provider({ children }) {
         ],
       },
     ],
-    const comorbidities = [
-    {
-      comorbiditie: "بیماری‌های قلبی و عروقی",
-      subComorbiditie: [
-        "فشار خون بالا (Hypertension)",
-        "نارسایی قلبی (Heart Failure)",
-        "بیماری عروق کرونر (Coronary Artery Disease)",
-        "آریتمی قلبی (Arrhythmia)",
-        "سکته قلبی (Myocardial Infarction)",
-        "بیماری دریچه‌ای قلب (Valvular Heart Disease)",
-        "کاردیومیوپاتی (Cardiomyopathy)",
-        "فشار خون ریوی (Pulmonary Hypertension)",
-      ],
-    },
 
-    {
-      comorbiditie: "بیماری‌های تنفسی",
-      subComorbiditie: [
-        "آسم (Asthma)",
-        "بیماری انسدادی مزمن ریه (COPD)",
-        "فیبروز ریوی (Pulmonary Fibrosis)",
-        "آمفیزم (Emphysema)",
-        "آپنه خواب (Sleep Apnea)",
-        "برونشکتازی (Bronchiectasis)",
-      ],
-    },
+    comorbidities: [
+      {
+        comorbiditie: "بیماری‌های قلبی و عروقی",
+        subComorbiditie: [
+          "فشار خون بالا (Hypertension)",
+          "نارسایی قلبی (Heart Failure)",
+          "بیماری عروق کرونر (Coronary Artery Disease)",
+          "آریتمی قلبی (Arrhythmia)",
+          "سکته قلبی (Myocardial Infarction)",
+          "بیماری دریچه‌ای قلب (Valvular Heart Disease)",
+          "کاردیومیوپاتی (Cardiomyopathy)",
+          "فشار خون ریوی (Pulmonary Hypertension)",
+        ],
+      },
 
-    {
-      comorbiditie: "بیماری‌های متابولیک و غدد درون‌ریز",
-      subComorbiditie: [
-        "دیابت نوع ۱ و ۲ (Type 1 and 2 Diabetes Mellitus)",
-        "کم‌کاری یا پرکاری تیروئید (Hypo/Hyperthyroidism)",
-        "چاقی مفرط (Morbid Obesity)",
-        "سندرم متابولیک (Metabolic Syndrome)",
-        "بیماری کوشینگ (Cushing’s Syndrome)",
-        "بیماری آدیسون (Addison’s Disease)",
-      ],
-    },
+      {
+        comorbiditie: "بیماری‌های تنفسی",
+        subComorbiditie: [
+          "آسم (Asthma)",
+          "بیماری انسدادی مزمن ریه (COPD)",
+          "فیبروز ریوی (Pulmonary Fibrosis)",
+          "آمفیزم (Emphysema)",
+          "آپنه خواب (Sleep Apnea)",
+          "برونشکتازی (Bronchiectasis)",
+        ],
+      },
 
-    {
-      comorbiditie: "بیماری‌های کلیوی",
-      subComorbiditie: [
-        "نارسایی مزمن کلیه (CKD)",
-        "سنگ کلیه مکرر (Recurrent Kidney Stones)",
-        "نفروپاتی دیابتی (Diabetic Nephropathy)",
-        "سندرم نفروتیک (Nephrotic Syndrome)",
-        "دیالیز (Hemodialysis / Peritoneal Dialysis)",
-      ],
-    },
+      {
+        comorbiditie: "بیماری‌های متابولیک و غدد درون‌ریز",
+        subComorbiditie: [
+          "دیابت نوع ۱ و ۲ (Type 1 and 2 Diabetes Mellitus)",
+          "کم‌کاری یا پرکاری تیروئید (Hypo/Hyperthyroidism)",
+          "چاقی مفرط (Morbid Obesity)",
+          "سندرم متابولیک (Metabolic Syndrome)",
+          "بیماری کوشینگ (Cushing’s Syndrome)",
+          "بیماری آدیسون (Addison’s Disease)",
+        ],
+      },
 
-    {
-      comorbiditie: "بیماری‌های گوارشی و کبدی",
-      subComorbiditie: [
-        "هپاتیت مزمن B و C (Chronic Hepatitis B/C)",
-        "سیروز کبدی (Liver Cirrhosis)",
-        "بیماری کبد چرب غیرالکلی (NAFLD)",
-        "بیماری کرون (Crohn’s Disease)",
-        "کولیت اولسراتیو (Ulcerative Colitis)",
-        "زخم معده یا اثنی‌عشر (Peptic Ulcer Disease)",
-      ],
-    },
+      {
+        comorbiditie: "بیماری‌های کلیوی",
+        subComorbiditie: [
+          "نارسایی مزمن کلیه (CKD)",
+          "سنگ کلیه مکرر (Recurrent Kidney Stones)",
+          "نفروپاتی دیابتی (Diabetic Nephropathy)",
+          "سندرم نفروتیک (Nephrotic Syndrome)",
+          "دیالیز (Hemodialysis / Peritoneal Dialysis)",
+        ],
+      },
 
-    {
-      comorbiditie: "بیماری‌های عصبی و روانی",
-      subComorbiditie: [
-        "صرع (Epilepsy)",
-        "سکته مغزی (Stroke)",
-        "پارکینسون (Parkinson’s Disease)",
-        "آلزایمر و دمانس (Dementia / Alzheimer’s)",
-        "اختلال دو قطبی (Bipolar Disorder)",
-        "افسردگی مزمن (Chronic Depression)",
-        "اسکلروز متعدد (MS)",
-      ],
-    },
+      {
+        comorbiditie: "بیماری‌های گوارشی و کبدی",
+        subComorbiditie: [
+          "هپاتیت مزمن B و C (Chronic Hepatitis B/C)",
+          "سیروز کبدی (Liver Cirrhosis)",
+          "بیماری کبد چرب غیرالکلی (NAFLD)",
+          "بیماری کرون (Crohn’s Disease)",
+          "کولیت اولسراتیو (Ulcerative Colitis)",
+          "زخم معده یا اثنی‌عشر (Peptic Ulcer Disease)",
+        ],
+      },
 
-    {
-      comorbiditie: "بیماری‌های ایمنی و خودایمنی",
-      subComorbiditie: [
-        "لوپوس (SLE)",
-        "آرتریت روماتوئید (Rheumatoid Arthritis)",
-        "اسکلرودرما",
-        "سندرم شوگرن (Sjögren’s Syndrome)",
-        "پسوریازیس شدید (Severe Psoriasis)",
-        "بیماری سلیاک",
-      ],
-    },
+      {
+        comorbiditie: "بیماری‌های عصبی و روانی",
+        subComorbiditie: [
+          "صرع (Epilepsy)",
+          "سکته مغزی (Stroke)",
+          "پارکینسون (Parkinson’s Disease)",
+          "آلزایمر و دمانس (Dementia / Alzheimer’s)",
+          "اختلال دو قطبی (Bipolar Disorder)",
+          "افسردگی مزمن (Chronic Depression)",
+          "اسکلروز متعدد (MS)",
+        ],
+      },
 
-    {
-      comorbiditie: "بیماری‌های خونی و انکولوژیک",
-      subComorbiditie: [
-        "کم‌خونی داسی‌شکل (Sickle Cell Anemia)",
-        "تالاسمی ماژور (Thalassemia Major)",
-        "هموفیلی (Hemophilia)",
-        "سرطان‌های فعال یا درمان‌شده (Active or Treated Cancers)",
-        "لوسمی، لنفوم، میلوما",
-        "اختلالات انعقادی (Coagulopathy)",
-      ],
-    },
+      {
+        comorbiditie: "بیماری‌های ایمنی و خودایمنی",
+        subComorbiditie: [
+          "لوپوس (SLE)",
+          "آرتریت روماتوئید (Rheumatoid Arthritis)",
+          "اسکلرودرما",
+          "سندرم شوگرن (Sjögren’s Syndrome)",
+          "پسوریازیس شدید (Severe Psoriasis)",
+          "بیماری سلیاک",
+        ],
+      },
 
-    {
-      comorbiditie: "بیماری‌های عفونی مزمن",
-      subComorbiditie: [
-        "HIV/AIDS",
-        "سل فعال یا نهفته (TB)",
-        "بیماری لایم (Lyme Disease)",
-        "سیفلیس مزمن",
-      ],
-    },
+      {
+        comorbiditie: "بیماری‌های خونی و انکولوژیک",
+        subComorbiditie: [
+          "کم‌خونی داسی‌شکل (Sickle Cell Anemia)",
+          "تالاسمی ماژور (Thalassemia Major)",
+          "هموفیلی (Hemophilia)",
+          "سرطان‌های فعال یا درمان‌شده (Active or Treated Cancers)",
+          "لوسمی، لنفوم، میلوما",
+          "اختلالات انعقادی (Coagulopathy)",
+        ],
+      },
 
-    {
-      comorbiditie: "بیماری‌های پوستی شدید",
-      subComorbiditie: [
-        "اگزمای شدید (Severe Eczema)",
-        "پسوریازیس گسترده",
-        "پمفیگوس",
-      ],
-    },
+      {
+        comorbiditie: "بیماری‌های عفونی مزمن",
+        subComorbiditie: [
+          "HIV/AIDS",
+          "سل فعال یا نهفته (TB)",
+          "بیماری لایم (Lyme Disease)",
+          "سیفلیس مزمن",
+        ],
+      },
 
-    {
-      comorbiditie: "سایر بیماری‌ها و شرایط خاص",
-      subComorbiditie: [
-        "پیوند عضو (Organ Transplant)",
-        "نقص سیستم ایمنی (Immunodeficiency)",
-        "حاملگی پرخطر (High-Risk Pregnancy)",
-        "بیماری‌های نادر ژنتیکی",
-        "اعتیاد مزمن (Chronic Substance Abuse)",
-        "ناباروری همراه با بیماری زمینه‌ای",
-      ],
-    },
-  ],
+      {
+        comorbiditie: "بیماری‌های پوستی شدید",
+        subComorbiditie: [
+          "اگزمای شدید (Severe Eczema)",
+          "پسوریازیس گسترده",
+          "پمفیگوس",
+        ],
+      },
+
+      {
+        comorbiditie: "سایر بیماری‌ها و شرایط خاص",
+        subComorbiditie: [
+          "پیوند عضو (Organ Transplant)",
+          "نقص سیستم ایمنی (Immunodeficiency)",
+          "حاملگی پرخطر (High-Risk Pregnancy)",
+          "بیماری‌های نادر ژنتیکی",
+          "اعتیاد مزمن (Chronic Substance Abuse)",
+          "ناباروری همراه با بیماری زمینه‌ای",
+        ],
+      },
+    ],
+
+    surgicalHistories: [
+      {
+        history: "جراحی‌های قلب و عروق",
+        subHistory: [
+          "جراحی بای‌پس عروق کرونر (CABG)",
+          "آنژیوپلاستی یا استنت‌گذاری (Angioplasty / Stent)",
+          "تعویض یا ترمیم دریچه قلب (Valve Replacement / Repair)",
+          "کاردیومیوپاتی با دستگاه LVAD",
+          "تعبیه پیس‌میکر یا دفیبریلاتور (Pacemaker / ICD)",
+          "جراحی آئورت (Aortic Repair or Dissection Surgery)",
+        ],
+      },
+
+      {
+        history: "جراحی‌های مغز و اعصاب",
+        subHistory: [
+          "کرانیوتومی (Craniotomy)",
+          "جراحی تومور مغزی (Brain Tumor Resection)",
+          "جراحی ستون فقرات (Spinal Fusion / Discectomy / Laminectomy)",
+          "درمان هیدروسفالی (Shunt Placement)",
+          "درمان هیدروسفالی (Shunt Placement)",
+        ],
+      },
+
+      {
+        history: "جراحی‌های گوارشی",
+        subHistory: [
+          "آپاندکتومی (Appendectomy)",
+          "کله‌سیستکتومی (Cholecystectomy – برداشتن کیسه صفرا)",
+          "جراحی فتق (Hernia Repair – اینگوینال، نافی، فمورال)",
+          "هموروئیدکتومی (Hemorrhoidectomy)",
+          "کلکتومی (Colectomy – برداشتن بخشی از روده بزرگ)",
+          "گاسترکتومی (Gastrectomy – برداشتن بخشی یا کل معده)",
+          "جراحی رفلاکس (Fundoplication)",
+          "پانکراتکتومی (Pancreatectomy)",
+          "جراحی بای‌پس معده یا اسلیو معده (Gastric Bypass / Sleeve)",
+        ],
+      },
+
+      {
+        history: "جراحی‌های کبد، طحال و لوزالمعده",
+        subHistory: [
+          "برداشتن کیست کبدی",
+          "اسپلنکتومی (Splenectomy – برداشتن طحال)",
+          "رزکسیون پانکراس (Pancreatic Resection)",
+          "بیوپسی کبدی (Liver Biopsy)",
+        ],
+      },
+
+      {
+        history: "جراحی‌های کلیه و مجاری ادراری",
+        subHistory: [
+          "نفرکتومی (Nephrectomy – برداشتن کلیه)",
+          "سنگ‌شکنی یا برداشتن سنگ کلیه (PCNL / URS / Lithotripsy)",
+          "تعبیه دابل جی یا کاتتر کلیوی",
+          "پیوند کلیه (Kidney Transplant)",
+          "سیستکتومی (برداشتن مثانه)",
+          "پروستاتکتومی (برداشتن پروستات)",
+        ],
+      },
+
+      {
+        history: "جراحی‌های زنان و زایمان",
+        subHistory: [
+          "سزارین (C-Section)",
+          "هیسترکتومی (برداشتن رحم)",
+          "اوفورکتومی (برداشتن تخمدان)",
+          "لاپاراسکوپی تشخیصی یا درمانی",
+          "کورتاژ رحم (D&C)",
+          "جراحی اندومتریوز",
+          "جراحی بارداری خارج‌رحمی",
+        ],
+      },
+
+      {
+        history: "جراحی‌های ارتوپدی",
+        subHistory: [
+          "تعویض مفصل (هیپ، زانو، شانه) – Total Joint Replacement",
+          "فیکساسیون شکستگی (ORIF – Open Reduction Internal Fixation)",
+          "آرتروسکوپی زانو / شانه",
+          "جراحی رباط ACL / منیسک",
+          "آمنیوتومی ستون فقرات",
+        ],
+      },
+
+      {
+        history: "جراحی‌های گوش، حلق و بینی (ENT)",
+        subHistory: [
+          "تونسیلکتومی (برداشتن لوزه)",
+          "آدنوئیدکتومی (برداشتن لوزه سوم)",
+          "جراحی سینوس (Sinus Surgery)",
+          "سپتوپلاستی یا انحراف بینی",
+          "جراحی گوش میانی / کاشت حلزون",
+        ],
+      },
+
+      {
+        history: " جراحی‌های چشم",
+        subHistory: [
+          "عمل آب مروارید (Cataract Surgery)",
+          "عمل لازک یا لیزیک",
+          "جراحی گلوکوم",
+          "شبکیه‌برداری یا ترمیم پارگی شبکیه",
+        ],
+      },
+
+      {
+        history: "جراحی‌های پوست و زیبایی",
+        subHistory: [
+          "جراحی پلاستیک و ترمیمی (Reconstructive Surgery)",
+          "برداشت تومور یا کیست پوست",
+          "پیوند پوست (Skin Graft)",
+          "جراحی زیبایی بینی (Rhinoplasty)",
+          "لیپوساکشن / ابدومینوپلاستی (Liposuction / Tummy Tuck)",
+          "ماموپلاستی (افزایش/کاهش سینه)",
+        ],
+      },
+
+      {
+        history: "جراحی‌های انکولوژیک (سرطان‌ها)",
+        subHistory: [
+          "رزکسیون تومور (هر ناحیه)",
+          "ماستکتومی (برداشتن پستان)",
+          "جراحی کولورکتال برای سرطان روده",
+          "جراحی پروستات برای سرطان",
+          "برداشت غدد لنفاوی (Lymphadenectomy)",
+        ],
+      },
+
+      {
+        history: "سایر جراحی‌های رایج",
+        subHistory: [
+          "پیوند عضو (کلیه، کبد، قلب)",
+          "تعبیه پورت مرکزی (Port / Central Line Placement)",
+          "آمپوتاسیون عضو (Amputation)",
+          "ترمیم زخم‌های وسیع (Debridement)",
+          "جراحی آندوسکوپیک دستگاه گوارش",
+        ],
+      },
+    ],
 
     // Insurance Information
     insuranceCompany: "",
