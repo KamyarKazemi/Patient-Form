@@ -751,6 +751,99 @@ function Provider({ children }) {
       },
     ],
 
+    drugAllergies: [
+      {
+        allergy: "آنتی‌بیوتیک‌ها",
+        subAllergy: [
+          "Penicillin / Ampicillin / Amoxicillin",
+          "Cephalosporins: Cefalexin, Ceftriaxone, Cefepime",
+          "Carbapenems: Meropenem, Imipenem",
+          "Sulfonamides: Cotrimoxazole (Trimethoprim + Sulfamethoxazole)",
+          "Macrolides: Erythromycin, Azithromycin",
+          "Fluoroquinolones: Ciprofloxacin, Levofloxacin",
+          "Vancomycin",
+          "Clindamycin",
+          "Tetracyclines: Doxycycline",
+        ],
+      },
+
+      {
+        allergy: "مسکن‌ها و ضدالتهاب‌ها",
+        subAllergy: [
+          "NSAIDs: Ibuprofen, Diclofenac, Naproxen",
+          "Aspirin",
+          "Paracetamol (نادر، اما ممکن)",
+          "Opioids: Morphine, Codeine, Tramadol, Fentanyl",
+          "Ketorolac",
+        ],
+      },
+
+      {
+        allergy: "بی‌حس‌کننده‌ها و بیهوشی",
+        subAllergy: [
+          "Lidocaine (موضعی)",
+          "Bupivacaine",
+          "Propofol",
+          "Etomidate",
+          "Midazolam / Diazepam (بیشتر حساسیت‌های خفیف یا واکنش‌های شبه آلرژیک)",
+        ],
+      },
+
+      {
+        allergy: "ضدتشنج و روان‌پزشکی",
+        subAllergy: [
+          "Phenytoin",
+          "Carbamazepine – واکنش‌های شدید مانند SJS/TEN",
+          "Lamotrigine",
+          "Valproic acid",
+          "Haloperidol",
+          "Lithium",
+        ],
+      },
+
+      {
+        allergy: "انسولین‌ها و داروهای دیابت",
+        subAllergy: [
+          "Insulin human / analogs: ممکن است در برخی افراد حساسیت داده باشند",
+          "Metformin",
+          "Sulfonylureas: Gliclazide, Glibenclamide (ممکن است در بیماران حساس به سولفا مشکل ایجاد کنند)",
+        ],
+      },
+
+      {
+        allergy: "سرکوب‌کننده‌های ایمنی و ضدسرطان",
+        subAllergy: [
+          "Methotrexate",
+          "Cyclophosphamide",
+          "Azathioprine",
+          "Rituximab",
+          "IVIG (ایمونوگلوبولین تزریقی) – حساسیت شدید در برخی بیماران",
+        ],
+      },
+
+      {
+        allergy: "داروهای ضد HIV و ویروسی",
+        subAllergy: [
+          "Nevirapine",
+          "Abacavir – تست ژنتیکی HLA-B*5701 قبل از مصرف توصیه می‌شود",
+          "Efavirenz",
+          "Oseltamivir",
+        ],
+      },
+
+      {
+        allergy: "سایر موارد شایع یا خاص",
+        subAllergy: [
+          "Heparin / Enoxaparin – می‌توانند باعث HIT (Heparin-induced Thrombocytopenia) یا حساسیت شوند",
+          "Contrast media (مواد حاجب) – به‌خصوص در CT یا آنژیوگرافی",
+          "Protamine – در بیماران دیالیزی یا با سابقه ماهیگیری آلرژی‌زا",
+          "Vaccine-related allergies",
+          "Iron sucrose / Iron dextran",
+          "Thiamine",
+        ],
+      },
+    ],
+
     // Insurance Information
     insuranceCompany: "",
     insurancePolicyNumber: "",
