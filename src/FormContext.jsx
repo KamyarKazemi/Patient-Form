@@ -846,11 +846,28 @@ function Provider({ children }) {
 
     // Insurance Information
     insuranceCompany: "",
+    insuranceCompanyOptions: [
+      "تامین اجتماعی",
+      "خدمات درمانی",
+      "نیروهای مسلح",
+      "امام خمینی",
+      "بیمه خصوصی",
+      "فاقد بیمه",
+    ],
     insurancePolicyNumber: "",
 
     // Emergency Contact
     emergencyContactName: "",
     emergencyContactRelationship: "",
+    emergencyContactRelationshipOptions: [
+      "همسر",
+      "والدین",
+      "فرزند",
+      "خواهر/برادر",
+      "سایر اقوام",
+      "دوست",
+      "قیم قانونی ",
+    ],
     emergencyContactPhone: "",
     secondEmergencyContactPhone: "",
     emergencyContactAddress: "",
@@ -862,17 +879,53 @@ function Provider({ children }) {
     glasgowComaScale: "",
     apacheScore: "",
     ventilatorRequirements: "",
+    ventilatorRequirementsOptions: [
+      "عدم نیاز",
+      "غیرتهاجمی (CPAP/BiPAP)",
+      "تهاجمی (لوله تراشه)",
+      "اکسیژن جریان بالا ",
+    ],
     isolationPrecautions: "",
+    isolationPrecautionsOptions: [
+      "عدم نیاز",
+      "تماسی",
+      "قطرات",
+      "هوابرد",
+      "محافظتی",
+    ],
     dietRestrictions: "",
     mobilityLimitations: "",
     mentalStatusAssessment: "",
 
     // Administrative Information
     admissionSource: "",
+    admissionSourceOptions: [
+      "اورژانس",
+      "انتقال از بخش",
+      "اتاق عمل",
+      "بیمارستان دیگر",
+      "منزل",
+      "کلینیک",
+    ],
     roomBedAssignment: "",
     languagePreference: "",
+    languagePreferenceOptions: [
+      "فارسی",
+      "انگلیسی",
+      "عربی",
+      "ترکی",
+      "کردی",
+      "سایر",
+    ],
     religionCulturalConsiderations: "",
     advanceDirectives: "",
+    advanceDirectivesOptions: [
+      "کد کامل",
+      "عدم احیاء (DNR)",
+      "عدم لوله‌گذاری (DNI)",
+      "مراقبت‌های تسکینی",
+      "نامشخص",
+    ],
     legalGuardian: "",
     admissionNotes: "",
   });

@@ -324,12 +324,11 @@ function FirstPage() {
             required
           >
             <option value="">انتخاب کنید</option>
-            <option value="social-security">تامین اجتماعی</option>
-            <option value="medical-services">خدمات درمانی</option>
-            <option value="armed-forces">نیروهای مسلح</option>
-            <option value="imam-khomeini">امام خمینی</option>
-            <option value="private">بیمه خصوصی</option>
-            <option value="none">فاقد بیمه</option>
+            {formData.insuranceCompanyOptions.map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -382,14 +381,14 @@ function FirstPage() {
             onChange={handleInputChange}
             required
           >
-            <option value="">انتخاب کنید</option>
-            <option value="spouse">همسر</option>
-            <option value="parent">والدین</option>
-            <option value="child">فرزند</option>
-            <option value="sibling">خواهر/برادر</option>
-            <option value="relative">سایر اقوام</option>
-            <option value="friend">دوست</option>
-            <option value="guardian">قیم قانونی</option>
+            <option value="">انتحاب کنید</option>
+            {formData.emergencyContactRelationshipOptions.map((item, index) => (
+              <>
+                <option value={item} key={index}>
+                  {item}
+                </option>
+              </>
+            ))}
           </select>
         </div>
 
@@ -564,11 +563,15 @@ function FirstPage() {
             value={formData.ventilatorRequirements}
             onChange={handleInputChange}
           >
-            <option value="">انتخاب کنید</option>
-            <option value="none">عدم نیاز</option>
-            <option value="non-invasive">غیرتهاجمی (CPAP/BiPAP)</option>
-            <option value="invasive">تهاجمی (لوله تراشه)</option>
-            <option value="high-flow">اکسیژن جریان بالا</option>
+            <option value="">انتحاب کنید</option>
+
+            {formData.ventilatorRequirementsOptions.map((item, index) => (
+              <>
+                <option value={item} key={index}>
+                  {item}
+                </option>
+              </>
+            ))}
           </select>
         </div>
 
@@ -583,12 +586,13 @@ function FirstPage() {
             value={formData.isolationPrecautions}
             onChange={handleInputChange}
           >
-            <option value="">انتخاب کنید</option>
-            <option value="none">عدم نیاز</option>
-            <option value="contact">تماسی</option>
-            <option value="droplet">قطرات</option>
-            <option value="airborne">هوابرد</option>
-            <option value="protective">محافظتی</option>
+            <option value="">انتحاب کنید</option>
+
+            {formData.isolationPrecautionsOptions.map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -648,13 +652,12 @@ function FirstPage() {
             onChange={handleInputChange}
             required
           >
-            <option value="">انتخاب کنید</option>
-            <option value="emergency">اورژانس</option>
-            <option value="ward-transfer">انتقال از بخش</option>
-            <option value="operating-room">اتاق عمل</option>
-            <option value="other-hospital">بیمارستان دیگر</option>
-            <option value="home">منزل</option>
-            <option value="clinic">کلینیک</option>
+            <option value="">انتحاب کنید</option>
+            {formData.admissionSourceOptions.map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -685,12 +688,11 @@ function FirstPage() {
             onChange={handleInputChange}
           >
             <option value="">انتخاب کنید</option>
-            <option value="persian">فارسی</option>
-            <option value="english">انگلیسی</option>
-            <option value="arabic">عربی</option>
-            <option value="turkish">ترکی</option>
-            <option value="kurdish">کردی</option>
-            <option value="other">سایر</option>
+            {formData.languagePreferenceOptions.map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -723,11 +725,11 @@ function FirstPage() {
             onChange={handleInputChange}
           >
             <option value="">انتخاب کنید</option>
-            <option value="full-code">کد کامل</option>
-            <option value="dnr">عدم احیاء (DNR)</option>
-            <option value="dni">عدم لوله‌گذاری (DNI)</option>
-            <option value="comfort-care">مراقبت‌های تسکینی</option>
-            <option value="unknown">نامشخص</option>
+            {formData.advanceDirectivesOptions.map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
           </select>
         </div>
 
