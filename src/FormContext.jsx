@@ -623,6 +623,134 @@ function Provider({ children }) {
       },
     ],
 
+    usedDrugs: [
+      {
+        drug: "داروهای قلبی و عروقی",
+        subDrug: [
+          "Aspirin (آسپرین)",
+          "Clopidogrel (Plavix) – ضد پلاکت",
+          "Warfarin – ضد انعقاد",
+          "Heparin / Enoxaparin (Clexane) – ضد انعقاد",
+          "Nitroglycerin – نیتروگلیسیرین برای آنژین",
+          "Beta blockers: Metoprolol, Atenolol",
+          "ACE Inhibitors: Captopril, Enalapril, Lisinopril",
+          "ARBs: Losartan, Valsartan",
+          "Calcium Channel Blockers: Amlodipine, Diltiazem",
+          "Diuretics: Furosemide (Lasix), Spironolactone",
+          "Digoxin – برای نارسایی قلبی و آریتمی",
+        ],
+      },
+
+      {
+        drug: "داروهای تنفسی",
+        subDrug: [
+          "Salbutamol (Ventolin) – اسپری یا نبولایزر",
+          "Ipratropium (Atrovent",
+          "Theophylline",
+          "Corticosteroids: Prednisolone, Dexamethasone",
+          "Montelukast – ضد آسم",
+          "Oxygen Therapy (تجویزی)",
+          "Antibiotics for Pneumonia: Azithromycin, Ceftriaxone, Piperacillin-Tazobactam",
+        ],
+      },
+
+      {
+        drug: "داروهای اعصاب و روان",
+        subDrug: [
+          "Phenytoin, Levetiracetam (Keppra) – ضد تشنج",
+          "Diazepam / Lorazepam / Midazolam – آرام‌بخش/ضد اضطراب",
+          "Haloperidol – آنتی‌سایکوتیک",
+          "Risperidone, Olanzapine",
+          "Sertraline, Fluoxetine (SSRIs)",
+          "Lithium – در بیماران با اختلال دوقطبی",
+          "Morphine / Methadone / Buprenorphine – مسکن و جایگزین اپیوئید",
+        ],
+      },
+
+      {
+        drug: "داروهای دیابت و متابولیک",
+        subDrug: [
+          "Insulin (Humulin, Lantus, Novorapid)",
+          "Metformin",
+          "Gliclazide / Glibenclamide",
+          "SGLT2 inhibitors: Empagliflozin, Dapagliflozin",
+          "Corticosteroids – در موارد نارسایی آدرنال یا التهاب شدید",
+        ],
+      },
+
+      {
+        drug: "آنتی‌بیوتیک‌ها و داروهای ضد عفونت",
+        subDrug: [
+          "Ceftriaxone / Cefepime / Ceftazidime",
+          "Meropenem / Imipenem",
+          "Vancomycin",
+          "Linezolid",
+          "Azithromycin / Clarithromycin",
+          "Metronidazole",
+          "Fluconazole, Amphotericin B – ضد قارچ",
+          "Oseltamivir (Tamiflu) – آنفلوآنزا",
+          "Remdesivir, Favipiravir – کووید-۱۹",
+        ],
+      },
+
+      {
+        drug: "داروهای معده و گوارش",
+        subDrug: [
+          "Pantoprazole / Omeprazole (PPI)",
+          "Ranitidine / Famotidine",
+          "Lactulose – برای آنسفالوپاتی کبدی",
+          "Domperidone / Metoclopramide – ضد تهوع",
+          "Loperamide – ضد اسهال",
+          "Mesalazine – بیماری‌های التهابی روده",
+        ],
+      },
+
+      {
+        drug: "داروهای ضد انعقاد و ترومبولیتیک",
+        subDrug: [
+          "Warfarin, Heparin, Enoxaparin",
+          "Apixaban, Rivaroxaban, Dabigatran – ضد انعقاد خوراکی جدید",
+          "Alteplase (tPA) – ترومبولیتیک برای سکته",
+        ],
+      },
+
+      {
+        drug: "داروهای کلیوی و الکترولیتی",
+        subDrug: [
+          "Sodium bicarbonate",
+          "Potassium Chloride (خوراکی یا تزریقی)",
+          "Calcium Gluconate",
+          "Sodium Polystyrene Sulfonate (Kayexalate) – برای هایپرکالمی",
+          "Sevelamer, Calcitriol – بیماران دیالیزی",
+          "Erythropoietin (EPO) – در نارسایی مزمن کلیه",
+        ],
+      },
+
+      {
+        drug: "داروهای سرکوب ایمنی و سرطان",
+        subDrug: [
+          "Prednisolone / Methylprednisolone",
+          "Azathioprine",
+          "Mycophenolate Mofetil (CellCept)",
+          "Tacrolimus / Cyclosporine",
+          "Methotrexate, Cyclophosphamide",
+          "Chemotherapy agents – Cisplatin, Doxorubicin, etc.",
+        ],
+      },
+
+      {
+        drug: "داروهای دیگر مهم و خاص",
+        subDrug: [
+          "Naloxone – آنتاگونیست اپیوئید",
+          "Flumazenil – آنتاگونیست بنزودیازپین",
+          "IVIG (ایمونوگلوبولین تزریقی) – در بیماری‌های خودایمنی",
+          "Antihistamines – مانند Diphenhydramine, Loratadine",
+          "Adrenaline / Epinephrine – آنافیلاکسی یا CPR",
+          "Hydrocortisone – شوک آدرنال",
+        ],
+      },
+    ],
+
     // Insurance Information
     insuranceCompany: "",
     insurancePolicyNumber: "",
