@@ -20,11 +20,9 @@ function Provider({ children }) {
     admissionDateTime: "",
     referringPhysician: "",
     primaryDiagnosis: "",
-    secondaryDiagnoses: "",
     knownAllergies: "",
     currentMedications: "",
     medicalHistory: "",
-    recentSurgeries: "",
     previousICUAdmissions: "",
 
     // Insurance Information
@@ -35,7 +33,7 @@ function Provider({ children }) {
     emergencyContactName: "",
     emergencyContactRelationship: "",
     emergencyContactPhone: "",
-    emergencyContactPhone2: "",
+    secondEmergencyContactPhone: "",
     emergencyContactAddress: "",
 
     // Clinical Assessment
@@ -62,9 +60,13 @@ function Provider({ children }) {
 
   // Error states
   const [idError, setIdError] = useState(false);
+  const [phoneNumberError, setPhoneNumberError] = useState(false);
+  const [homePhoneNumberError, setHomePhoneNumberError] = useState(false);
   const [medicalRecordError, setMedicalRecordError] = useState(false);
   const [insuranceError, setInsuranceError] = useState(false);
   const [emergencyContactError, setEmergencyContactError] = useState(false);
+  const [secondEmergencyContactError, setSecondEmergencyContactError] =
+    useState(false);
   const [weightError, setWeightError] = useState(false);
   const [heightError, setHeightError] = useState(false);
   const [vitalSignsError, setVitalSignsError] = useState(false);
@@ -143,10 +145,8 @@ function Provider({ children }) {
 
     if (isAgeValid) {
       console.log("✌️ age is Valid");
-      setIdError(false);
     } else {
       console.log("🤦 age is Invalid");
-      setIdError(true);
     }
 
     setFormData((prev) => ({
@@ -164,10 +164,10 @@ function Provider({ children }) {
 
     if (isValid || isValid2) {
       console.log("✌️ phone is Valid");
-      setIdError(false);
+      setPhoneNumberError(false);
     } else {
       console.log("🤦 phone is Invalid");
-      setIdError(true);
+      setPhoneNumberError(true);
     }
 
     setFormData((prev) => ({
@@ -200,10 +200,10 @@ function Provider({ children }) {
 
     if (isValid) {
       console.log("✌️ home is Valid");
-      setIdError(false);
+      setHomePhoneNumberError(false);
     } else {
       console.log("🤦 home is Invalid");
-      setIdError(true);
+      setHomePhoneNumberError(true);
     }
 
     setFormData((prev) => ({
@@ -216,7 +216,7 @@ function Provider({ children }) {
     const { name, value } = e.target;
     const cleanedValue = value.replace(/[^A-Za-z0-9]/g, "");
 
-    const isValid = cleanedValue.length >= 5 && cleanedValue.length <= 25;
+    const isValid = cleanedValue.length === 10;
 
     if (isValid) {
       console.log("✌️ Insurance Policy Number is Valid");
@@ -240,11 +240,32 @@ function Provider({ children }) {
     const isValid2 = /^9\d{9}$/.test(cleanedValue2);
 
     if (isValid || isValid2) {
-      console.log("✌️ Emergency Contact Phone is Valid");
+      console.log("✌️ phone is Valid");
       setEmergencyContactError(false);
     } else {
-      console.log("🤦 Emergency Contact Phone is Invalid");
+      console.log("🤦 phone is Invalid");
       setEmergencyContactError(true);
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: cleanedValue,
+    }));
+  };
+
+  const handleSecondEmergencyContactPhone = (e) => {
+    const { name, value } = e.target;
+    const cleanedValue = value.replace(/\D/g, "").slice(0, 11);
+    const cleanedValue2 = value.replace(/\D/g, "").slice(0, 10);
+    const isValid = /^09\d{9}$/.test(cleanedValue);
+    const isValid2 = /^9\d{9}$/.test(cleanedValue2);
+
+    if (isValid || isValid2) {
+      console.log("✌️ phone is Valid");
+      setSecondEmergencyContactError(false);
+    } else {
+      console.log("🤦 phone is Invalid");
+      setSecondEmergencyContactError(true);
     }
 
     setFormData((prev) => ({
@@ -381,6 +402,10 @@ function Provider({ children }) {
     vitalSignsError,
     glasgowError,
     apacheError,
+    phoneNumberError,
+    homePhoneNumberError,
+    handleSecondEmergencyContactPhone,
+    secondEmergencyContactError,
   };
 
   return (

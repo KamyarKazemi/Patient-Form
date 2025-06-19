@@ -15,6 +15,8 @@ function FirstPage() {
     handleMedicalRecordNumber,
     handleInsurancePolicyNumber,
     handleEmergencyContactPhone,
+    handleSecondEmergencyContactPhone,
+    secondEmergencyContactError,
     handleWeight,
     handleHeight,
     handleVitalSigns,
@@ -29,6 +31,8 @@ function FirstPage() {
     vitalSignsError,
     glasgowError,
     apacheError,
+    phoneNumberError,
+    homePhoneNumberError,
   } = useContext(FormContext);
 
   return (
@@ -126,11 +130,6 @@ function FirstPage() {
             onChange={handleAge}
             required
           />
-          {idError ? (
-            <div className="idError">
-              <p>سن نامعتبر است</p>
-            </div>
-          ) : null}
         </div>
 
         <div className="input-group">
@@ -146,7 +145,7 @@ function FirstPage() {
             onChange={handlePhoneNumber}
             required
           />
-          {idError ? (
+          {phoneNumberError ? (
             <div className="idError">
               <p>شماره تماس نامعتبر است</p>
             </div>
@@ -167,7 +166,7 @@ function FirstPage() {
             onChange={handleHomePhoneNumber}
             required
           />
-          {idError ? (
+          {homePhoneNumberError ? (
             <div className="idError">
               <p>شماره تلفن نامعتبر است</p>
             </div>
@@ -255,19 +254,6 @@ function FirstPage() {
         </div>
 
         <div className="input-group">
-          <label htmlFor="secondaryDiagnoses" className="form-label">
-            تشخیص‌های ثانویه
-          </label>
-          <textarea
-            id="secondaryDiagnoses"
-            name="secondaryDiagnoses"
-            className="form-input"
-            value={formData.secondaryDiagnoses}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="input-group">
           <label htmlFor="knownAllergies" className="form-label">
             حساسیت‌های شناخته شده
           </label>
@@ -305,20 +291,6 @@ function FirstPage() {
             className="form-input"
             value={formData.medicalHistory}
             onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="input-group">
-          <label htmlFor="recentSurgeries" className="form-label">
-            جراحی‌های اخیر
-          </label>
-          <textarea
-            id="recentSurgeries"
-            name="recentSurgeries"
-            className="form-input"
-            value={formData.recentSurgeries}
-            onChange={handleInputChange}
-            placeholder="نوع جراحی و تاریخ آن"
           />
         </div>
 
@@ -375,7 +347,7 @@ function FirstPage() {
           />
           {insuranceError ? (
             <div className="idError">
-              <p>شماره بیمه‌نامه نامعتبر است</p>
+              <p>شماره بیمه‌نامه باید 10 رقم باشد</p>
             </div>
           ) : null}
         </div>
@@ -451,9 +423,15 @@ function FirstPage() {
             name="emergencyContactPhone2"
             className="form-input"
             value={formData.emergencyContactPhone2}
-            onChange={handleInputChange}
+            onChange={handleSecondEmergencyContactPhone}
           />
         </div>
+
+        {secondEmergencyContactError ? (
+          <div className="idError">
+            <p>شماره تماس اضطراری نامعتبر است</p>
+          </div>
+        ) : null}
 
         <div className="input-group">
           <label htmlFor="emergencyContactAddress" className="form-label">
