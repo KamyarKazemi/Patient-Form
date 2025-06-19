@@ -877,6 +877,79 @@ function Provider({ children }) {
     admissionNotes: "",
   });
 
+  // subFunctions
+  const [selectedSymptom, setSelectedSymptom] = useState("");
+
+  const handleSymptom = (e) => {
+    setSelectedSymptom(e.target.value);
+  };
+
+  const selectedItem = formData.baseIcuReason.find(
+    (item) => item.symptom === selectedSymptom
+  );
+
+  const [selectedDiagnosis, setSelectedDiagnosis] = useState("");
+
+  const handleDiagnosis = (e) => {
+    setSelectedDiagnosis(e.target.value);
+  };
+
+  const selectedSubDiagnosis = formData.firstDiagnosis.find(
+    (item) => item.diagnosis === selectedDiagnosis
+  );
+
+  const [selectedComorbiditie, setSelectedComorbiditie] = useState("");
+
+  const handleComorbiditie = (e) => {
+    setSelectedComorbiditie(e.target.value);
+  };
+
+  const selectedSubComorbiditie = formData.comorbidities.find(
+    (item) => item.comorbiditie === selectedComorbiditie
+  );
+
+  const [selectedSurgicalHistory, setSelectedSurgicalHistory] = useState("");
+
+  const handleHistory = (e) => {
+    setSelectedSurgicalHistory(e.target.value);
+  };
+
+  const selectedSubSurgicalHistory = formData.surgicalHistories.find(
+    (item) => item.history === selectedSurgicalHistory
+  );
+
+  const [selectedAdmissionReasons, setSelectedAdmissionReasons] = useState("");
+
+  const handleAdmissionReasons = (e) => {
+    setSelectedAdmissionReasons(e.target.value);
+  };
+
+  const selectedSubAdmissionReasons = formData.icuAdmissionReasons.find(
+    (item) => item.reason === selectedAdmissionReasons
+  );
+
+  const [selectedDrugs, setSelectedDrugs] = useState("");
+
+  const handleDrugs = (e) => {
+    setSelectedDrugs(e.target.value);
+  };
+
+  const selectedSubDrugs = formData.usedDrugs.find(
+    (item) => item.drug === selectedDrugs
+  );
+
+  const [selectedAllergies, setSelectedAllergies] = useState("");
+
+  const handleAllergies = (e) => {
+    setSelectedAllergies(e.target.value);
+  };
+
+  const selectedSubAllergies = formData.drugAllergies.find(
+    (item) => item.allergy === selectedAllergies
+  );
+
+  //
+
   // Error states
   const [idError, setIdError] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
@@ -1227,26 +1300,18 @@ function Provider({ children }) {
     secondEmergencyContactError,
     handleDrugs,
     selectedSubDrugs,
-    drugAllergies,
     handleAllergies,
     selectedSubAllergies,
-    baseIcuReason,
     handleSymptom,
     selectedItem,
-    vitalSigns,
-    firstDiagnosis,
     handleDiagnosis,
     selectedSubDiagnosis,
-    comorbidities,
     selectedSubComorbiditie,
     handleComorbiditie,
-    surgicalHistories,
     handleHistory,
     selectedSubSurgicalHistory,
-    icuAdmissionReasons,
     handleAdmissionReasons,
     selectedSubAdmissionReasons,
-    usedDrugs,
   };
 
   return (

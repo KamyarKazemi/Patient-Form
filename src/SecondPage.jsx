@@ -5,40 +5,21 @@ import { useNavigate, Link } from "react-router-dom";
 
 function SecondPage() {
   const {
-    // formData,
-    // handleInputChange,
-    // handleIdCode,
-    // handleAge,
-    // handlePhoneNumber,
-    // handleHomePhoneNumber,
-    baseIcuReason,
+    formData,
     handleSymptom,
     selectedItem,
-    vitalSigns,
-    firstDiagnosis,
-    // selectedDiagnosis,
     handleDiagnosis,
     selectedSubDiagnosis,
-    comorbidities,
-    // selectedComorbiditie,
     selectedSubComorbiditie,
     handleComorbiditie,
-    // selectedSurgicalHistory,
-    surgicalHistories,
     handleHistory,
     selectedSubSurgicalHistory,
-    icuAdmissionReasons,
-    // selectedAdmissionReasons,
     handleAdmissionReasons,
     selectedSubAdmissionReasons,
-    usedDrugs,
-    // selectedDrugs,
     handleDrugs,
     selectedSubDrugs,
-    drugAllergies,
     handleAllergies,
     selectedSubAllergies,
-    // idError,
     isAnyError,
   } = useContext(FormContext);
 
@@ -69,7 +50,7 @@ function SecondPage() {
             className="form-input"
             onChange={handleSymptom}
           >
-            {baseIcuReason.map((item, index) => (
+            {formData.baseIcuReason.map((item, index) => (
               <option key={index} value={item.symptom}>
                 {item.symptom}
               </option>
@@ -96,7 +77,7 @@ function SecondPage() {
         <div className="input-group">
           <label htmlFor="vitalSigns">وضعیت علاعم حیاتی</label>
           <select name="vitalSigns" id="vitalSigns" className="form-input">
-            {vitalSigns.map((item, index) => (
+            {formData.vitalSigns.map((item, index) => (
               <option key={index} value={item.sign}>
                 {item.sign}
               </option>
@@ -111,7 +92,7 @@ function SecondPage() {
             className="form-input"
             onChange={handleDiagnosis}
           >
-            {firstDiagnosis.map((item, index) => (
+            {formData.firstDiagnosis.map((item, index) => (
               <option key={index} value={item.diagnosis}>
                 {item.diagnosis}
               </option>
@@ -119,7 +100,7 @@ function SecondPage() {
           </select>
         </div>
         <div className="checkbox">
-          {selectedSubDiagnosis && (
+          {formData.selectedSubDiagnosis && (
             <div className="checkbox-container">
               {selectedSubDiagnosis.subDiagnosis.map((sub, index) => (
                 <div key={index} className="checkbox-item">
@@ -143,7 +124,7 @@ function SecondPage() {
             className="form-input"
             onChange={handleComorbiditie}
           >
-            {comorbidities.map((item, index) => (
+            {formData.comorbidities.map((item, index) => (
               <option value={item.comorbiditie} key={index}>
                 {item.comorbiditie}
               </option>
@@ -151,7 +132,7 @@ function SecondPage() {
           </select>
         </div>
         <div className="checkbox">
-          {selectedSubComorbiditie && (
+          {formData.selectedSubComorbiditie && (
             <div className="checkbox-container">
               {selectedSubComorbiditie.subComorbiditie.map((sub, index) => (
                 <div className="checkbox-item" key={index}>
@@ -175,7 +156,7 @@ function SecondPage() {
             className="form-input"
             onChange={handleHistory}
           >
-            {surgicalHistories.map((item, index) => (
+            {formData.surgicalHistories.map((item, index) => (
               <option key={index} value={item.history}>
                 {item.history}
               </option>
@@ -208,7 +189,7 @@ function SecondPage() {
             className="form-input"
             onChange={handleDrugs}
           >
-            {usedDrugs.map((item, index) => (
+            {formData.usedDrugs.map((item, index) => (
               <option value={item.drug} key={index}>
                 {item.drug}
               </option>
@@ -240,7 +221,7 @@ function SecondPage() {
             className="form-input"
             onChange={handleAllergies}
           >
-            {drugAllergies.map((item, index) => (
+            {formData.drugAllergies.map((item, index) => (
               <option value={item.allergy} key={index}>
                 {item.allergy}
               </option>
@@ -272,7 +253,7 @@ function SecondPage() {
             className="form-input"
             onChange={handleAdmissionReasons}
           >
-            {icuAdmissionReasons.map((item, index) => (
+            {formData.icuAdmissionReasons.map((item, index) => (
               <option value={item.reason} key={index}>
                 {item.reason}
               </option>
