@@ -931,6 +931,8 @@ function Provider({ children }) {
     admissionNotes: "",
   });
 
+  const [isAnyError, setIsAnyError] = useState(false);
+
   // subFunctions
   const [selectedSymptom, setSelectedSymptom] = useState("");
 
@@ -1031,20 +1033,14 @@ function Provider({ children }) {
 
     const isTenDigits = cleanedValue.length === 10;
 
-    let isUnique = true;
-    for (let i = 0; i < cleanedValue.length; i++) {
-      if (cleanedValue.indexOf(cleanedValue[i]) !== i) {
-        isUnique = false;
-        break;
-      }
-    }
-
-    if (isTenDigits && isUnique) {
+    if (isTenDigits) {
       console.log("✌️ idCode is Valid");
       setIdError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 idCode is Invalid");
       setIdError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1062,9 +1058,11 @@ function Provider({ children }) {
     if (isValid) {
       console.log("✌️ Medical Record Number is Valid");
       setMedicalRecordError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 Medical Record Number is Invalid");
       setMedicalRecordError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1091,8 +1089,10 @@ function Provider({ children }) {
 
     if (isAgeValid) {
       console.log("✌️ age is Valid");
+      setIsAnyError(false);
     } else {
       console.log("🤦 age is Invalid");
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1111,9 +1111,11 @@ function Provider({ children }) {
     if (isValid || isValid2) {
       console.log("✌️ phone is Valid");
       setPhoneNumberError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 phone is Invalid");
       setPhoneNumberError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1147,9 +1149,11 @@ function Provider({ children }) {
     if (isValid) {
       console.log("✌️ home is Valid");
       setHomePhoneNumberError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 home is Invalid");
       setHomePhoneNumberError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1167,9 +1171,11 @@ function Provider({ children }) {
     if (isValid) {
       console.log("✌️ Insurance Policy Number is Valid");
       setInsuranceError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 Insurance Policy Number is Invalid");
       setInsuranceError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1188,9 +1194,11 @@ function Provider({ children }) {
     if (isValid || isValid2) {
       console.log("✌️ phone is Valid");
       setEmergencyContactError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 phone is Invalid");
       setEmergencyContactError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1209,9 +1217,11 @@ function Provider({ children }) {
     if (isValid || isValid2) {
       console.log("✌️ phone is Valid");
       setSecondEmergencyContactError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 phone is Invalid");
       setSecondEmergencyContactError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1229,9 +1239,11 @@ function Provider({ children }) {
     if (isValid || value === "") {
       console.log("✌️ Weight is Valid");
       setWeightError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 Weight is Invalid");
       setWeightError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1249,9 +1261,11 @@ function Provider({ children }) {
     if (isValid || value === "") {
       console.log("✌️ Height is Valid");
       setHeightError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 Height is Invalid");
       setHeightError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1272,9 +1286,11 @@ function Provider({ children }) {
     if (hasRequiredInfo || value === "") {
       console.log("✌️ Vital Signs are Valid");
       setVitalSignsError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 Vital Signs are Incomplete");
       setVitalSignsError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1292,9 +1308,11 @@ function Provider({ children }) {
     if (isValid || value === "") {
       console.log("✌️ Glasgow Coma Scale is Valid");
       setGlasgowError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 Glasgow Coma Scale is Invalid");
       setGlasgowError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1312,9 +1330,11 @@ function Provider({ children }) {
     if (isValid || value === "") {
       console.log("✌️ APACHE Score is Valid");
       setApacheError(false);
+      setIsAnyError(false);
     } else {
       console.log("🤦 APACHE Score is Invalid");
       setApacheError(true);
+      setIsAnyError(true);
     }
 
     setFormData((prev) => ({
@@ -1366,6 +1386,7 @@ function Provider({ children }) {
     selectedSubSurgicalHistory,
     handleAdmissionReasons,
     selectedSubAdmissionReasons,
+    isAnyError,
   };
 
   return (

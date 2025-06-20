@@ -1,9 +1,11 @@
 import { GoDot, GoDotFill } from "react-icons/go";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import FormContext from "./FormContext";
 
 function FirstPage() {
+  const navigate = useNavigate();
+
   const {
     formData,
     handleInputChange,
@@ -33,12 +35,22 @@ function FirstPage() {
     apacheError,
     phoneNumberError,
     homePhoneNumberError,
+    isAnyError,
   } = useContext(FormContext);
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    if (isAnyError) {
+      alert("لطفا اطلاعات را به درستی وارد کنید!");
+    } else {
+      alert("مرحله بعد");
+      navigate("/second");
+    }
+  };
 
   return (
     <>
-      <form className="container card" dir="rtl">
-        {/* Patient Identity Section */}
+      <form className="container card" onChange={handleForm}>
         <h1>مرحله اول</h1>
         <h1>اطلاعات هویتی بیمار</h1>
 
@@ -761,7 +773,7 @@ function FirstPage() {
             placeholder="سایر اطلاعات مهم یا یادداشت‌های اضافی"
           />
         </div>
-
+        <button className="form-button">بعدی</button>
         <div>
           <GoDot />
           <GoDot />
