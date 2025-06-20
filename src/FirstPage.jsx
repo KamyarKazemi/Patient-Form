@@ -11,7 +11,6 @@ function FirstPage() {
     handleName,
     handleAge,
     handlePhoneNumber,
-    handleHomePhoneNumber,
     handleMedicalRecordNumber,
     handleInsurancePolicyNumber,
     handleEmergencyContactPhone,
@@ -32,7 +31,6 @@ function FirstPage() {
     glasgowError,
     apacheError,
     phoneNumberError,
-    homePhoneNumberError,
     isAnyError,
   } = useContext(FormContext);
 
@@ -41,13 +39,16 @@ function FirstPage() {
   const handleForm = (e) => {
     e.preventDefault();
     if (isAnyError) {
-      alert("sth is weeehhhh!");
+      alert("لطفا اطلاعات را به درستی وارد کنید!");
+      return;
     }
+    alert("مرحله بعد");
+    navigate("/second");
   };
 
   return (
     <>
-      <form className="container card" onChange={handleForm}>
+      <form className="container card" onSubmit={handleForm}>
         <h1>مرحله اول</h1>
         <h1>اطلاعات هویتی بیمار</h1>
 
@@ -161,28 +162,7 @@ function FirstPage() {
           ) : null}
         </div>
 
-        <div className="input-group">
-          <label htmlFor="phoneNumber" className="form-label">
-            شماره تلفن
-          </label>
-          <input
-            type="tel"
-            id="phoneNumber"
-            name="homePhoneNumber"
-            pattern="09\d{9}"
-            className="form-input"
-            value={formData.homePhoneNumber}
-            onChange={handleHomePhoneNumber}
-            required
-          />
-          {homePhoneNumberError ? (
-            <div className="idError">
-              <p>شماره تلفن نامعتبر است</p>
-            </div>
-          ) : null}
-        </div>
-
-        <div className="input-group">
+        {/* <div className="input-group">
           <label className="form-label date-label">تاریخ تولد (شمسی)</label>
 
           <div className="persian-date-container">
@@ -198,7 +178,7 @@ function FirstPage() {
               <option value="">روز</option>
             </select>
           </div>
-        </div>
+        </div> */}
 
         <div className="input-group">
           <label htmlFor="fullAddress" className="form-label">

@@ -14,7 +14,6 @@ function Provider({ children }) {
     birthDate: "",
     age: "",
     phoneNumber: "",
-    homePhoneNumber: "",
     fullAddress: "",
 
     // Medical Information
@@ -1009,7 +1008,6 @@ function Provider({ children }) {
   // Error states
   const [idError, setIdError] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
-  const [homePhoneNumberError, setHomePhoneNumberError] = useState(false);
   const [medicalRecordError, setMedicalRecordError] = useState(false);
   const [insuranceError, setInsuranceError] = useState(false);
   const [emergencyContactError, setEmergencyContactError] = useState(false);
@@ -1114,44 +1112,6 @@ function Provider({ children }) {
     } else {
       console.log("🤦 phone is Invalid");
       setPhoneNumberError(true);
-      setIsAnyError(true);
-    }
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: cleanedValue,
-    }));
-  };
-
-  const handleHomePhoneNumber = (e) => {
-    const { name, value } = e.target;
-    const cleanedValue = value.replace(/\D/g, "").slice(0, 8);
-    const numVars = [
-      "021",
-      "025",
-      "026",
-      "031",
-      "041",
-      "051",
-      "071",
-      "076",
-      "081",
-      "083",
-      "084",
-      "085",
-      "086",
-    ];
-
-    const prefix = cleanedValue.slice(0, 3);
-    const isValid = numVars.includes(prefix) && cleanedValue.length === 8;
-
-    if (isValid) {
-      console.log("✌️ home is Valid");
-      setHomePhoneNumberError(false);
-      // setIsAnyError(false);
-    } else {
-      console.log("🤦 home is Invalid");
-      setHomePhoneNumberError(true);
       setIsAnyError(true);
     }
 
@@ -1350,7 +1310,6 @@ function Provider({ children }) {
     handleName,
     handleAge,
     handlePhoneNumber,
-    handleHomePhoneNumber,
     handleInsurancePolicyNumber,
     handleEmergencyContactPhone,
     handleWeight,
@@ -1368,7 +1327,6 @@ function Provider({ children }) {
     glasgowError,
     apacheError,
     phoneNumberError,
-    homePhoneNumberError,
     handleSecondEmergencyContactPhone,
     secondEmergencyContactError,
     handleDrugs,
