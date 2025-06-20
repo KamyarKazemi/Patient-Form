@@ -1,10 +1,11 @@
 import { GoDot, GoDotFill } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import FormContext from "./FormContext";
 
 function FirstPage() {
   const {
+    setYears,
     formData,
     handleInputChange,
     handleIdCode,
@@ -52,6 +53,14 @@ function FirstPage() {
     alert("مرحله بعد");
     navigate("/second");
   };
+
+  useEffect(() => {
+    const yearList = [];
+    for (let y = 1300; y <= 1404; y++) {
+      yearList.push(y);
+    }
+    setYears(yearList);
+  }, []);
 
   return (
     <>

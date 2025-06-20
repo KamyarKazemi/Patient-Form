@@ -1400,6 +1400,7 @@ function Provider({ children }) {
     selectedMonth,
     handleDayChange,
     days,
+    setYears,
   };
 
   return (
