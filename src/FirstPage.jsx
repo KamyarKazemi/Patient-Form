@@ -4,8 +4,6 @@ import { useContext } from "react";
 import FormContext from "./FormContext";
 
 function FirstPage() {
-  const navigate = useNavigate();
-
   const {
     formData,
     handleInputChange,
@@ -38,13 +36,12 @@ function FirstPage() {
     isAnyError,
   } = useContext(FormContext);
 
+  const navigate = useNavigate();
+
   const handleForm = (e) => {
     e.preventDefault();
     if (isAnyError) {
-      alert("لطفا اطلاعات را به درستی وارد کنید!");
-    } else {
-      alert("مرحله بعد");
-      navigate("/second");
+      alert("sth is weeehhhh!");
     }
   };
 

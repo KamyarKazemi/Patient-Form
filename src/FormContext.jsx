@@ -1036,7 +1036,7 @@ function Provider({ children }) {
     if (isTenDigits) {
       console.log("✌️ idCode is Valid");
       setIdError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 idCode is Invalid");
       setIdError(true);
@@ -1058,7 +1058,7 @@ function Provider({ children }) {
     if (isValid) {
       console.log("✌️ Medical Record Number is Valid");
       setMedicalRecordError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 Medical Record Number is Invalid");
       setMedicalRecordError(true);
@@ -1089,7 +1089,6 @@ function Provider({ children }) {
 
     if (isAgeValid) {
       console.log("✌️ age is Valid");
-      setIsAnyError(false);
     } else {
       console.log("🤦 age is Invalid");
       setIsAnyError(true);
@@ -1111,7 +1110,7 @@ function Provider({ children }) {
     if (isValid || isValid2) {
       console.log("✌️ phone is Valid");
       setPhoneNumberError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 phone is Invalid");
       setPhoneNumberError(true);
@@ -1149,7 +1148,7 @@ function Provider({ children }) {
     if (isValid) {
       console.log("✌️ home is Valid");
       setHomePhoneNumberError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 home is Invalid");
       setHomePhoneNumberError(true);
@@ -1171,7 +1170,7 @@ function Provider({ children }) {
     if (isValid) {
       console.log("✌️ Insurance Policy Number is Valid");
       setInsuranceError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 Insurance Policy Number is Invalid");
       setInsuranceError(true);
@@ -1194,7 +1193,7 @@ function Provider({ children }) {
     if (isValid || isValid2) {
       console.log("✌️ phone is Valid");
       setEmergencyContactError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 phone is Invalid");
       setEmergencyContactError(true);
@@ -1217,7 +1216,7 @@ function Provider({ children }) {
     if (isValid || isValid2) {
       console.log("✌️ phone is Valid");
       setSecondEmergencyContactError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 phone is Invalid");
       setSecondEmergencyContactError(true);
@@ -1239,7 +1238,7 @@ function Provider({ children }) {
     if (isValid || value === "") {
       console.log("✌️ Weight is Valid");
       setWeightError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 Weight is Invalid");
       setWeightError(true);
@@ -1261,7 +1260,7 @@ function Provider({ children }) {
     if (isValid || value === "") {
       console.log("✌️ Height is Valid");
       setHeightError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 Height is Invalid");
       setHeightError(true);
@@ -1286,7 +1285,7 @@ function Provider({ children }) {
     if (hasRequiredInfo || value === "") {
       console.log("✌️ Vital Signs are Valid");
       setVitalSignsError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 Vital Signs are Incomplete");
       setVitalSignsError(true);
@@ -1308,7 +1307,7 @@ function Provider({ children }) {
     if (isValid || value === "") {
       console.log("✌️ Glasgow Coma Scale is Valid");
       setGlasgowError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 Glasgow Coma Scale is Invalid");
       setGlasgowError(true);
@@ -1330,7 +1329,7 @@ function Provider({ children }) {
     if (isValid || value === "") {
       console.log("✌️ APACHE Score is Valid");
       setApacheError(false);
-      setIsAnyError(false);
+      // setIsAnyError(false);
     } else {
       console.log("🤦 APACHE Score is Invalid");
       setApacheError(true);
