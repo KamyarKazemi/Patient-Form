@@ -32,6 +32,13 @@ function FirstPage() {
     apacheError,
     phoneNumberError,
     isAnyError,
+    handleYearChange,
+    years,
+    handleMonthChange,
+    months,
+    selectedMonth,
+    handleDayChange,
+    days,
   } = useContext(FormContext);
 
   const navigate = useNavigate();
@@ -162,23 +169,51 @@ function FirstPage() {
           ) : null}
         </div>
 
-        {/* <div className="input-group">
+        <div className="input-group">
           <label className="form-label date-label">تاریخ تولد (شمسی)</label>
 
           <div className="persian-date-container">
-            <select className="form-input date-select" required>
+            <select
+              className="form-input date-select"
+              required
+              onChange={handleYearChange}
+            >
               <option value="">سال</option>
+              {years.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
             </select>
 
-            <select className="form-input date-select" required>
+            <select
+              className="form-input date-select"
+              required
+              onChange={handleMonthChange}
+            >
               <option value="">ماه</option>
+              {months.map((m, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {m}
+                </option>
+              ))}
             </select>
 
-            <select className="form-input date-select" required disabled>
+            <select
+              className="form-input date-select"
+              required
+              disabled={!selectedMonth}
+              onChange={handleDayChange}
+            >
               <option value="">روز</option>
+              {days.map((d) => (
+                <option key={d} value={d}>
+                  {d}
+                </option>
+              ))}
             </select>
           </div>
-        </div> */}
+        </div>
 
         <div className="input-group">
           <label htmlFor="fullAddress" className="form-label">
