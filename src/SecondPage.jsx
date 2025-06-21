@@ -21,6 +21,7 @@ function SecondPage() {
     handleAllergies,
     selectedSubAllergies,
     isAnyError,
+    sendItems,
   } = useContext(FormContext);
 
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function SecondPage() {
       alert("sth is weeehhhh!");
     } else {
       alert("sth is wooohhhh");
-      navigate("/third");
+      sendItems();
     }
   };
 

@@ -1351,7 +1351,14 @@ function Provider({ children }) {
     setDays(dayList);
   };
 
-  const sendItems = async;
+  const sendItems = async () => {
+    const response = await axios.post(
+      "http://localhost:3001/PatientInformation",
+      {
+        formData,
+      }
+    );
+  };
 
   const sharedValues = {
     formData,
@@ -1403,6 +1410,7 @@ function Provider({ children }) {
     handleDayChange,
     days,
     setYears,
+    sendItems,
   };
 
   return (
