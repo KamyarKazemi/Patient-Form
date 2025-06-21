@@ -1351,6 +1351,8 @@ function Provider({ children }) {
     setDays(dayList);
   };
 
+  const sendItems = async;
+
   const sharedValues = {
     formData,
     handleInputChange,
