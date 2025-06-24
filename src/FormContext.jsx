@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import axios from "axios";
 
 const FormContext = createContext();
 //hello
@@ -1351,7 +1352,7 @@ function Provider({ children }) {
     setDays(dayList);
   };
 
-  const sendItems = async () => {
+  const sendData = async (formData) => {
     const response = await axios.post(
       "http://localhost:3001/PatientInformation",
       {
@@ -1410,7 +1411,8 @@ function Provider({ children }) {
     handleDayChange,
     days,
     setYears,
-    sendItems,
+    sendData,
+    selectedSymptom,
   };
 
   return (

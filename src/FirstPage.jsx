@@ -797,7 +797,6 @@ function FirstPage() {
         <button className="form-button">بعدی</button>
         <div>
           <GoDot />
-          <GoDot />
           <GoDotFill />
         </div>
       </form>

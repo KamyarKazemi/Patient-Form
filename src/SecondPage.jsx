@@ -1,7 +1,7 @@
 import { GoDot, GoDotFill } from "react-icons/go";
 import { useContext } from "react";
 import FormContext from "./FormContext";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SecondPage() {
   const {
@@ -21,10 +21,9 @@ function SecondPage() {
     handleAllergies,
     selectedSubAllergies,
     isAnyError,
-    sendItems,
+    sendData,
+    selectedSymptom,
   } = useContext(FormContext);
-
-  const navigate = useNavigate();
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -32,7 +31,7 @@ function SecondPage() {
       alert("sth is weeehhhh!");
     } else {
       alert("sth is wooohhhh");
-      sendItems();
+      sendData(selectedSymptom);
     }
   };
 
@@ -280,9 +279,6 @@ function SecondPage() {
         </div>
         <button className="form-button">مرحله بعد</button>
         <div className="dots">
-          <Link to="/third">
-            <GoDot />
-          </Link>
           <Link to="/second">
             <GoDotFill />
           </Link>
