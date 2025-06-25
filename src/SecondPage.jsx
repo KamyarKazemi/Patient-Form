@@ -21,8 +21,6 @@ function SecondPage() {
     handleAllergies,
     selectedSubAllergies,
     isAnyError,
-    sendData,
-    selectedSymptom,
   } = useContext(FormContext);
 
   const handleForm = (e) => {
@@ -31,8 +29,7 @@ function SecondPage() {
       alert("لطفا اطلاعات را به درستی وارد کنید!");
       return;
     }
-    alert("مرحله بعد");
-    sendData(selectedSymptom);
+    alert("اطلاعات مرحله دوم ثبت شد");
   };
 
   return (
@@ -40,15 +37,15 @@ function SecondPage() {
       <form className="container card" onSubmit={handleForm} dir="rtl">
         <h1>مرحله دوم</h1>
         <h2 className="h2-form">اطلاعات پزشکی بیمار</h2>
+
+        {/* ICU Reason Select */}
         <div className="input-group">
-          <label htmlFor="icu-reason" className="form-label">
-            علت ارجاع به ICU
-          </label>
+          <label htmlFor="icu-reason">علت ارجاع به ICU</label>
           <select
             name="icu-reason"
             id="icu-reason"
-            className="form-input"
             onChange={handleSymptom}
+            className="form-input"
           >
             {formData.baseIcuReason.map((item, index) => (
               <option key={index} value={item.symptom}>
@@ -57,40 +54,25 @@ function SecondPage() {
             ))}
           </select>
         </div>
-        <div className="checkbox">
-          {selectedItem && (
-            <div className="checkbox-container">
-              {selectedItem.subSymptom.map((sub, index) => (
-                <div key={index} className="checkbox-item">
-                  <input
-                    type="checkbox"
-                    name="subSymptom"
-                    id={`subSymptom-${index}`}
-                    value={sub}
-                  />
-                  <label htmlFor={`subSymptom-${index}`}>{sub}</label>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        <div className="input-group">
-          <label htmlFor="vitalSigns">وضعیت علاعم حیاتی</label>
-          <select name="vitalSigns" id="vitalSigns" className="form-input">
-            {formData.vitalSigns.map((item, index) => (
-              <option key={index} value={item.sign}>
-                {item.sign}
-              </option>
+
+        {selectedItem && (
+          <div className="checkbox-container">
+            {selectedItem.subSymptom.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input type="checkbox" id={`subSymptom-${index}`} value={sub} />
+                <label htmlFor={`subSymptom-${index}`}>{sub}</label>
+              </div>
             ))}
-          </select>
-        </div>
+          </div>
+        )}
+
+        {/* Diagnosis */}
         <div className="input-group">
           <label htmlFor="firstDiagnosis">تشخیص اولیه پزشک</label>
           <select
-            name="firstDiagnosis"
             id="firstDiagnosis"
-            className="form-input"
             onChange={handleDiagnosis}
+            className="form-input"
           >
             {formData.firstDiagnosis.map((item, index) => (
               <option key={index} value={item.diagnosis}>
@@ -99,62 +81,60 @@ function SecondPage() {
             ))}
           </select>
         </div>
-        <div className="checkbox">
-          {formData.selectedSubDiagnosis && (
-            <div className="checkbox-container">
-              {selectedSubDiagnosis.subDiagnosis.map((sub, index) => (
-                <div key={index} className="checkbox-item">
-                  <input
-                    type="checkbox"
-                    name="subDiagnosis"
-                    value={sub}
-                    id={`subDiagnosis-${index}`}
-                  />
-                  <label htmlFor={`subDiagnosis-${index}`}>{sub}</label>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+
+        {selectedSubDiagnosis && (
+          <div className="checkbox-container">
+            {selectedSubDiagnosis.subDiagnosis.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`subDiagnosis-${index}`}
+                  value={sub}
+                />
+                <label htmlFor={`subDiagnosis-${index}`}>{sub}</label>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Comorbidities */}
         <div className="input-group">
-          <label htmlFor="comobordities"> سابقه بیماری‌های زمینه‌ای</label>
+          <label htmlFor="comorbidities">سابقه بیماری‌های زمینه‌ای</label>
           <select
-            name="comobordities"
-            id="comobordities"
-            className="form-input"
+            id="comorbidities"
             onChange={handleComorbiditie}
+            className="form-input"
           >
             {formData.comorbidities.map((item, index) => (
-              <option value={item.comorbiditie} key={index}>
+              <option key={index} value={item.comorbiditie}>
                 {item.comorbiditie}
               </option>
             ))}
           </select>
         </div>
-        <div className="checkbox">
-          {formData.selectedSubComorbiditie && (
-            <div className="checkbox-container">
-              {selectedSubComorbiditie.subComorbiditie.map((sub, index) => (
-                <div className="checkbox-item" key={index}>
-                  <input
-                    type="checkbox"
-                    name="subComorbiditie"
-                    id={`subComorbiditie-${index}`}
-                    value={sub}
-                  />
-                  <label htmlFor={`subComorbiditie-${index}`}>{sub}</label>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+
+        {selectedSubComorbiditie && (
+          <div className="checkbox-container">
+            {selectedSubComorbiditie.subComorbiditie.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`subComorbiditie-${index}`}
+                  value={sub}
+                />
+                <label htmlFor={`subComorbiditie-${index}`}>{sub}</label>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Surgical History */}
         <div className="input-group">
           <label htmlFor="surgicalHistory">سوابق جراحی</label>
           <select
-            name="surgicalHistory"
             id="surgicalHistory"
-            className="form-input"
             onChange={handleHistory}
+            className="form-input"
           >
             {formData.surgicalHistories.map((item, index) => (
               <option key={index} value={item.history}>
@@ -163,120 +143,99 @@ function SecondPage() {
             ))}
           </select>
         </div>
-        <div className="checkbox">
-          {selectedSubSurgicalHistory && (
-            <div className="checkbox-container">
-              {selectedSubSurgicalHistory.subHistory.map((sub, index) => (
-                <div className="checkbox-item" key={index}>
-                  <input
-                    type="checkbox"
-                    name="subSurgicalHistory"
-                    id={`subSurgicalHistory-${index}`}
-                    value={sub}
-                  />
-                  <label htmlFor={`subSurgicalHistory-${index}`}>{sub}</label>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
 
+        {selectedSubSurgicalHistory && (
+          <div className="checkbox-container">
+            {selectedSubSurgicalHistory.subHistory.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`subSurgicalHistory-${index}`}
+                  value={sub}
+                />
+                <label htmlFor={`subSurgicalHistory-${index}`}>{sub}</label>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Medications */}
         <div className="input-group">
-          <label htmlFor="usedDrugs">دارو های مصرفی</label>
-          <select
-            name="usedDrugs"
-            id="usedDrugs"
-            className="form-input"
-            onChange={handleDrugs}
-          >
+          <label htmlFor="usedDrugs">داروهای مصرفی</label>
+          <select id="usedDrugs" onChange={handleDrugs} className="form-input">
             {formData.usedDrugs.map((item, index) => (
-              <option value={item.drug} key={index}>
+              <option key={index} value={item.drug}>
                 {item.drug}
               </option>
             ))}
           </select>
         </div>
-        <div className="checkbox">
-          {selectedSubDrugs && (
-            <div className="checkbox-container">
-              {selectedSubDrugs.subDrug.map((sub, index) => (
-                <div className="checkbox-item" key={index}>
-                  <input
-                    type="checkbox"
-                    name="subDrug"
-                    id={`subDrug-${index}`}
-                    value={sub}
-                  />
-                  <label htmlFor={`subDrug-${index}`}>{sub}</label>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+
+        {selectedSubDrugs && (
+          <div className="checkbox-container">
+            {selectedSubDrugs.subDrug.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input type="checkbox" id={`subDrug-${index}`} value={sub} />
+                <label htmlFor={`subDrug-${index}`}>{sub}</label>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Drug Allergies */}
         <div className="input-group">
           <label htmlFor="drugAllergies">آلرژی دارویی</label>
           <select
-            name="drugAllergies"
             id="drugAllergies"
-            className="form-input"
             onChange={handleAllergies}
+            className="form-input"
           >
             {formData.drugAllergies.map((item, index) => (
-              <option value={item.allergy} key={index}>
+              <option key={index} value={item.allergy}>
                 {item.allergy}
               </option>
             ))}
           </select>
         </div>
-        <div className="checkbox">
-          {selectedSubAllergies && (
-            <div className="checkbox-container">
-              {selectedSubAllergies.subAllergy.map((sub, index) => (
-                <div className="checkbox-item" key={index}>
-                  <input
-                    type="checkbox"
-                    name="subAllergy"
-                    id={`subAllergy-${index}`}
-                    value={sub}
-                  />
-                  <label htmlFor={`subAllergy-${index}`}>{sub}</label>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+
+        {selectedSubAllergies && (
+          <div className="checkbox-container">
+            {selectedSubAllergies.subAllergy.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input type="checkbox" id={`subAllergy-${index}`} value={sub} />
+                <label htmlFor={`subAllergy-${index}`}>{sub}</label>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* ICU Admission Reasons */}
         <div className="input-group">
           <label htmlFor="icuAdmissionReasons">دلایل بستری در ICU</label>
           <select
-            name="icuAdmissionReasons"
             id="icuAdmissionReasons"
-            className="form-input"
             onChange={handleAdmissionReasons}
+            className="form-input"
           >
             {formData.icuAdmissionReasons.map((item, index) => (
-              <option value={item.reason} key={index}>
+              <option key={index} value={item.reason}>
                 {item.reason}
               </option>
             ))}
           </select>
         </div>
-        <div className="checkbox">
-          {selectedSubAdmissionReasons && (
-            <div className="checkbox-container">
-              {selectedSubAdmissionReasons.subReason.map((sub, index) => (
-                <div className="checkbox-item" key={index}>
-                  <input
-                    type="checkbox"
-                    name="subReason"
-                    id={`subReason-${index}`}
-                    value={sub}
-                  />
-                  <label htmlFor={`subReason-${index}`}>{sub}</label>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+
+        {selectedSubAdmissionReasons && (
+          <div className="checkbox-container">
+            {selectedSubAdmissionReasons.subReason.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input type="checkbox" id={`subReason-${index}`} value={sub} />
+                <label htmlFor={`subReason-${index}`}>{sub}</label>
+              </div>
+            ))}
+          </div>
+        )}
+
         <button className="form-button">مرحله بعد</button>
         <div className="dots">
           <Link to="/second">
