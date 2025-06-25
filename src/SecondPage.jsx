@@ -28,11 +28,11 @@ function SecondPage() {
   const handleForm = (e) => {
     e.preventDefault();
     if (isAnyError) {
-      alert("sth is weeehhhh!");
-    } else {
-      alert("sth is wooohhhh");
-      sendData(selectedSymptom);
+      alert("لطفا اطلاعات را به درستی وارد کنید!");
+      return;
     }
+    alert("مرحله بعد");
+    sendData(selectedSymptom);
   };
 
   return (
