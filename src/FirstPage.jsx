@@ -114,11 +114,11 @@ function FirstPage() {
             onChange={handleIdCode}
             required
           />
-          {idError ? (
+          {idError && (
             <div className="idError">
               <p>کد ملی نامعتبر است</p>
             </div>
-          ) : null}
+          )}
         </div>
 
         <div className="input-group">
@@ -134,11 +134,11 @@ function FirstPage() {
             onChange={handleMedicalRecordNumber}
             required
           />
-          {medicalRecordError ? (
+          {medicalRecordError && (
             <div className="idError">
               <p>شماره پرونده پزشکی نامعتبر است</p>
             </div>
-          ) : null}
+          )}
         </div>
 
         <div className="input-group">
@@ -171,16 +171,15 @@ function FirstPage() {
             onChange={handlePhoneNumber}
             required
           />
-          {phoneNumberError ? (
+          {phoneNumberError && (
             <div className="idError">
               <p>شماره تماس نامعتبر است</p>
             </div>
-          ) : null}
+          )}
         </div>
 
         <div className="input-group">
           <label className="form-label date-label">تاریخ تولد (شمسی)</label>
-
           <div className="persian-date-container">
             <select
               className="form-input date-select"
@@ -239,7 +238,6 @@ function FirstPage() {
           />
         </div>
 
-        {/* Medical Information Section */}
         <h1>اطلاعات پزشکی</h1>
 
         <div className="input-group">
@@ -341,7 +339,6 @@ function FirstPage() {
           />
         </div>
 
-        {/* Insurance Information */}
         <h1>اطلاعات بیمه</h1>
 
         <div className="input-group">
@@ -377,14 +374,13 @@ function FirstPage() {
             value={formData.insurancePolicyNumber}
             onChange={handleInsurancePolicyNumber}
           />
-          {insuranceError ? (
+          {insuranceError && (
             <div className="idError">
               <p>شماره بیمه‌نامه باید 10 رقم باشد</p>
             </div>
-          ) : null}
+          )}
         </div>
 
-        {/* Emergency Contact Section */}
         <h1>اطلاعات تماس اضطراری</h1>
 
         <div className="input-group">
@@ -414,13 +410,11 @@ function FirstPage() {
             onChange={handleInputChange}
             required
           >
-            <option value="">انتحاب کنید</option>
+            <option value="">انتخاب کنید</option>
             {formData.emergencyContactRelationshipOptions.map((item, index) => (
-              <>
-                <option value={item} key={index}>
-                  {item}
-                </option>
-              </>
+              <option value={item} key={index}>
+                {item}
+              </option>
             ))}
           </select>
         </div>
@@ -438,32 +432,31 @@ function FirstPage() {
             onChange={handleEmergencyContactPhone}
             required
           />
-          {emergencyContactError ? (
+          {emergencyContactError && (
             <div className="idError">
               <p>شماره تماس اضطراری نامعتبر است</p>
             </div>
-          ) : null}
+          )}
         </div>
 
         <div className="input-group">
-          <label htmlFor="emergencyContactPhone2" className="form-label">
+          <label htmlFor="secondEmergencyContactPhone" className="form-label">
             شماره تماس اضطراری دوم (اختیاری)
           </label>
           <input
             type="tel"
-            id="emergencyContactPhone2"
-            name="emergencyContactPhone2"
+            id="secondEmergencyContactPhone"
+            name="secondEmergencyContactPhone"
             className="form-input"
-            value={formData.emergencyContactPhone2}
+            value={formData.secondEmergencyContactPhone}
             onChange={handleSecondEmergencyContactPhone}
           />
+          {secondEmergencyContactError && (
+            <div className="idError">
+              <p>شماره تماس اضطراری نامعتبر است</p>
+            </div>
+          )}
         </div>
-
-        {secondEmergencyContactError ? (
-          <div className="idError">
-            <p>شماره تماس اضطراری نامعتبر است</p>
-          </div>
-        ) : null}
 
         <div className="input-group">
           <label htmlFor="emergencyContactAddress" className="form-label">
@@ -478,7 +471,6 @@ function FirstPage() {
           />
         </div>
 
-        {/* Clinical Assessment Section */}
         <h1>ارزیابی بالینی</h1>
 
         <div className="input-group">
@@ -496,11 +488,11 @@ function FirstPage() {
             value={formData.admissionWeight}
             onChange={handleWeight}
           />
-          {weightError ? (
+          {weightError && (
             <div className="idError">
               <p>وزن نامعتبر است</p>
             </div>
-          ) : null}
+          )}
         </div>
 
         <div className="input-group">
@@ -517,11 +509,11 @@ function FirstPage() {
             value={formData.admissionHeight}
             onChange={handleHeight}
           />
-          {heightError ? (
+          {heightError && (
             <div className="idError">
               <p>قد نامعتبر است</p>
             </div>
-          ) : null}
+          )}
         </div>
 
         <div className="input-group">
@@ -536,11 +528,11 @@ function FirstPage() {
             onChange={handleVitalSigns}
             placeholder="فشار خون، ضربان قلب، تنفس، دما، اکسیژن خون"
           />
-          {vitalSignsError ? (
+          {vitalSignsError && (
             <div className="idError">
               <p>علائم حیاتی باید کامل باشد</p>
             </div>
-          ) : null}
+          )}
         </div>
 
         <div className="input-group">
@@ -557,11 +549,11 @@ function FirstPage() {
             value={formData.glasgowComaScale}
             onChange={handleGlasgowComaScale}
           />
-          {glasgowError ? (
+          {glasgowError && (
             <div className="idError">
               <p>مقیاس GCS باید بین 3 تا 15 باشد</p>
             </div>
-          ) : null}
+          )}
         </div>
 
         <div className="input-group">
@@ -578,11 +570,11 @@ function FirstPage() {
             value={formData.apacheScore}
             onChange={handleApacheScore}
           />
-          {apacheError ? (
+          {apacheError && (
             <div className="idError">
               <p>امتیاز APACHE II باید بین 0 تا 71 باشد</p>
             </div>
-          ) : null}
+          )}
         </div>
 
         <div className="input-group">
@@ -596,14 +588,11 @@ function FirstPage() {
             value={formData.ventilatorRequirements}
             onChange={handleInputChange}
           >
-            <option value="">انتحاب کنید</option>
-
+            <option value="">انتخاب کنید</option>
             {formData.ventilatorRequirementsOptions.map((item, index) => (
-              <>
-                <option value={item} key={index}>
-                  {item}
-                </option>
-              </>
+              <option value={item} key={index}>
+                {item}
+              </option>
             ))}
           </select>
         </div>
@@ -619,8 +608,7 @@ function FirstPage() {
             value={formData.isolationPrecautions}
             onChange={handleInputChange}
           >
-            <option value="">انتحاب کنید</option>
-
+            <option value="">انتخاب کنید</option>
             {formData.isolationPrecautionsOptions.map((item, index) => (
               <option value={item} key={index}>
                 {item}
@@ -670,7 +658,6 @@ function FirstPage() {
           />
         </div>
 
-        {/* Administrative Information */}
         <h1>اطلاعات اداری</h1>
 
         <div className="input-group">
@@ -685,7 +672,7 @@ function FirstPage() {
             onChange={handleInputChange}
             required
           >
-            <option value="">انتحاب کنید</option>
+            <option value="">انتخاب کنید</option>
             {formData.admissionSourceOptions.map((item, index) => (
               <option value={item} key={index}>
                 {item}
