@@ -958,7 +958,7 @@ function Provider({ children }) {
 
   const handleMedicalRecordNumber = (e) => {
     const cleaned = e.target.value.replace(/[^a-zA-Z0-9]/g, "");
-    setMedicalRecordError(cleaned.length < 4 || cleaned.length > 20);
+    setMedicalRecordError(cleaned.length >= 4 || cleaned.length > 20);
     setFormData((prev) => ({ ...prev, medicalRecordNumber: cleaned }));
   };
 

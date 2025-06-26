@@ -20,7 +20,17 @@ function FirstPage() {
     handleVitalSigns,
     handleGlasgowComaScale,
     handleApacheScore,
-
+    idError,
+    phoneNumberError,
+    medicalRecordError,
+    insuranceError,
+    emergencyContactError,
+    secondEmergencyContactError,
+    weightError,
+    heightError,
+    vitalSignsError,
+    glasgowError,
+    apacheError,
     isAnyError,
     handleYearChange,
     years,
@@ -84,6 +94,7 @@ function FirstPage() {
           className="form-input"
           required
         />
+        {idError ? <p className="idError"></p> : null}
       </div>
 
       <div className="input-group">
