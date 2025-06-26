@@ -20,16 +20,7 @@ function FirstPage() {
     handleVitalSigns,
     handleGlasgowComaScale,
     handleApacheScore,
-    idError,
-    medicalRecordError,
-    insuranceError,
-    emergencyContactError,
-    weightError,
-    heightError,
-    vitalSignsError,
-    glasgowError,
-    apacheError,
-    phoneNumberError,
+
     isAnyError,
     handleYearChange,
     years,
@@ -63,6 +54,7 @@ function FirstPage() {
       <h2>اطلاعات هویتی بیمار</h2>
 
       <div className="input-group">
+        <label>نام</label>
         <input
           name="firstName"
           value={formData.firstName}
@@ -73,6 +65,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>نام خانوادگی</label>
         <input
           name="lastName"
           value={formData.lastName}
@@ -83,6 +76,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>کد ملی</label>
         <input
           name="idCode"
           value={formData.idCode}
@@ -93,6 +87,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>شماره پرونده پزشکی</label>
         <input
           name="medicalRecordNumber"
           value={formData.medicalRecordNumber}
@@ -103,6 +98,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>سن</label>
         <input
           name="age"
           value={formData.age}
@@ -113,6 +109,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>شماره تماس</label>
         <input
           name="phoneNumber"
           value={formData.phoneNumber}
@@ -123,18 +120,17 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>تاریخ تولد (سال، ماه، روز)</label>
         <select onChange={handleYearChange} className="form-input">
           {years.map((y) => (
             <option key={y}>{y}</option>
           ))}
         </select>
-
         <select onChange={handleMonthChange} className="form-input">
           {months.map((m, i) => (
             <option key={i}>{m}</option>
           ))}
         </select>
-
         <select
           onChange={handleDayChange}
           disabled={!selectedMonth}
@@ -147,6 +143,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>آدرس کامل</label>
         <textarea
           name="fullAddress"
           value={formData.fullAddress}
@@ -159,6 +156,7 @@ function FirstPage() {
       <h2>اطلاعات بیمه</h2>
 
       <div className="input-group">
+        <label>شرکت بیمه</label>
         <select
           name="insuranceCompany"
           value={formData.insuranceCompany}
@@ -172,6 +170,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>شماره بیمه‌نامه</label>
         <input
           name="insurancePolicyNumber"
           value={formData.insurancePolicyNumber}
@@ -183,6 +182,7 @@ function FirstPage() {
       <h2>تماس اضطراری</h2>
 
       <div className="input-group">
+        <label>نام تماس اضطراری</label>
         <input
           name="emergencyContactName"
           value={formData.emergencyContactName}
@@ -192,6 +192,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>شماره تماس اضطراری</label>
         <input
           name="emergencyContactPhone"
           value={formData.emergencyContactPhone}
@@ -201,6 +202,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>شماره تماس اضطراری دوم</label>
         <input
           name="secondEmergencyContactPhone"
           value={formData.secondEmergencyContactPhone}
@@ -210,6 +212,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>آدرس تماس اضطراری</label>
         <textarea
           name="emergencyContactAddress"
           value={formData.emergencyContactAddress}
@@ -221,6 +224,7 @@ function FirstPage() {
       <h2>ارزیابی بالینی</h2>
 
       <div className="input-group">
+        <label>وزن پذیرش</label>
         <input
           name="admissionWeight"
           value={formData.admissionWeight}
@@ -230,6 +234,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>قد پذیرش</label>
         <input
           name="admissionHeight"
           value={formData.admissionHeight}
@@ -239,6 +244,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>علائم حیاتی</label>
         <textarea
           name="vitalSignsOnAdmission"
           value={formData.vitalSignsOnAdmission}
@@ -248,6 +254,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>GCS</label>
         <input
           name="glasgowComaScale"
           value={formData.glasgowComaScale}
@@ -257,6 +264,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
+        <label>APACHE II</label>
         <input
           name="apacheScore"
           value={formData.apacheScore}
@@ -265,7 +273,9 @@ function FirstPage() {
         />
       </div>
 
-      <button type="submit">مرحله بعد</button>
+      <button type="submit" className="form-button">
+        مرحله بعد
+      </button>
     </form>
   );
 }
