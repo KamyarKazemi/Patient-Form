@@ -94,7 +94,11 @@ function FirstPage() {
           className="form-input"
           required
         />
-        {idError ? <p className="idError"></p> : null}
+        {idError ? (
+          <div className="idError">
+            <p>کد ملی نامعتبر است</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
@@ -106,6 +110,11 @@ function FirstPage() {
           className="form-input"
           required
         />
+        {medicalRecordError ? (
+          <div className="idError">
+            <p>شماره پرونده پزشکی نامعتبر است</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
@@ -128,6 +137,11 @@ function FirstPage() {
           className="form-input"
           required
         />
+        {phoneNumberError ? (
+          <div className="idError">
+            <p>شماره تماس نامعتبر است</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
