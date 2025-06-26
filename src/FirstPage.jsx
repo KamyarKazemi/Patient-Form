@@ -202,6 +202,11 @@ function FirstPage() {
           onChange={handleInsurancePolicyNumber}
           className="form-input"
         />
+        {insuranceError ? (
+          <div className="idError">
+            <p>شماره بیمه‌نامه باید 10 رقم باشد</p>
+          </div>
+        ) : null}
       </div>
 
       <h2>تماس اضطراری</h2>
@@ -224,6 +229,11 @@ function FirstPage() {
           onChange={handleEmergencyContactPhone}
           className="form-input"
         />
+        {emergencyContactError ? (
+          <div className="idError">
+            <p>شماره تماس اضطراری نامعتبر است</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
@@ -234,6 +244,11 @@ function FirstPage() {
           onChange={handleSecondEmergencyContactPhone}
           className="form-input"
         />
+        {secondEmergencyContactError ? (
+          <div className="idError">
+            <p>شماره تماس اضطراری نامعتبر است</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
@@ -256,6 +271,11 @@ function FirstPage() {
           onChange={handleWeight}
           className="form-input"
         />
+        {weightError ? (
+          <div className="idError">
+            <p>وزن نامعتبر است</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
@@ -266,6 +286,11 @@ function FirstPage() {
           onChange={handleHeight}
           className="form-input"
         />
+        {heightError ? (
+          <div className="idError">
+            <p>قد نامعتبر است</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
@@ -276,6 +301,11 @@ function FirstPage() {
           onChange={handleVitalSigns}
           className="form-input"
         />
+        {vitalSignsError ? (
+          <div className="idError">
+            <p>علائم حیاتی باید کامل باشد</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
@@ -286,6 +316,11 @@ function FirstPage() {
           onChange={handleGlasgowComaScale}
           className="form-input"
         />
+        {glasgowError ? (
+          <div className="idError">
+            <p>مقیاس GCS باید بین 3 تا 15 باشد</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
@@ -296,6 +331,11 @@ function FirstPage() {
           onChange={handleApacheScore}
           className="form-input"
         />
+        {apacheError ? (
+          <div className="idError">
+            <p>امتیاز APACHE II باید بین 0 تا 71 باشد</p>
+          </div>
+        ) : null}
       </div>
 
       <button type="submit" className="form-button">
