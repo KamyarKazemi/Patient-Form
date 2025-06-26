@@ -963,10 +963,18 @@ function Provider({ children }) {
   };
 
   const handlePhoneNumber = (e) => {
-    const cleaned = e.target.value.replace(/\D/g, "").slice(0, 11);
-    const valid = /^09\d{9}$/.test(cleaned);
-    setPhoneNumberError(!valid);
-    setFormData((prev) => ({ ...prev, phoneNumber: cleaned }));
+    const input = e.target.value.replace(/\D/g, "").slice(0, 11); // Max 11 digits
+
+    const isValid =
+      (input.length === 11 && /^09\d{9}$/.test(input)) ||
+      (input.length === 10 && /^9\d{9}$/.test(input));
+
+    setPhoneNumberError(!isValid);
+
+    setFormData((prev) => ({
+      ...prev,
+      phoneNumber: input,
+    }));
   };
 
   const handleName = (e) => {
@@ -989,17 +997,33 @@ function Provider({ children }) {
   };
 
   const handleEmergencyContactPhone = (e) => {
-    const cleaned = e.target.value.replace(/\D/g, "").slice(0, 11);
-    const valid = /^09\d{9}$/.test(cleaned);
-    setEmergencyContactError(!valid);
-    setFormData((prev) => ({ ...prev, emergencyContactPhone: cleaned }));
+    const input = e.target.value.replace(/\D/g, "").slice(0, 11); // Max 11 digits
+
+    const isValid =
+      (input.length === 11 && /^09\d{9}$/.test(input)) ||
+      (input.length === 10 && /^9\d{9}$/.test(input));
+
+    setEmergencyContactError(!isValid);
+
+    setFormData((prev) => ({
+      ...prev,
+      emergencyContactPhone: input,
+    }));
   };
 
   const handleSecondEmergencyContactPhone = (e) => {
-    const cleaned = e.target.value.replace(/\D/g, "").slice(0, 11);
-    const valid = /^09\d{9}$/.test(cleaned);
-    setSecondEmergencyContactError(!valid);
-    setFormData((prev) => ({ ...prev, secondEmergencyContactPhone: cleaned }));
+    const input = e.target.value.replace(/\D/g, "").slice(0, 11); // Max 11 digits
+
+    const isValid =
+      (input.length === 11 && /^09\d{9}$/.test(input)) ||
+      (input.length === 10 && /^9\d{9}$/.test(input));
+
+    setSecondEmergencyContactError(!isValid);
+
+    setFormData((prev) => ({
+      ...prev,
+      secondEmergencyContactPhone: input,
+    }));
   };
 
   const handleWeight = (e) => {
@@ -1022,13 +1046,13 @@ function Provider({ children }) {
 
   const handleGlasgowComaScale = (e) => {
     const val = parseInt(e.target.value, 10);
-    setGlasgowError(isNaN(val) || val < 3 || val > 15);
+    setGlasgowError(val < 3 || val > 15);
     setFormData((prev) => ({ ...prev, glasgowComaScale: val }));
   };
 
   const handleApacheScore = (e) => {
     const val = parseInt(e.target.value, 10);
-    setApacheError(isNaN(val) || val < 0 || val > 71);
+    setApacheError(val < 0 || val > 71);
     setFormData((prev) => ({ ...prev, apacheScore: val }));
   };
 
@@ -1074,7 +1098,7 @@ function Provider({ children }) {
   const postFormData = async () => {
     try {
       const response = await axios.post(
-        "https://your-api-endpoint.com/submit",
+        "http://localhost:3001/PatientInformation",
         formData
       );
       console.log("✅ Data submitted successfully:", response.data);

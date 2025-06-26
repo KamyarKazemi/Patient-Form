@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import FormContext from "./FormContext";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function SecondPage() {
   const {
@@ -27,7 +28,7 @@ function SecondPage() {
     if (isAnyError) return alert("خطا در اطلاعات!");
     try {
       const response = await axios.post(
-        "https://your-api-endpoint.com/submit",
+        "http://localhost:3001/PatientInformation",
         formData
       );
       console.log("✅ Submitted:", response.data);
@@ -238,14 +239,6 @@ function SecondPage() {
       )}
 
       <button className="form-button">مرحله بعد</button>
-      <div className="dots">
-        <Link to="/second">
-          <GoDotFill />
-        </Link>
-        <Link to="/">
-          <GoDot />
-        </Link>
-      </div>
     </form>
   );
 }
