@@ -1,30 +1,70 @@
-// ✅ Refactored FormContext — Cleaned up state, ensured data is ready for Axios submission
 import { createContext, useState } from "react";
 import axios from "axios";
 
 const FormContext = createContext();
 
-function Provider({ children }) {
-  const [formData, setFormData] = useState({
-    // Patient Identity
-    firstName: "",
-    lastName: "",
-    fullName: "",
-    idCode: "",
-    medicalRecordNumber: "",
-    birthDate: "",
-    age: "",
-    phoneNumber: "",
-    fullAddress: "",
+const defaultFormData = {
+  firstName: "",
+  lastName: "",
+  idCode: "",
+  medicalRecordNumber: "",
+  age: "",
+  phoneNumber: "",
+  birthDate: "",
+  fullAddress: "",
+  insuranceCompany: "",
+  insurancePolicyNumber: "",
+  emergencyContactName: "",
+  emergencyContactPhone: "",
+  secondEmergencyContactPhone: "",
+  emergencyContactAddress: "",
+  admissionWeight: "",
+  admissionHeight: "",
+  vitalSignsOnAdmission: "",
+  glasgowComaScale: "",
+  apacheScore: "",
 
-    // Medical Information
-    admissionDateTime: "",
-    referringPhysician: "",
-    primaryDiagnosis: "",
-    knownAllergies: "",
-    currentMedications: "",
-    medicalHistory: "",
-    previousICUAdmissions: "",
+  insuranceCompanyOptions: [
+    "تامین اجتماعی",
+    "سلامت",
+    "ارتش",
+    "خدمات درمانی",
+    "سایر",
+  ],
+
+  baseIcuReason: [],
+  selectedIcuReason: "",
+  selectedIcuSubReasons: [],
+
+  firstDiagnosis: [],
+  selectedPrimaryDiagnosis: "",
+  selectedDiagnosisSubcategories: [],
+
+  comorbidities: [],
+  selectedComorbidity: "",
+  selectedComorbiditiesSubcategories: [],
+
+  surgicalHistories: [],
+  selectedSurgicalHistory: "",
+  selectedSurgicalHistorySubcategories: [],
+
+  usedDrugs: [],
+  selectedMedication: "",
+  selectedMedicationSubcategories: [],
+
+  drugAllergies: [],
+  selectedDrugAllergy: "",
+  selectedAllergySubcategories: [],
+
+  icuAdmissionReasons: [],
+  selectedIcuAdmissionReason: "",
+  selectedAdmissionReasonSubcategories: [],
+};
+
+function Provider({ children }) {
+  const [formData, setFormData] = useState(defaultFormData);
+
+  const def = {
     baseIcuReason: [
       {
         symptom: "سایر دلایل عمومی (Miscellaneous)",
@@ -846,7 +886,6 @@ function Provider({ children }) {
     ],
 
     // Insurance Information
-    insuranceCompany: "",
     insuranceCompanyOptions: [
       "تامین اجتماعی",
       "خدمات درمانی",
@@ -855,11 +894,9 @@ function Provider({ children }) {
       "بیمه خصوصی",
       "فاقد بیمه",
     ],
-    insurancePolicyNumber: "",
 
     // Emergency Contact
-    emergencyContactName: "",
-    emergencyContactRelationship: "",
+
     emergencyContactRelationshipOptions: [
       "همسر",
       "والدین",
@@ -869,24 +906,13 @@ function Provider({ children }) {
       "دوست",
       "قیم قانونی ",
     ],
-    emergencyContactPhone: "",
-    secondEmergencyContactPhone: "",
-    emergencyContactAddress: "",
 
-    // Clinical Assessment
-    admissionWeight: "",
-    admissionHeight: "",
-    vitalSignsOnAdmission: "",
-    glasgowComaScale: "",
-    apacheScore: "",
-    ventilatorRequirements: "",
     ventilatorRequirementsOptions: [
       "عدم نیاز",
       "غیرتهاجمی (CPAP/BiPAP)",
       "تهاجمی (لوله تراشه)",
       "اکسیژن جریان بالا ",
     ],
-    isolationPrecautions: "",
     isolationPrecautionsOptions: [
       "عدم نیاز",
       "تماسی",
@@ -894,12 +920,8 @@ function Provider({ children }) {
       "هوابرد",
       "محافظتی",
     ],
-    dietRestrictions: "",
-    mobilityLimitations: "",
-    mentalStatusAssessment: "",
 
     // Administrative Information
-    admissionSource: "",
     admissionSourceOptions: [
       "اورژانس",
       "انتقال از بخش",
@@ -908,8 +930,7 @@ function Provider({ children }) {
       "منزل",
       "کلینیک",
     ],
-    roomBedAssignment: "",
-    languagePreference: "",
+
     languagePreferenceOptions: [
       "فارسی",
       "انگلیسی",
@@ -918,8 +939,7 @@ function Provider({ children }) {
       "کردی",
       "سایر",
     ],
-    religionCulturalConsiderations: "",
-    advanceDirectives: "",
+
     advanceDirectivesOptions: [
       "کد کامل",
       "عدم احیاء (DNR)",
@@ -927,9 +947,7 @@ function Provider({ children }) {
       "مراقبت‌های تسکینی",
       "نامشخص",
     ],
-    legalGuardian: "",
-    admissionNotes: "",
-  });
+  };
 
   const [isAnyError, setIsAnyError] = useState(false);
   const [idError, setIdError] = useState(false);
@@ -963,18 +981,12 @@ function Provider({ children }) {
   };
 
   const handlePhoneNumber = (e) => {
-    const input = e.target.value.replace(/\D/g, "").slice(0, 11); // Max 11 digits
-
+    const input = e.target.value.replace(/\D/g, "").slice(0, 11);
     const isValid =
       (input.length === 11 && /^09\d{9}$/.test(input)) ||
       (input.length === 10 && /^9\d{9}$/.test(input));
-
     setPhoneNumberError(!isValid);
-
-    setFormData((prev) => ({
-      ...prev,
-      phoneNumber: input,
-    }));
+    setFormData((prev) => ({ ...prev, phoneNumber: input }));
   };
 
   const handleName = (e) => {
@@ -997,33 +1009,21 @@ function Provider({ children }) {
   };
 
   const handleEmergencyContactPhone = (e) => {
-    const input = e.target.value.replace(/\D/g, "").slice(0, 11); // Max 11 digits
-
+    const input = e.target.value.replace(/\D/g, "").slice(0, 11);
     const isValid =
       (input.length === 11 && /^09\d{9}$/.test(input)) ||
       (input.length === 10 && /^9\d{9}$/.test(input));
-
     setEmergencyContactError(!isValid);
-
-    setFormData((prev) => ({
-      ...prev,
-      emergencyContactPhone: input,
-    }));
+    setFormData((prev) => ({ ...prev, emergencyContactPhone: input }));
   };
 
   const handleSecondEmergencyContactPhone = (e) => {
-    const input = e.target.value.replace(/\D/g, "").slice(0, 11); // Max 11 digits
-
+    const input = e.target.value.replace(/\D/g, "").slice(0, 11);
     const isValid =
       (input.length === 11 && /^09\d{9}$/.test(input)) ||
       (input.length === 10 && /^9\d{9}$/.test(input));
-
     setSecondEmergencyContactError(!isValid);
-
-    setFormData((prev) => ({
-      ...prev,
-      secondEmergencyContactPhone: input,
-    }));
+    setFormData((prev) => ({ ...prev, secondEmergencyContactPhone: input }));
   };
 
   const handleWeight = (e) => {
@@ -1056,7 +1056,6 @@ function Provider({ children }) {
     setFormData((prev) => ({ ...prev, apacheScore: val }));
   };
 
-  // Date dropdowns (for birthDate)
   const [years, setYears] = useState([]);
   const [months] = useState([
     "فروردین",
@@ -1097,26 +1096,18 @@ function Provider({ children }) {
 
   const handleCheckboxChange = (category, value, isChecked) => {
     const fieldName = `selected${category}Subcategories`;
-
     setFormData((prev) => {
       const currentSelections = prev[fieldName] || [];
-
       if (isChecked) {
-        // Add if not already present
         if (!currentSelections.includes(value)) {
-          return {
-            ...prev,
-            [fieldName]: [...currentSelections, value],
-          };
+          return { ...prev, [fieldName]: [...currentSelections, value] };
         }
       } else {
-        // Remove if present
         return {
           ...prev,
           [fieldName]: currentSelections.filter((item) => item !== value),
         };
       }
-
       return prev;
     });
   };
@@ -1124,11 +1115,10 @@ function Provider({ children }) {
   const handleMainCategoryChange = (category, value) => {
     const mainFieldName = `selected${category}`;
     const subFieldName = `selected${category}Subcategories`;
-
     setFormData((prev) => ({
       ...prev,
       [mainFieldName]: value,
-      [subFieldName]: [], // Clear subcategories when main category changes
+      [subFieldName]: [],
     }));
   };
 
@@ -1188,6 +1178,7 @@ function Provider({ children }) {
         postFormData,
         handleCheckboxChange,
         handleMainCategoryChange,
+        def,
       }}
     >
       {children}
