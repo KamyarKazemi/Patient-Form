@@ -1028,13 +1028,13 @@ function Provider({ children }) {
 
   const handleWeight = (e) => {
     const value = parseFloat(e.target.value);
-    setWeightError(isNaN(value) || value < 0 || value > 500);
+    setWeightError(value < 0 || value > 500);
     setFormData((prev) => ({ ...prev, admissionWeight: value }));
   };
 
   const handleHeight = (e) => {
     const value = parseFloat(e.target.value);
-    setHeightError(isNaN(value) || value < 0 || value > 300);
+    setHeightError(value < 0 || value > 300);
     setFormData((prev) => ({ ...prev, admissionHeight: value }));
   };
 
@@ -1095,6 +1095,43 @@ function Provider({ children }) {
     setFormData((prev) => ({ ...prev, birthDate: `${prev.birthDate}/${day}` }));
   };
 
+  const handleCheckboxChange = (category, value, isChecked) => {
+    const fieldName = `selected${category}Subcategories`;
+
+    setFormData((prev) => {
+      const currentSelections = prev[fieldName] || [];
+
+      if (isChecked) {
+        // Add if not already present
+        if (!currentSelections.includes(value)) {
+          return {
+            ...prev,
+            [fieldName]: [...currentSelections, value],
+          };
+        }
+      } else {
+        // Remove if present
+        return {
+          ...prev,
+          [fieldName]: currentSelections.filter((item) => item !== value),
+        };
+      }
+
+      return prev;
+    });
+  };
+
+  const handleMainCategoryChange = (category, value) => {
+    const mainFieldName = `selected${category}`;
+    const subFieldName = `selected${category}Subcategories`;
+
+    setFormData((prev) => ({
+      ...prev,
+      [mainFieldName]: value,
+      [subFieldName]: [], // Clear subcategories when main category changes
+    }));
+  };
+
   const postFormData = async () => {
     try {
       const response = await axios.post(
@@ -1149,6 +1186,8 @@ function Provider({ children }) {
         glasgowError,
         apacheError,
         postFormData,
+        handleCheckboxChange,
+        handleMainCategoryChange,
       }}
     >
       {children}

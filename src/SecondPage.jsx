@@ -1,40 +1,30 @@
 import { useContext } from "react";
 import FormContext from "./FormContext";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 function SecondPage() {
   const {
     formData,
-    handleSymptom,
-    selectedItem,
-    handleDiagnosis,
-    selectedSubDiagnosis,
-    selectedSubComorbiditie,
-    handleComorbiditie,
-    handleHistory,
-    selectedSubSurgicalHistory,
-    handleAdmissionReasons,
-    selectedSubAdmissionReasons,
-    handleDrugs,
-    selectedSubDrugs,
-    handleAllergies,
-    selectedSubAllergies,
+    postFormData, // Use your existing API function
+    handleMainCategoryChange,
+    handleCheckboxChange,
     isAnyError,
   } = useContext(FormContext);
 
   const handleForm = async (e) => {
     e.preventDefault();
-    if (isAnyError) return alert("خطا در اطلاعات!");
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/PatientInformation",
-        formData
-      );
-      console.log("✅ Submitted:", response.data);
+    if (isAnyError) {
+      alert("خطا در اطلاعات!");
+      return;
+    }
+
+    // Use your existing postFormData function
+    const result = await postFormData();
+
+    if (result.success) {
       alert("اطلاعات با موفقیت ارسال شد");
-    } catch (error) {
-      console.error("❌ Error submitting:", error);
+      console.log("✅ Complete data sent to API:", formData);
+    } else {
       alert("ارسال اطلاعات با خطا مواجه شد");
     }
   };
@@ -50,9 +40,13 @@ function SecondPage() {
         <select
           name="icu-reason"
           id="icu-reason"
-          onChange={handleSymptom}
+          value={formData.selectedIcuReason}
+          onChange={(e) =>
+            handleMainCategoryChange("IcuReason", e.target.value)
+          }
           className="form-input"
         >
+          <option value="">انتخاب کنید</option>
           {formData.baseIcuReason.map((item, index) => (
             <option key={index} value={item.symptom}>
               {item.symptom}
@@ -61,25 +55,41 @@ function SecondPage() {
         </select>
       </div>
 
-      {selectedItem && (
+      {/* ICU Sub-reasons Checkboxes */}
+      {formData.selectedIcuReason && (
         <div className="checkbox-container">
-          {selectedItem.subSymptom.map((sub, index) => (
-            <div key={index} className="checkbox-item">
-              <input type="checkbox" id={`subSymptom-${index}`} value={sub} />
-              <label htmlFor={`subSymptom-${index}`}>{sub}</label>
-            </div>
-          ))}
+          <h4>انتخاب علائم مرتبط:</h4>
+          {formData.baseIcuReason
+            .find((item) => item.symptom === formData.selectedIcuReason)
+            ?.subSymptom.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`subSymptom-${index}`}
+                  value={sub}
+                  checked={formData.selectedIcuSubReasons.includes(sub)}
+                  onChange={(e) =>
+                    handleCheckboxChange("IcuReason", sub, e.target.checked)
+                  }
+                />
+                <label htmlFor={`subSymptom-${index}`}>{sub}</label>
+              </div>
+            ))}
         </div>
       )}
 
-      {/* Diagnosis */}
+      {/* Primary Diagnosis */}
       <div className="input-group">
         <label htmlFor="firstDiagnosis">تشخیص اولیه پزشک</label>
         <select
           id="firstDiagnosis"
-          onChange={handleDiagnosis}
+          value={formData.selectedPrimaryDiagnosis}
+          onChange={(e) =>
+            handleMainCategoryChange("PrimaryDiagnosis", e.target.value)
+          }
           className="form-input"
         >
+          <option value="">انتخاب کنید</option>
           {formData.firstDiagnosis.map((item, index) => (
             <option key={index} value={item.diagnosis}>
               {item.diagnosis}
@@ -88,14 +98,34 @@ function SecondPage() {
         </select>
       </div>
 
-      {selectedSubDiagnosis && (
+      {/* Diagnosis Subcategories */}
+      {formData.selectedPrimaryDiagnosis && (
         <div className="checkbox-container">
-          {selectedSubDiagnosis.subDiagnosis.map((sub, index) => (
-            <div key={index} className="checkbox-item">
-              <input type="checkbox" id={`subDiagnosis-${index}`} value={sub} />
-              <label htmlFor={`subDiagnosis-${index}`}>{sub}</label>
-            </div>
-          ))}
+          <h4>انتخاب تشخیص‌های فرعی:</h4>
+          {formData.firstDiagnosis
+            .find(
+              (item) => item.diagnosis === formData.selectedPrimaryDiagnosis
+            )
+            ?.subDiagnosis.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`subDiagnosis-${index}`}
+                  value={sub}
+                  checked={formData.selectedDiagnosisSubcategories.includes(
+                    sub
+                  )}
+                  onChange={(e) =>
+                    handleCheckboxChange(
+                      "PrimaryDiagnosis",
+                      sub,
+                      e.target.checked
+                    )
+                  }
+                />
+                <label htmlFor={`subDiagnosis-${index}`}>{sub}</label>
+              </div>
+            ))}
         </div>
       )}
 
@@ -104,9 +134,13 @@ function SecondPage() {
         <label htmlFor="comorbidities">سابقه بیماری‌های زمینه‌ای</label>
         <select
           id="comorbidities"
-          onChange={handleComorbiditie}
+          value={formData.selectedComorbidity}
+          onChange={(e) =>
+            handleMainCategoryChange("Comorbidity", e.target.value)
+          }
           className="form-input"
         >
+          <option value="">انتخاب کنید</option>
           {formData.comorbidities.map((item, index) => (
             <option key={index} value={item.comorbiditie}>
               {item.comorbiditie}
@@ -115,18 +149,28 @@ function SecondPage() {
         </select>
       </div>
 
-      {selectedSubComorbiditie && (
+      {/* Comorbidities Subcategories */}
+      {formData.selectedComorbidity && (
         <div className="checkbox-container">
-          {selectedSubComorbiditie.subComorbiditie.map((sub, index) => (
-            <div key={index} className="checkbox-item">
-              <input
-                type="checkbox"
-                id={`subComorbiditie-${index}`}
-                value={sub}
-              />
-              <label htmlFor={`subComorbiditie-${index}`}>{sub}</label>
-            </div>
-          ))}
+          <h4>انتخاب بیماری‌های زمینه‌ای:</h4>
+          {formData.comorbidities
+            .find((item) => item.comorbiditie === formData.selectedComorbidity)
+            ?.subComorbiditie.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`subComorbiditie-${index}`}
+                  value={sub}
+                  checked={formData.selectedComorbiditiesSubcategories.includes(
+                    sub
+                  )}
+                  onChange={(e) =>
+                    handleCheckboxChange("Comorbidity", sub, e.target.checked)
+                  }
+                />
+                <label htmlFor={`subComorbiditie-${index}`}>{sub}</label>
+              </div>
+            ))}
         </div>
       )}
 
@@ -135,9 +179,13 @@ function SecondPage() {
         <label htmlFor="surgicalHistory">سوابق جراحی</label>
         <select
           id="surgicalHistory"
-          onChange={handleHistory}
+          value={formData.selectedSurgicalHistory}
+          onChange={(e) =>
+            handleMainCategoryChange("SurgicalHistory", e.target.value)
+          }
           className="form-input"
         >
+          <option value="">انتخاب کنید</option>
           {formData.surgicalHistories.map((item, index) => (
             <option key={index} value={item.history}>
               {item.history}
@@ -146,25 +194,47 @@ function SecondPage() {
         </select>
       </div>
 
-      {selectedSubSurgicalHistory && (
+      {/* Surgical History Subcategories */}
+      {formData.selectedSurgicalHistory && (
         <div className="checkbox-container">
-          {selectedSubSurgicalHistory.subHistory.map((sub, index) => (
-            <div key={index} className="checkbox-item">
-              <input
-                type="checkbox"
-                id={`subSurgicalHistory-${index}`}
-                value={sub}
-              />
-              <label htmlFor={`subSurgicalHistory-${index}`}>{sub}</label>
-            </div>
-          ))}
+          <h4>انتخاب سوابق جراحی:</h4>
+          {formData.surgicalHistories
+            .find((item) => item.history === formData.selectedSurgicalHistory)
+            ?.subHistory.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`subSurgicalHistory-${index}`}
+                  value={sub}
+                  checked={formData.selectedSurgicalHistorySubcategories.includes(
+                    sub
+                  )}
+                  onChange={(e) =>
+                    handleCheckboxChange(
+                      "SurgicalHistory",
+                      sub,
+                      e.target.checked
+                    )
+                  }
+                />
+                <label htmlFor={`subSurgicalHistory-${index}`}>{sub}</label>
+              </div>
+            ))}
         </div>
       )}
 
       {/* Medications */}
       <div className="input-group">
         <label htmlFor="usedDrugs">داروهای مصرفی</label>
-        <select id="usedDrugs" onChange={handleDrugs} className="form-input">
+        <select
+          id="usedDrugs"
+          value={formData.selectedMedication}
+          onChange={(e) =>
+            handleMainCategoryChange("Medication", e.target.value)
+          }
+          className="form-input"
+        >
+          <option value="">انتخاب کنید</option>
           {formData.usedDrugs.map((item, index) => (
             <option key={index} value={item.drug}>
               {item.drug}
@@ -173,14 +243,28 @@ function SecondPage() {
         </select>
       </div>
 
-      {selectedSubDrugs && (
+      {/* Medication Subcategories */}
+      {formData.selectedMedication && (
         <div className="checkbox-container">
-          {selectedSubDrugs.subDrug.map((sub, index) => (
-            <div key={index} className="checkbox-item">
-              <input type="checkbox" id={`subDrug-${index}`} value={sub} />
-              <label htmlFor={`subDrug-${index}`}>{sub}</label>
-            </div>
-          ))}
+          <h4>انتخاب داروها:</h4>
+          {formData.usedDrugs
+            .find((item) => item.drug === formData.selectedMedication)
+            ?.subDrug.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`subDrug-${index}`}
+                  value={sub}
+                  checked={formData.selectedMedicationSubcategories.includes(
+                    sub
+                  )}
+                  onChange={(e) =>
+                    handleCheckboxChange("Medication", sub, e.target.checked)
+                  }
+                />
+                <label htmlFor={`subDrug-${index}`}>{sub}</label>
+              </div>
+            ))}
         </div>
       )}
 
@@ -189,9 +273,13 @@ function SecondPage() {
         <label htmlFor="drugAllergies">آلرژی دارویی</label>
         <select
           id="drugAllergies"
-          onChange={handleAllergies}
+          value={formData.selectedDrugAllergy}
+          onChange={(e) =>
+            handleMainCategoryChange("DrugAllergy", e.target.value)
+          }
           className="form-input"
         >
+          <option value="">انتخاب کنید</option>
           {formData.drugAllergies.map((item, index) => (
             <option key={index} value={item.allergy}>
               {item.allergy}
@@ -200,14 +288,26 @@ function SecondPage() {
         </select>
       </div>
 
-      {selectedSubAllergies && (
+      {/* Allergy Subcategories */}
+      {formData.selectedDrugAllergy && (
         <div className="checkbox-container">
-          {selectedSubAllergies.subAllergy.map((sub, index) => (
-            <div key={index} className="checkbox-item">
-              <input type="checkbox" id={`subAllergy-${index}`} value={sub} />
-              <label htmlFor={`subAllergy-${index}`}>{sub}</label>
-            </div>
-          ))}
+          <h4>انتخاب آلرژی‌ها:</h4>
+          {formData.drugAllergies
+            .find((item) => item.allergy === formData.selectedDrugAllergy)
+            ?.subAllergy.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`subAllergy-${index}`}
+                  value={sub}
+                  checked={formData.selectedAllergySubcategories.includes(sub)}
+                  onChange={(e) =>
+                    handleCheckboxChange("DrugAllergy", sub, e.target.checked)
+                  }
+                />
+                <label htmlFor={`subAllergy-${index}`}>{sub}</label>
+              </div>
+            ))}
         </div>
       )}
 
@@ -216,9 +316,13 @@ function SecondPage() {
         <label htmlFor="icuAdmissionReasons">دلایل بستری در ICU</label>
         <select
           id="icuAdmissionReasons"
-          onChange={handleAdmissionReasons}
+          value={formData.selectedIcuAdmissionReason}
+          onChange={(e) =>
+            handleMainCategoryChange("IcuAdmissionReason", e.target.value)
+          }
           className="form-input"
         >
+          <option value="">انتخاب کنید</option>
           {formData.icuAdmissionReasons.map((item, index) => (
             <option key={index} value={item.reason}>
               {item.reason}
@@ -227,18 +331,38 @@ function SecondPage() {
         </select>
       </div>
 
-      {selectedSubAdmissionReasons && (
+      {/* ICU Admission Reason Subcategories */}
+      {formData.selectedIcuAdmissionReason && (
         <div className="checkbox-container">
-          {selectedSubAdmissionReasons.subReason.map((sub, index) => (
-            <div key={index} className="checkbox-item">
-              <input type="checkbox" id={`subReason-${index}`} value={sub} />
-              <label htmlFor={`subReason-${index}`}>{sub}</label>
-            </div>
-          ))}
+          <h4>انتخاب دلایل بستری:</h4>
+          {formData.icuAdmissionReasons
+            .find((item) => item.reason === formData.selectedIcuAdmissionReason)
+            ?.subReason.map((sub, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`subReason-${index}`}
+                  value={sub}
+                  checked={formData.selectedAdmissionReasonSubcategories.includes(
+                    sub
+                  )}
+                  onChange={(e) =>
+                    handleCheckboxChange(
+                      "IcuAdmissionReason",
+                      sub,
+                      e.target.checked
+                    )
+                  }
+                />
+                <label htmlFor={`subReason-${index}`}>{sub}</label>
+              </div>
+            ))}
         </div>
       )}
 
-      <button className="form-button">مرحله بعد</button>
+      <button className="form-button" type="submit">
+        ارسال اطلاعات
+      </button>
     </form>
   );
 }
