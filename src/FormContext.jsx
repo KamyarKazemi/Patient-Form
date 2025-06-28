@@ -1109,11 +1109,100 @@ function Provider({ children }) {
     }));
   };
 
+  // const postFormData = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3001/PatientInformation",
+  //       formData
+  //     );
+  //     console.log("✅ Data submitted successfully:", response.data);
+  //     return { success: true };
+  //   } catch (error) {
+  //     console.error("❌ Submission failed:", error);
+  //     return { success: false, error };
+  //   }
+  // };
+
   const postFormData = async () => {
     try {
+      // Only include the fields we explicitly allow
+      const {
+        firstName,
+        lastName,
+        idCode,
+        medicalRecordNumber,
+        age,
+        phoneNumber,
+        birthDate,
+        fullAddress,
+        insuranceCompany,
+        insurancePolicyNumber,
+        emergencyContactName,
+        emergencyContactPhone,
+        secondEmergencyContactPhone,
+        emergencyContactAddress,
+        admissionWeight,
+        admissionHeight,
+        vitalSignsOnAdmission,
+        glasgowComaScale,
+        apacheScore,
+
+        selectedIcuReason,
+        selectedIcuReasonSubcategories,
+        selectedPrimaryDiagnosis,
+        selectedPrimaryDiagnosisSubcategories,
+        selectedComorbidity,
+        selectedComorbiditySubcategories,
+        selectedSurgicalHistory,
+        selectedSurgicalHistorySubcategories,
+        selectedMedication,
+        selectedMedicationSubcategories,
+        selectedDrugAllergy,
+        selectedDrugAllergySubcategories,
+        selectedIcuAdmissionReason,
+        selectedIcuAdmissionReasonSubcategories,
+      } = formData;
+
+      const cleaned = {
+        firstName,
+        lastName,
+        idCode,
+        medicalRecordNumber,
+        age,
+        phoneNumber,
+        birthDate,
+        fullAddress,
+        insuranceCompany,
+        insurancePolicyNumber,
+        emergencyContactName,
+        emergencyContactPhone,
+        secondEmergencyContactPhone,
+        emergencyContactAddress,
+        admissionWeight,
+        admissionHeight,
+        vitalSignsOnAdmission,
+        glasgowComaScale,
+        apacheScore,
+
+        selectedIcuReason,
+        selectedIcuReasonSubcategories,
+        selectedPrimaryDiagnosis,
+        selectedPrimaryDiagnosisSubcategories,
+        selectedComorbidity,
+        selectedComorbiditySubcategories,
+        selectedSurgicalHistory,
+        selectedSurgicalHistorySubcategories,
+        selectedMedication,
+        selectedMedicationSubcategories,
+        selectedDrugAllergy,
+        selectedDrugAllergySubcategories,
+        selectedIcuAdmissionReason,
+        selectedIcuAdmissionReasonSubcategories,
+      };
+
       const response = await axios.post(
         "http://localhost:3001/PatientInformation",
-        formData
+        cleaned
       );
       console.log("✅ Data submitted successfully:", response.data);
       return { success: true };
