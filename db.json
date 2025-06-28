@@ -1,67 +1,103 @@
 {
   "PatientInformation": [
     {
-      "id": "fb92",
+      "id": "4a54",
       "firstName": "hdgf",
       "lastName": "mad",
       "idCode": "1111111111",
-      "medicalRecordNumber": "1222",
-      "age": "33",
-      "phoneNumber": "9175555555",
-      "birthDate": "1316//18",
-      "fullAddress": "gg",
-      "insuranceCompany": "بیمه خصوصی",
-      "insurancePolicyNumber": "1111111111",
-      "emergencyContactName": "d",
+      "medicalRecordNumber": "4444",
+      "age": "3",
+      "phoneNumber": "09301641943",
+      "birthDate": "1316//17",
+      "fullAddress": "dd",
+      "insuranceCompany": "نیروهای مسلح",
+      "insurancePolicyNumber": "5555555555",
+      "emergencyContactName": "e",
       "emergencyContactPhone": "9174444444",
       "secondEmergencyContactPhone": "9176666666",
-      "emergencyContactAddress": "hh",
-      "admissionWeight": "5",
-      "admissionHeight": "12",
-      "vitalSignsOnAdmission": "hh",
-      "glasgowComaScale": 10,
-      "apacheScore": 10,
-      "selectedIcuReason": "دلایل جراحی و تروما (Surgical/Trauma Causes)",
+      "emergencyContactAddress": "dd",
+      "admissionWeight": "4",
+      "admissionHeight": "5",
+      "vitalSignsOnAdmission": "f",
+      "glasgowComaScale": "5",
+      "apacheScore": "5",
+      "selectedIcuReason": "دلایل قلبی‌عروقی (Cardiovascular Causes)",
       "selectedIcuReasonSubcategories": [
-        "نارسایی حاد تنفسی (Acute Respiratory Failure)",
-        "دیسترس تنفسی حاد (ARDS)",
-        "بعد از جراحی‌های بزرگ مثل جراحی قلب، مغز یا شکم"
+        "سکته قلبی حاد وسیع (Massive Myocardial Infarction)"
       ],
-      "selectedPrimaryDiagnosis": "تروما و خونریزی شدید",
+      "selectedPrimaryDiagnosis": "معیارهای قلبی‌عروقی",
       "selectedPrimaryDiagnosisSubcategories": [
-        "تب شدید با لرز و ناپایداری فشار",
-        "وجود منبع عفونی + اختلال در عملکرد ≥1 ارگان",
-        "تروما با GCS پایین یا همودینامیک ناپایدار",
-        "خونریزی داخلی/خارجی شدید (Hb↓ + شوک)"
+        "شوک (سردی اندام، تاخیر پرشدن مویرگی، فشار پایین)"
       ],
-      "selectedComorbidity": "بیماری‌های کلیوی",
+      "selectedComorbidity": "بیماری‌های عفونی مزمن",
       "selectedComorbiditySubcategories": [
-        "پیوند عضو (Organ Transplant)",
-        "نقص سیستم ایمنی (Immunodeficiency)",
-        "سنگ کلیه مکرر (Recurrent Kidney Stones)",
-        "نفروپاتی دیابتی (Diabetic Nephropathy)"
+        "HIV/AIDS"
       ],
-      "selectedSurgicalHistory": "جراحی‌های مغز و اعصاب",
+      "selectedSurgicalHistory": " جراحی‌های چشم",
       "selectedSurgicalHistorySubcategories": [
-        "رزکسیون تومور (هر ناحیه)",
-        "ماستکتومی (برداشتن پستان)",
-        "درمان هیدروسفالی (Shunt Placement)"
+        "عمل آب مروارید (Cataract Surgery)"
       ],
-      "selectedMedication": "داروهای اعصاب و روان",
+      "selectedMedication": "داروهای دیگر مهم و خاص",
       "selectedMedicationSubcategories": [
-        "Prednisolone / Methylprednisolone",
-        "Azathioprine",
-        "Diazepam / Lorazepam / Midazolam – آرام‌بخش/ضد اضطراب"
+        "IVIG (ایمونوگلوبولین تزریقی) – در بیماری‌های خودایمنی"
       ],
-      "selectedDrugAllergy": "آنتی‌بیوتیک‌ها",
+      "selectedDrugAllergy": "بی‌حس‌کننده‌ها و بیهوشی",
       "selectedDrugAllergySubcategories": [
-        "Cephalosporins: Cefalexin, Ceftriaxone, Cefepime",
-        "Fluoroquinolones: Ciprofloxacin, Levofloxacin"
+        "Midazolam / Diazepam (بیشتر حساسیت‌های خفیف یا واکنش‌های شبه آلرژیک)"
       ],
-      "selectedIcuAdmissionReason": "وضعیت‌های زنان و زایمان در ICU",
+      "selectedIcuAdmissionReason": "وضعیت‌های خاص و نادر",
       "selectedIcuAdmissionReasonSubcategories": [
-        "سوختگی وسیع (Burn > 20% TBSA)",
-        "پره‌اکلامپسی / اکلامپسی شدید"
+        "بحران میاستنی (Myasthenic Crisis)"
+      ]
+    },
+    {
+      "id": "b182",
+      "firstName": "کامیار",
+      "lastName": "mad",
+      "idCode": "1111111111",
+      "medicalRecordNumber": "4444",
+      "age": "3",
+      "phoneNumber": "09301641943",
+      "birthDate": "1316//17",
+      "fullAddress": "dd",
+      "insuranceCompany": "نیروهای مسلح",
+      "insurancePolicyNumber": "5555555555",
+      "emergencyContactName": "e",
+      "emergencyContactPhone": "9174444444",
+      "secondEmergencyContactPhone": "9176666666",
+      "emergencyContactAddress": "dd",
+      "admissionWeight": "4",
+      "admissionHeight": "5",
+      "vitalSignsOnAdmission": "f",
+      "glasgowComaScale": "5",
+      "apacheScore": "5",
+      "selectedIcuReason": "دلایل قلبی‌عروقی (Cardiovascular Causes)",
+      "selectedIcuReasonSubcategories": [
+        "سکته قلبی حاد وسیع (Massive Myocardial Infarction)"
+      ],
+      "selectedPrimaryDiagnosis": "معیارهای قلبی‌عروقی",
+      "selectedPrimaryDiagnosisSubcategories": [
+        "شوک (سردی اندام، تاخیر پرشدن مویرگی، فشار پایین)"
+      ],
+      "selectedComorbidity": "بیماری‌های عفونی مزمن",
+      "selectedComorbiditySubcategories": [
+        "HIV/AIDS"
+      ],
+      "selectedSurgicalHistory": " جراحی‌های چشم",
+      "selectedSurgicalHistorySubcategories": [
+        "عمل آب مروارید (Cataract Surgery)"
+      ],
+      "selectedMedication": "داروهای دیگر مهم و خاص",
+      "selectedMedicationSubcategories": [
+        "IVIG (ایمونوگلوبولین تزریقی) – در بیماری‌های خودایمنی"
+      ],
+      "selectedDrugAllergy": "بی‌حس‌کننده‌ها و بیهوشی",
+      "selectedDrugAllergySubcategories": [
+        "Midazolam / Diazepam (بیشتر حساسیت‌های خفیف یا واکنش‌های شبه آلرژیک)"
+      ],
+      "selectedIcuAdmissionReason": "وضعیت‌های خاص و نادر",
+      "selectedIcuAdmissionReasonSubcategories": [
+        "بحران میاستنی (Myasthenic Crisis)"
       ]
     }
   ]

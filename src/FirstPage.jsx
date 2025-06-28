@@ -31,7 +31,6 @@ function FirstPage() {
     vitalSignsError,
     glasgowError,
     apacheError,
-    isAnyError,
     handleYearChange,
     years,
     handleMonthChange,
@@ -40,13 +39,18 @@ function FirstPage() {
     handleDayChange,
     days,
     def,
+    ageError,
+    handleEmergencyContactName,
+    setIsAnyError,
+    hasErrors,
   } = useContext(FormContext);
 
   const navigate = useNavigate();
 
   const handleForm = (e) => {
     e.preventDefault();
-    if (isAnyError) {
+    if (hasErrors) {
+      setIsAnyError(true);
       alert("لطفا اطلاعات را به درستی وارد کنید!");
       return;
     }
@@ -127,6 +131,11 @@ function FirstPage() {
           className="form-input"
           required
         />
+        {ageError ? (
+          <div className="idError">
+            <p>سن نامعتبر است</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
@@ -161,6 +170,7 @@ function FirstPage() {
           onChange={handleDayChange}
           disabled={!selectedMonth}
           className="form-input"
+          required
         >
           {days.map((d) => (
             <option key={d}>{d}</option>
@@ -188,6 +198,7 @@ function FirstPage() {
           value={formData.insuranceCompany}
           onChange={handleInputChange}
           className="form-input"
+          required
         >
           {def.insuranceCompanyOptions.map((item, i) => (
             <option key={i}>{item}</option>
@@ -202,6 +213,7 @@ function FirstPage() {
           value={formData.insurancePolicyNumber}
           onChange={handleInsurancePolicyNumber}
           className="form-input"
+          required
         />
         {insuranceError ? (
           <div className="idError">
@@ -217,7 +229,7 @@ function FirstPage() {
         <input
           name="emergencyContactName"
           value={formData.emergencyContactName}
-          onChange={handleInputChange}
+          onChange={handleEmergencyContactName}
           className="form-input"
         />
       </div>
@@ -271,6 +283,7 @@ function FirstPage() {
           value={formData.admissionWeight}
           onChange={handleWeight}
           className="form-input"
+          required
         />
         {weightError ? (
           <div className="idError">
@@ -286,6 +299,7 @@ function FirstPage() {
           value={formData.admissionHeight}
           onChange={handleHeight}
           className="form-input"
+          required
         />
         {heightError ? (
           <div className="idError">
@@ -301,6 +315,7 @@ function FirstPage() {
           value={formData.vitalSignsOnAdmission}
           onChange={handleVitalSigns}
           className="form-input"
+          required
         />
         {vitalSignsError ? (
           <div className="idError">
@@ -316,6 +331,7 @@ function FirstPage() {
           value={formData.glasgowComaScale}
           onChange={handleGlasgowComaScale}
           className="form-input"
+          required
         />
         {glasgowError ? (
           <div className="idError">
@@ -331,6 +347,7 @@ function FirstPage() {
           value={formData.apacheScore}
           onChange={handleApacheScore}
           className="form-input"
+          required
         />
         {apacheError ? (
           <div className="idError">
