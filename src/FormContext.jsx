@@ -1112,7 +1112,7 @@ function Provider({ children }) {
   const postFormData = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/PatientInformation",
+        "https://KamyarKazemi.github.io/PatientInformation",
         formData
       );
       console.log("✅ Data submitted successfully:", response.data);
