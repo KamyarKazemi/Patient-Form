@@ -24,39 +24,28 @@ const defaultFormData = {
   glasgowComaScale: "",
   apacheScore: "",
 
-  insuranceCompanyOptions: [
-    "تامین اجتماعی",
-    "سلامت",
-    "ارتش",
-    "خدمات درمانی",
-    "سایر",
-  ],
-
-  baseIcuReason: [],
   selectedIcuReason: "",
   selectedIcuSubReasons: [],
+  selectedIcuReasonSubcategories: [],
+  selectedPrimaryDiagnosisSubcategories: [],
+  selectedComorbiditySubcategories: [],
+  selectedSurgicalHistorySubcategories: [],
+  selectedMedicationSubcategories: [],
+  selectedDrugAllergySubcategories: [],
+  selectedIcuAdmissionReasonSubcategories: [],
 
-  firstDiagnosis: [],
   selectedPrimaryDiagnosis: "",
-  selectedDiagnosisSubcategories: [],
 
-  comorbidities: [],
   selectedComorbidity: "",
   selectedComorbiditiesSubcategories: [],
 
-  surgicalHistories: [],
   selectedSurgicalHistory: "",
-  selectedSurgicalHistorySubcategories: [],
 
-  usedDrugs: [],
   selectedMedication: "",
-  selectedMedicationSubcategories: [],
 
-  drugAllergies: [],
   selectedDrugAllergy: "",
   selectedAllergySubcategories: [],
 
-  icuAdmissionReasons: [],
   selectedIcuAdmissionReason: "",
   selectedAdmissionReasonSubcategories: [],
 };
@@ -1027,13 +1016,13 @@ function Provider({ children }) {
   };
 
   const handleWeight = (e) => {
-    const value = parseFloat(e.target.value);
+    const value = e.target.value;
     setWeightError(value < 0 || value > 500);
     setFormData((prev) => ({ ...prev, admissionWeight: value }));
   };
 
   const handleHeight = (e) => {
-    const value = parseFloat(e.target.value);
+    const value = e.target.value;
     setHeightError(value < 0 || value > 300);
     setFormData((prev) => ({ ...prev, admissionHeight: value }));
   };
@@ -1045,13 +1034,13 @@ function Provider({ children }) {
   };
 
   const handleGlasgowComaScale = (e) => {
-    const val = parseInt(e.target.value, 10);
+    const val = (e.target.value, 10);
     setGlasgowError(val < 3 || val > 15);
     setFormData((prev) => ({ ...prev, glasgowComaScale: val }));
   };
 
   const handleApacheScore = (e) => {
-    const val = parseInt(e.target.value, 10);
+    const val = (e.target.value, 10);
     setApacheError(val < 0 || val > 71);
     setFormData((prev) => ({ ...prev, apacheScore: val }));
   };
@@ -1114,11 +1103,9 @@ function Provider({ children }) {
 
   const handleMainCategoryChange = (category, value) => {
     const mainFieldName = `selected${category}`;
-    const subFieldName = `selected${category}Subcategories`;
     setFormData((prev) => ({
       ...prev,
       [mainFieldName]: value,
-      [subFieldName]: [],
     }));
   };
 

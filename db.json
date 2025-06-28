@@ -1,59 +1,148 @@
 {
   "PatientInformation": [
     {
-      "id": "bc3e",
+      "id": "0fca",
       "firstName": "hdgf",
       "lastName": "mad",
-      "idCode": "1111111111",
-      "medicalRecordNumber": "dddd",
-      "age": "12",
-      "phoneNumber": "09174444444",
-      "birthDate": "1314/",
-      "fullAddress": "bb",
-      "insuranceCompany": "ارتش",
-      "insurancePolicyNumber": "1234567890",
-      "emergencyContactName": "kam",
-      "emergencyContactPhone": "9174444444",
-      "secondEmergencyContactPhone": "9176666667",
+      "idCode": "3333333333",
+      "medicalRecordNumber": "2123",
+      "age": "33",
+      "phoneNumber": "9175555555",
+      "birthDate": "1315//28",
+      "fullAddress": "kk",
+      "insuranceCompany": "خدمات درمانی",
+      "insurancePolicyNumber": "8777777777",
+      "emergencyContactName": "d",
+      "emergencyContactPhone": "09301641943",
+      "secondEmergencyContactPhone": "9176666666",
       "emergencyContactAddress": "jj",
-      "admissionWeight": 4,
-      "admissionHeight": 10,
-      "vitalSignsOnAdmission": "hh",
-      "glasgowComaScale": 4,
-      "apacheScore": 13,
-      "insuranceCompanyOptions": [
-        "تامین اجتماعی",
-        "سلامت",
-        "ارتش",
-        "خدمات درمانی",
-        "سایر"
-      ],
+      "admissionWeight": "7",
+      "admissionHeight": "10",
+      "vitalSignsOnAdmission": "33",
+      "glasgowComaScale": 10,
+      "apacheScore": 10,
+      "insuranceCompanyOptions": [],
       "baseIcuReason": [],
-      "selectedIcuReason": "سایر دلایل عمومی (Miscellaneous)",
+      "selectedIcuReason": "دلایل نورولوژیک (Neurological Causes)",
       "selectedIcuSubReasons": [],
+      "selectedIcuReasonSubcategories": [
+        "نارسایی حاد تنفسی (Acute Respiratory Failure)",
+        "صرع مقاوم یا status epilepticus"
+      ],
+      "selectedPrimaryDiagnosisSubcategories": [
+        "دیسترس تنفسی شدید (retractions, accessory muscles use)",
+        "آریتمی تهدیدکننده زندگی (VF, VT, complete heart block)"
+      ],
+      "selectedComorbiditySubcategories": [
+        "سکته مغزی (Stroke)",
+        "کم‌کاری یا پرکاری تیروئید (Hypo/Hyperthyroidism)"
+      ],
+      "selectedSurgicalHistorySubcategories": [
+        "رزکسیون تومور (هر ناحیه)",
+        "ماستکتومی (برداشتن پستان)",
+        "سنگ‌شکنی یا برداشتن سنگ کلیه (PCNL / URS / Lithotripsy)"
+      ],
+      "selectedMedicationSubcategories": [
+        "Phenytoin, Levetiracetam (Keppra) – ضد تشنج",
+        "Aspirin (آسپرین)"
+      ],
+      "selectedDrugAllergySubcategories": [
+        "Nevirapine",
+        "Bupivacaine"
+      ],
+      "selectedIcuAdmissionReasonSubcategories": [
+        "پره‌اکلامپسی / اکلامپسی شدید",
+        "سندرم آنتی‌فسفولیپید شدید"
+      ],
       "firstDiagnosis": [],
-      "selectedPrimaryDiagnosis": "معیارهای تنفسی (Respiratory Red Flags)",
-      "selectedDiagnosisSubcategories": [],
+      "selectedPrimaryDiagnosis": "معیارهای قلبی‌عروقی",
       "comorbidities": [],
-      "selectedComorbidity": "بیماری‌های پوستی شدید",
+      "selectedComorbidity": "بیماری‌های متابولیک و غدد درون‌ریز",
       "selectedComorbiditiesSubcategories": [],
       "surgicalHistories": [],
-      "selectedSurgicalHistory": " جراحی‌های چشم",
-      "selectedSurgicalHistorySubcategories": [],
+      "selectedSurgicalHistory": "جراحی‌های کلیه و مجاری ادراری",
       "usedDrugs": [],
-      "selectedMedication": "داروهای معده و گوارش",
-      "selectedMedicationSubcategories": [],
+      "selectedMedication": "داروهای قلبی و عروقی",
       "drugAllergies": [],
-      "selectedDrugAllergy": "داروهای ضد HIV و ویروسی",
+      "selectedDrugAllergy": "بی‌حس‌کننده‌ها و بیهوشی",
       "selectedAllergySubcategories": [],
       "icuAdmissionReasons": [],
-      "selectedIcuAdmissionReason": "مسمومیت‌ها و اختلالات دارویی",
-      "selectedAdmissionReasonSubcategories": [],
-      "selectedIcuReasonSubcategories": [],
-      "selectedPrimaryDiagnosisSubcategories": [],
-      "selectedComorbiditySubcategories": [],
-      "selectedDrugAllergySubcategories": [],
-      "selectedIcuAdmissionReasonSubcategories": []
+      "selectedIcuAdmissionReason": "وضعیت‌های خاص و نادر",
+      "selectedAdmissionReasonSubcategories": []
+    },
+    {
+      "id": "911a",
+      "firstName": "hdgf",
+      "lastName": "mad",
+      "idCode": "3333333333",
+      "medicalRecordNumber": "1222",
+      "age": "4",
+      "phoneNumber": "9175555554",
+      "birthDate": "1315//14",
+      "fullAddress": "hhhhd",
+      "insuranceCompany": "بیمه خصوصی",
+      "insurancePolicyNumber": "7654321098",
+      "emergencyContactName": "d",
+      "emergencyContactPhone": "9174444444",
+      "secondEmergencyContactPhone": "9176666666",
+      "emergencyContactAddress": "ff",
+      "admissionWeight": "3",
+      "admissionHeight": "12",
+      "vitalSignsOnAdmission": "2",
+      "glasgowComaScale": 10,
+      "apacheScore": 10,
+      "selectedIcuReason": "دلایل قلبی‌عروقی (Cardiovascular Causes)",
+      "selectedIcuSubReasons": [],
+      "selectedIcuReasonSubcategories": [
+        "دیسترس تنفسی حاد (ARDS)",
+        "نارسایی حاد تنفسی (Acute Respiratory Failure)",
+        "شوک قلبی (Cardiogenic Shock)",
+        "سکته قلبی حاد وسیع (Massive Myocardial Infarction)"
+      ],
+      "selectedPrimaryDiagnosisSubcategories": [
+        "کراتینین ↑ سریع + کاهش ادرار (Oliguria/Anuria)",
+        "پتاسیم > 6.5 mEq/L همراه با ECG abnormal",
+        "خونریزی داخلی/خارجی شدید (Hb↓ + شوک)",
+        "هموپتیزی یا ملنا شدید با فشار پایین"
+      ],
+      "selectedComorbiditySubcategories": [
+        "سل فعال یا نهفته (TB)",
+        "HIV/AIDS",
+        "اگزمای شدید (Severe Eczema)",
+        "پسوریازیس گسترده"
+      ],
+      "selectedSurgicalHistorySubcategories": [
+        "رزکسیون تومور (هر ناحیه)",
+        "ماستکتومی (برداشتن پستان)",
+        "کله‌سیستکتومی (Cholecystectomy – برداشتن کیسه صفرا)",
+        "آپاندکتومی (Appendectomy)"
+      ],
+      "selectedMedicationSubcategories": [
+        "Azathioprine",
+        "Prednisolone / Methylprednisolone",
+        "Mycophenolate Mofetil (CellCept)",
+        "Salbutamol (Ventolin) – اسپری یا نبولایزر"
+      ],
+      "selectedDrugAllergySubcategories": [
+        "Lidocaine (موضعی)",
+        "Bupivacaine",
+        "Penicillin / Ampicillin / Amoxicillin",
+        "Cephalosporins: Cefalexin, Ceftriaxone, Cefepime"
+      ],
+      "selectedIcuAdmissionReasonSubcategories": [
+        "سندرم آنتی‌فسفولیپید شدید",
+        "بحران میاستنی (Myasthenic Crisis)",
+        "تشنج‌های مکرر یا استاتوس اپی‌لپتیکوس"
+      ],
+      "selectedPrimaryDiagnosis": "تروما و خونریزی شدید",
+      "selectedComorbidity": "بیماری‌های پوستی شدید",
+      "selectedComorbiditiesSubcategories": [],
+      "selectedSurgicalHistory": "جراحی‌های گوارشی",
+      "selectedMedication": "داروهای تنفسی",
+      "selectedDrugAllergy": "آنتی‌بیوتیک‌ها",
+      "selectedAllergySubcategories": [],
+      "selectedIcuAdmissionReason": "بیماری‌های مغز و اعصاب",
+      "selectedAdmissionReasonSubcategories": []
     }
   ]
 }

@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import FormContext from "./FormContext";
-import { Link } from "react-router-dom";
 
 function SecondPage() {
   const {
     formData,
-    postFormData, // Use your existing API function
+    postFormData,
     handleMainCategoryChange,
     handleCheckboxChange,
     isAnyError,
@@ -19,14 +18,12 @@ function SecondPage() {
       return;
     }
 
-    // Use your existing postFormData function
     const result = await postFormData();
-
     if (result.success) {
       alert("اطلاعات با موفقیت ارسال شد");
-      console.log("✅ Complete data sent to API:", formData);
+      console.log("✅ Submitted:", formData);
     } else {
-      alert("ارسال اطلاعات با خطا مواجه شد");
+      alert("❌ ارسال اطلاعات با خطا مواجه شد");
     }
   };
 
@@ -35,45 +32,44 @@ function SecondPage() {
       <h1>مرحله دوم</h1>
       <h2 className="h2-form">اطلاعات پزشکی بیمار</h2>
 
-      {/* ICU Reason Select */}
+      {/* ICU Reason */}
       <div className="input-group">
-        <label htmlFor="icu-reason">علت ارجاع به ICU</label>
+        <label>علت ارجاع به ICU</label>
         <select
-          name="icu-reason"
-          id="icu-reason"
-          value={def.selectedIcuReason}
+          value={formData.selectedIcuReason}
           onChange={(e) =>
             handleMainCategoryChange("IcuReason", e.target.value)
           }
           className="form-input"
         >
           <option value="">انتخاب کنید</option>
-          {def.baseIcuReason.map((item, index) => (
-            <option key={index} value={item.symptom}>
+          {def.baseIcuReason.map((item, i) => (
+            <option key={i} value={item.symptom}>
               {item.symptom}
             </option>
           ))}
         </select>
       </div>
 
-      {/* ICU Sub-reasons Checkboxes */}
-      {def.selectedIcuReason && (
+      {formData.selectedIcuReason && (
         <div className="checkbox-container">
           <h4>انتخاب علائم مرتبط:</h4>
           {def.baseIcuReason
-            .find((item) => item.symptom === def.selectedIcuReason)
-            ?.subSymptom.map((sub, index) => (
-              <div key={index} className="checkbox-item">
+            .find((item) => item.symptom === formData.selectedIcuReason)
+            ?.subSymptom.map((sub, i) => (
+              <div key={i} className="checkbox-item">
                 <input
                   type="checkbox"
-                  id={`subSymptom-${index}`}
+                  id={`icu-reason-${i}`}
                   value={sub}
-                  checked={def.selectedIcuSubReasons.includes(sub)}
+                  checked={formData.selectedIcuReasonSubcategories?.includes(
+                    sub
+                  )}
                   onChange={(e) =>
                     handleCheckboxChange("IcuReason", sub, e.target.checked)
                   }
                 />
-                <label htmlFor={`subSymptom-${index}`}>{sub}</label>
+                <label htmlFor={`icu-reason-${i}`}>{sub}</label>
               </div>
             ))}
         </div>
@@ -81,37 +77,39 @@ function SecondPage() {
 
       {/* Primary Diagnosis */}
       <div className="input-group">
-        <label htmlFor="firstDiagnosis">تشخیص اولیه پزشک</label>
+        <label>تشخیص اولیه پزشک</label>
         <select
-          id="firstDiagnosis"
-          value={def.selectedPrimaryDiagnosis}
+          value={formData.selectedPrimaryDiagnosis}
           onChange={(e) =>
             handleMainCategoryChange("PrimaryDiagnosis", e.target.value)
           }
           className="form-input"
         >
           <option value="">انتخاب کنید</option>
-          {def.firstDiagnosis.map((item, index) => (
-            <option key={index} value={item.diagnosis}>
+          {def.firstDiagnosis.map((item, i) => (
+            <option key={i} value={item.diagnosis}>
               {item.diagnosis}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Diagnosis Subcategories */}
-      {def.selectedPrimaryDiagnosis && (
+      {formData.selectedPrimaryDiagnosis && (
         <div className="checkbox-container">
-          <h4>انتخاب تشخیص‌های فرعی:</h4>
+          <h4>تشخیص‌های فرعی:</h4>
           {def.firstDiagnosis
-            .find((item) => item.diagnosis === def.selectedPrimaryDiagnosis)
-            ?.subDiagnosis.map((sub, index) => (
-              <div key={index} className="checkbox-item">
+            .find(
+              (item) => item.diagnosis === formData.selectedPrimaryDiagnosis
+            )
+            ?.subDiagnosis.map((sub, i) => (
+              <div key={i} className="checkbox-item">
                 <input
                   type="checkbox"
-                  id={`subDiagnosis-${index}`}
+                  id={`diag-${i}`}
                   value={sub}
-                  checked={def.selectedDiagnosisSubcategories.includes(sub)}
+                  checked={formData.selectedPrimaryDiagnosisSubcategories?.includes(
+                    sub
+                  )}
                   onChange={(e) =>
                     handleCheckboxChange(
                       "PrimaryDiagnosis",
@@ -120,7 +118,7 @@ function SecondPage() {
                     )
                   }
                 />
-                <label htmlFor={`subDiagnosis-${index}`}>{sub}</label>
+                <label htmlFor={`diag-${i}`}>{sub}</label>
               </div>
             ))}
         </div>
@@ -128,42 +126,42 @@ function SecondPage() {
 
       {/* Comorbidities */}
       <div className="input-group">
-        <label htmlFor="comorbidities">سابقه بیماری‌های زمینه‌ای</label>
+        <label>سابقه بیماری زمینه‌ای</label>
         <select
-          id="comorbidities"
-          value={def.selectedComorbidity}
+          value={formData.selectedComorbidity}
           onChange={(e) =>
             handleMainCategoryChange("Comorbidity", e.target.value)
           }
           className="form-input"
         >
           <option value="">انتخاب کنید</option>
-          {def.comorbidities.map((item, index) => (
-            <option key={index} value={item.comorbiditie}>
+          {def.comorbidities.map((item, i) => (
+            <option key={i} value={item.comorbiditie}>
               {item.comorbiditie}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Comorbidities Subcategories */}
-      {def.selectedComorbidity && (
+      {formData.selectedComorbidity && (
         <div className="checkbox-container">
-          <h4>انتخاب بیماری‌های زمینه‌ای:</h4>
+          <h4>بیماری‌های زمینه‌ای:</h4>
           {def.comorbidities
-            .find((item) => item.comorbiditie === def.selectedComorbidity)
-            ?.subComorbiditie.map((sub, index) => (
-              <div key={index} className="checkbox-item">
+            .find((item) => item.comorbiditie === formData.selectedComorbidity)
+            ?.subComorbiditie.map((sub, i) => (
+              <div key={i} className="checkbox-item">
                 <input
                   type="checkbox"
-                  id={`subComorbiditie-${index}`}
+                  id={`comorb-${i}`}
                   value={sub}
-                  checked={def.selectedComorbiditiesSubcategories.includes(sub)}
+                  checked={formData.selectedComorbiditySubcategories?.includes(
+                    sub
+                  )}
                   onChange={(e) =>
                     handleCheckboxChange("Comorbidity", sub, e.target.checked)
                   }
                 />
-                <label htmlFor={`subComorbiditie-${index}`}>{sub}</label>
+                <label htmlFor={`comorb-${i}`}>{sub}</label>
               </div>
             ))}
         </div>
@@ -171,37 +169,35 @@ function SecondPage() {
 
       {/* Surgical History */}
       <div className="input-group">
-        <label htmlFor="surgicalHistory">سوابق جراحی</label>
+        <label>سوابق جراحی</label>
         <select
-          id="surgicalHistory"
-          value={def.selectedSurgicalHistory}
+          value={formData.selectedSurgicalHistory}
           onChange={(e) =>
             handleMainCategoryChange("SurgicalHistory", e.target.value)
           }
           className="form-input"
         >
           <option value="">انتخاب کنید</option>
-          {def.surgicalHistories.map((item, index) => (
-            <option key={index} value={item.history}>
+          {def.surgicalHistories.map((item, i) => (
+            <option key={i} value={item.history}>
               {item.history}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Surgical History Subcategories */}
-      {def.selectedSurgicalHistory && (
+      {formData.selectedSurgicalHistory && (
         <div className="checkbox-container">
-          <h4>انتخاب سوابق جراحی:</h4>
+          <h4>جزئیات جراحی:</h4>
           {def.surgicalHistories
-            .find((item) => item.history === def.selectedSurgicalHistory)
-            ?.subHistory.map((sub, index) => (
-              <div key={index} className="checkbox-item">
+            .find((item) => item.history === formData.selectedSurgicalHistory)
+            ?.subHistory.map((sub, i) => (
+              <div key={i} className="checkbox-item">
                 <input
                   type="checkbox"
-                  id={`subSurgicalHistory-${index}`}
+                  id={`surg-${i}`}
                   value={sub}
-                  checked={def.selectedSurgicalHistorySubcategories.includes(
+                  checked={formData.selectedSurgicalHistorySubcategories?.includes(
                     sub
                   )}
                   onChange={(e) =>
@@ -212,7 +208,7 @@ function SecondPage() {
                     )
                   }
                 />
-                <label htmlFor={`subSurgicalHistory-${index}`}>{sub}</label>
+                <label htmlFor={`surg-${i}`}>{sub}</label>
               </div>
             ))}
         </div>
@@ -220,42 +216,42 @@ function SecondPage() {
 
       {/* Medications */}
       <div className="input-group">
-        <label htmlFor="usedDrugs">داروهای مصرفی</label>
+        <label>داروهای مصرفی</label>
         <select
-          id="usedDrugs"
-          value={def.selectedMedication}
+          value={formData.selectedMedication}
           onChange={(e) =>
             handleMainCategoryChange("Medication", e.target.value)
           }
           className="form-input"
         >
           <option value="">انتخاب کنید</option>
-          {def.usedDrugs.map((item, index) => (
-            <option key={index} value={item.drug}>
+          {def.usedDrugs.map((item, i) => (
+            <option key={i} value={item.drug}>
               {item.drug}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Medication Subcategories */}
-      {def.selectedMedication && (
+      {formData.selectedMedication && (
         <div className="checkbox-container">
-          <h4>انتخاب داروها:</h4>
+          <h4>داروها:</h4>
           {def.usedDrugs
-            .find((item) => item.drug === def.selectedMedication)
-            ?.subDrug.map((sub, index) => (
-              <div key={index} className="checkbox-item">
+            .find((item) => item.drug === formData.selectedMedication)
+            ?.subDrug.map((sub, i) => (
+              <div key={i} className="checkbox-item">
                 <input
                   type="checkbox"
-                  id={`subDrug-${index}`}
+                  id={`drug-${i}`}
                   value={sub}
-                  checked={def.selectedMedicationSubcategories.includes(sub)}
+                  checked={formData.selectedMedicationSubcategories?.includes(
+                    sub
+                  )}
                   onChange={(e) =>
                     handleCheckboxChange("Medication", sub, e.target.checked)
                   }
                 />
-                <label htmlFor={`subDrug-${index}`}>{sub}</label>
+                <label htmlFor={`drug-${i}`}>{sub}</label>
               </div>
             ))}
         </div>
@@ -263,80 +259,78 @@ function SecondPage() {
 
       {/* Drug Allergies */}
       <div className="input-group">
-        <label htmlFor="drugAllergies">آلرژی دارویی</label>
+        <label>آلرژی دارویی</label>
         <select
-          id="drugAllergies"
-          value={def.selectedDrugAllergy}
+          value={formData.selectedDrugAllergy}
           onChange={(e) =>
             handleMainCategoryChange("DrugAllergy", e.target.value)
           }
           className="form-input"
         >
           <option value="">انتخاب کنید</option>
-          {def.drugAllergies.map((item, index) => (
-            <option key={index} value={item.allergy}>
+          {def.drugAllergies.map((item, i) => (
+            <option key={i} value={item.allergy}>
               {item.allergy}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Allergy Subcategories */}
-      {def.selectedDrugAllergy && (
+      {formData.selectedDrugAllergy && (
         <div className="checkbox-container">
-          <h4>انتخاب آلرژی‌ها:</h4>
+          <h4>جزئیات آلرژی:</h4>
           {def.drugAllergies
-            .find((item) => item.allergy === def.selectedDrugAllergy)
-            ?.subAllergy.map((sub, index) => (
-              <div key={index} className="checkbox-item">
+            .find((item) => item.allergy === formData.selectedDrugAllergy)
+            ?.subAllergy.map((sub, i) => (
+              <div key={i} className="checkbox-item">
                 <input
                   type="checkbox"
-                  id={`subAllergy-${index}`}
+                  id={`allergy-${i}`}
                   value={sub}
-                  checked={def.selectedAllergySubcategories.includes(sub)}
+                  checked={formData.selectedDrugAllergySubcategories?.includes(
+                    sub
+                  )}
                   onChange={(e) =>
                     handleCheckboxChange("DrugAllergy", sub, e.target.checked)
                   }
                 />
-                <label htmlFor={`subAllergy-${index}`}>{sub}</label>
+                <label htmlFor={`allergy-${i}`}>{sub}</label>
               </div>
             ))}
         </div>
       )}
 
-      {/* ICU Admission Reasons */}
+      {/* ICU Admission Reason */}
       <div className="input-group">
-        <label htmlFor="icuAdmissionReasons">دلایل بستری در ICU</label>
+        <label>دلایل بستری ICU</label>
         <select
-          id="icuAdmissionReasons"
-          value={def.selectedIcuAdmissionReason}
+          value={formData.selectedIcuAdmissionReason}
           onChange={(e) =>
             handleMainCategoryChange("IcuAdmissionReason", e.target.value)
           }
           className="form-input"
         >
           <option value="">انتخاب کنید</option>
-          {def.icuAdmissionReasons.map((item, index) => (
-            <option key={index} value={item.reason}>
+          {def.icuAdmissionReasons.map((item, i) => (
+            <option key={i} value={item.reason}>
               {item.reason}
             </option>
           ))}
         </select>
       </div>
 
-      {/* ICU Admission Reason Subcategories */}
-      {def.selectedIcuAdmissionReason && (
+      {formData.selectedIcuAdmissionReason && (
         <div className="checkbox-container">
-          <h4>انتخاب دلایل بستری:</h4>
+          <h4>جزئیات بستری:</h4>
           {def.icuAdmissionReasons
-            .find((item) => item.reason === def.selectedIcuAdmissionReason)
-            ?.subReason.map((sub, index) => (
-              <div key={index} className="checkbox-item">
+            .find((item) => item.reason === formData.selectedIcuAdmissionReason)
+            ?.subReason.map((sub, i) => (
+              <div key={i} className="checkbox-item">
                 <input
                   type="checkbox"
-                  id={`subReason-${index}`}
+                  id={`icuadm-${i}`}
                   value={sub}
-                  checked={def.selectedAdmissionReasonSubcategories.includes(
+                  checked={formData.selectedIcuAdmissionReasonSubcategories?.includes(
                     sub
                   )}
                   onChange={(e) =>
@@ -347,7 +341,7 @@ function SecondPage() {
                     )
                   }
                 />
-                <label htmlFor={`subReason-${index}`}>{sub}</label>
+                <label htmlFor={`icuadm-${i}`}>{sub}</label>
               </div>
             ))}
         </div>

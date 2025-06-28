@@ -39,6 +39,7 @@ function FirstPage() {
     selectedMonth,
     handleDayChange,
     days,
+    def,
   } = useContext(FormContext);
 
   const navigate = useNavigate();
@@ -188,7 +189,7 @@ function FirstPage() {
           onChange={handleInputChange}
           className="form-input"
         >
-          {formData.insuranceCompanyOptions.map((item, i) => (
+          {def.insuranceCompanyOptions.map((item, i) => (
             <option key={i}>{item}</option>
           ))}
         </select>
