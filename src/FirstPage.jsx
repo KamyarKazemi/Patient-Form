@@ -1,183 +1,348 @@
-import { GoDot, GoDotFill } from "react-icons/go";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import FormContext from "./FormContext";
 
 function FirstPage() {
   const {
+    setYears,
     formData,
     handleInputChange,
     handleIdCode,
     handleName,
     handleAge,
     handlePhoneNumber,
-    handleHomePhoneNumber,
+    handleMedicalRecordNumber,
+    handleInsurancePolicyNumber,
+    handleEmergencyContactPhone,
+    handleSecondEmergencyContactPhone,
+    handleWeight,
+    handleHeight,
+    handleVitalSigns,
+    handleGlasgowComaScale,
+    handleApacheScore,
     idError,
-    ageError,
-    phoneError,
-    homePhoneError,
+    phoneNumberError,
+    medicalRecordError,
+    insuranceError,
+    emergencyContactError,
+    secondEmergencyContactError,
+    weightError,
+    heightError,
+    vitalSignsError,
+    glasgowError,
+    apacheError,
+    isAnyError,
+    handleYearChange,
+    years,
+    handleMonthChange,
+    months,
+    selectedMonth,
+    handleDayChange,
+    days,
+    def,
   } = useContext(FormContext);
 
+  const navigate = useNavigate();
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    if (isAnyError) {
+      alert("لطفا اطلاعات را به درستی وارد کنید!");
+      return;
+    }
+    navigate("/second");
+  };
+
+  useEffect(() => {
+    const yearList = [];
+    for (let y = 1300; y <= 1404; y++) yearList.push(y);
+    setYears(yearList);
+  }, []);
+
   return (
-    <>
-      <form className="container card" dir="rtl">
-        <h1>مرحله اول</h1>
-        <h1>اطلاعات هویتی بیمار</h1>
+    <form className="container card" onSubmit={handleForm}>
+      <h1>مرحله اول</h1>
+      <h2>اطلاعات هویتی بیمار</h2>
 
-        <div className="input-group">
-          <label htmlFor="firstName" className="form-label">
-            نام
-          </label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            className="form-input"
-            value={formData.firstName}
-            onChange={handleName}
-            required
-          />
-        </div>
+      <div className="input-group">
+        <label>نام</label>
+        <input
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleName}
+          className="form-input"
+          required
+        />
+      </div>
 
-        <div className="input-group">
-          <label htmlFor="lastName" className="form-label">
-            نام خانوادگی
-          </label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            className="form-input"
-            value={formData.lastName}
-            onChange={handleName}
-            required
-          />
-        </div>
+      <div className="input-group">
+        <label>نام خانوادگی</label>
+        <input
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleName}
+          className="form-input"
+          required
+        />
+      </div>
 
-        <div className="input-group">
-          <label htmlFor="idCode" className="form-label">
-            کد ملی
-          </label>
-          <input
-            type="text"
-            id="idCode"
-            name="idCode"
-            pattern="\d{10}"
-            inputMode="numeric"
-            maxLength={10}
-            className="form-input"
-            value={formData.idCode}
-            onChange={handleIdCode}
-            required
-          />
-          {idError && (
-            <div className="idError">
-              <p>کد ملی نامعتبر است</p>
-            </div>
-          )}
-        </div>
-
-        <div className="input-group">
-          <label htmlFor="age" className="form-label">
-            سن بیمار
-          </label>
-          <input
-            type="number"
-            id="age"
-            name="age"
-            className="form-input"
-            min="0"
-            max="130"
-            value={formData.age}
-            onChange={handleAge}
-            required
-          />
-          {ageError && (
-            <div className="idError">
-              <p>سن نامعتبر است</p>
-            </div>
-          )}
-        </div>
-
-        <div className="input-group">
-          <label htmlFor="phoneNumber" className="form-label">
-            شماره موبایل
-          </label>
-          <input
-            type="tel"
-            id="phoneNumber"
-            name="phoneNumber"
-            className="form-input"
-            value={formData.phoneNumber}
-            onChange={handlePhoneNumber}
-            required
-          />
-          {phoneError && (
-            <div className="idError">
-              <p>شماره موبایل نامعتبر است</p>
-            </div>
-          )}
-        </div>
-
-        <div className="input-group">
-          <label htmlFor="homePhoneNumber" className="form-label">
-            شماره تلفن ثابت
-          </label>
-          <input
-            type="tel"
-            id="homePhoneNumber"
-            name="homePhoneNumber"
-            className="form-input"
-            value={formData.homePhoneNumber}
-            onChange={handleHomePhoneNumber}
-            required
-          />
-          {homePhoneError && (
-            <div className="idError">
-              <p>شماره تلفن ثابت نامعتبر است</p>
-            </div>
-          )}
-        </div>
-
-        <div className="input-group">
-          <label className="form-label date-label">تاریخ تولد (شمسی)</label>
-
-          <div className="persian-date-container">
-            <select className="form-input date-select" required>
-              <option value="">سال</option>
-            </select>
-
-            <select className="form-input date-select" required>
-              <option value="">ماه</option>
-            </select>
-
-            <select className="form-input date-select" required disabled>
-              <option value="">روز</option>
-            </select>
+      <div className="input-group">
+        <label>کد ملی</label>
+        <input
+          name="idCode"
+          value={formData.idCode}
+          onChange={handleIdCode}
+          className="form-input"
+          required
+        />
+        {idError ? (
+          <div className="idError">
+            <p>کد ملی نامعتبر است</p>
           </div>
-        </div>
+        ) : null}
+      </div>
 
-        <div className="input-group">
-          <label htmlFor="fullAddress" className="form-label">
-            آدرس کامل
-          </label>
-          <textarea
-            id="fullAddress"
-            name="fullAddress"
-            className="form-input"
-            value={formData.fullAddress}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+      <div className="input-group">
+        <label>شماره پرونده پزشکی</label>
+        <input
+          name="medicalRecordNumber"
+          value={formData.medicalRecordNumber}
+          onChange={handleMedicalRecordNumber}
+          className="form-input"
+          required
+        />
+        {medicalRecordError ? (
+          <div className="idError">
+            <p>شماره پرونده پزشکی نامعتبر است</p>
+          </div>
+        ) : null}
+      </div>
 
-        <div>
-          <GoDot />
-          <GoDot />
-          <GoDotFill />
-        </div>
-      </form>
-    </>
+      <div className="input-group">
+        <label>سن</label>
+        <input
+          name="age"
+          value={formData.age}
+          onChange={handleAge}
+          className="form-input"
+          required
+        />
+      </div>
+
+      <div className="input-group">
+        <label>شماره تماس</label>
+        <input
+          name="phoneNumber"
+          value={formData.phoneNumber}
+          onChange={handlePhoneNumber}
+          className="form-input"
+          required
+        />
+        {phoneNumberError ? (
+          <div className="idError">
+            <p>شماره تماس نامعتبر است</p>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="input-group">
+        <label>تاریخ تولد (سال، ماه، روز)</label>
+        <select onChange={handleYearChange} className="form-input">
+          {years.map((y) => (
+            <option key={y}>{y}</option>
+          ))}
+        </select>
+        <select onChange={handleMonthChange} className="form-input">
+          {months.map((m, i) => (
+            <option key={i}>{m}</option>
+          ))}
+        </select>
+        <select
+          onChange={handleDayChange}
+          disabled={!selectedMonth}
+          className="form-input"
+        >
+          {days.map((d) => (
+            <option key={d}>{d}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="input-group">
+        <label>آدرس کامل</label>
+        <textarea
+          name="fullAddress"
+          value={formData.fullAddress}
+          onChange={handleInputChange}
+          className="form-input"
+          required
+        />
+      </div>
+
+      <h2>اطلاعات بیمه</h2>
+
+      <div className="input-group">
+        <label>شرکت بیمه</label>
+        <select
+          name="insuranceCompany"
+          value={formData.insuranceCompany}
+          onChange={handleInputChange}
+          className="form-input"
+        >
+          {def.insuranceCompanyOptions.map((item, i) => (
+            <option key={i}>{item}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="input-group">
+        <label>شماره بیمه‌نامه</label>
+        <input
+          name="insurancePolicyNumber"
+          value={formData.insurancePolicyNumber}
+          onChange={handleInsurancePolicyNumber}
+          className="form-input"
+        />
+        {insuranceError ? (
+          <div className="idError">
+            <p>شماره بیمه‌نامه باید 10 رقم باشد</p>
+          </div>
+        ) : null}
+      </div>
+
+      <h2>تماس اضطراری</h2>
+
+      <div className="input-group">
+        <label>نام تماس اضطراری</label>
+        <input
+          name="emergencyContactName"
+          value={formData.emergencyContactName}
+          onChange={handleInputChange}
+          className="form-input"
+        />
+      </div>
+
+      <div className="input-group">
+        <label>شماره تماس اضطراری</label>
+        <input
+          name="emergencyContactPhone"
+          value={formData.emergencyContactPhone}
+          onChange={handleEmergencyContactPhone}
+          className="form-input"
+        />
+        {emergencyContactError ? (
+          <div className="idError">
+            <p>شماره تماس اضطراری نامعتبر است</p>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="input-group">
+        <label>شماره تماس اضطراری دوم</label>
+        <input
+          name="secondEmergencyContactPhone"
+          value={formData.secondEmergencyContactPhone}
+          onChange={handleSecondEmergencyContactPhone}
+          className="form-input"
+        />
+        {secondEmergencyContactError ? (
+          <div className="idError">
+            <p>شماره تماس اضطراری نامعتبر است</p>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="input-group">
+        <label>آدرس تماس اضطراری</label>
+        <textarea
+          name="emergencyContactAddress"
+          value={formData.emergencyContactAddress}
+          onChange={handleInputChange}
+          className="form-input"
+        />
+      </div>
+
+      <h2>ارزیابی بالینی</h2>
+
+      <div className="input-group">
+        <label>وزن پذیرش</label>
+        <input
+          name="admissionWeight"
+          value={formData.admissionWeight}
+          onChange={handleWeight}
+          className="form-input"
+        />
+        {weightError ? (
+          <div className="idError">
+            <p>وزن نامعتبر است</p>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="input-group">
+        <label>قد پذیرش</label>
+        <input
+          name="admissionHeight"
+          value={formData.admissionHeight}
+          onChange={handleHeight}
+          className="form-input"
+        />
+        {heightError ? (
+          <div className="idError">
+            <p>قد نامعتبر است</p>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="input-group">
+        <label>علائم حیاتی</label>
+        <textarea
+          name="vitalSignsOnAdmission"
+          value={formData.vitalSignsOnAdmission}
+          onChange={handleVitalSigns}
+          className="form-input"
+        />
+        {vitalSignsError ? (
+          <div className="idError">
+            <p>علائم حیاتی باید کامل باشد</p>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="input-group">
+        <label>GCS</label>
+        <input
+          name="glasgowComaScale"
+          value={formData.glasgowComaScale}
+          onChange={handleGlasgowComaScale}
+          className="form-input"
+        />
+        {glasgowError ? (
+          <div className="idError">
+            <p>مقیاس GCS باید بین 3 تا 15 باشد</p>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="input-group">
+        <label>APACHE II</label>
+        <input
+          name="apacheScore"
+          value={formData.apacheScore}
+          onChange={handleApacheScore}
+          className="form-input"
+        />
+        {apacheError ? (
+          <div className="idError">
+            <p>امتیاز APACHE II باید بین 0 تا 71 باشد</p>
+          </div>
+        ) : null}
+      </div>
+
+      <button type="submit" className="form-button">
+        مرحله بعد
+      </button>
+    </form>
   );
 }
 

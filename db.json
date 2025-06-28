@@ -1,12 +1,104 @@
 {
   "PatientInformation": [
     {
-      "id": "9e8d",
-      "formData": "دلایل کلیوی (Renal Causes)"
+      "id": "4a54",
+      "firstName": "hdgf",
+      "lastName": "mad",
+      "idCode": "1111111111",
+      "medicalRecordNumber": "4444",
+      "age": "3",
+      "phoneNumber": "09301641943",
+      "birthDate": "1316//17",
+      "fullAddress": "dd",
+      "insuranceCompany": "نیروهای مسلح",
+      "insurancePolicyNumber": "5555555555",
+      "emergencyContactName": "e",
+      "emergencyContactPhone": "9174444444",
+      "secondEmergencyContactPhone": "9176666666",
+      "emergencyContactAddress": "dd",
+      "admissionWeight": "4",
+      "admissionHeight": "5",
+      "vitalSignsOnAdmission": "f",
+      "glasgowComaScale": "5",
+      "apacheScore": "5",
+      "selectedIcuReason": "دلایل قلبی‌عروقی (Cardiovascular Causes)",
+      "selectedIcuReasonSubcategories": [
+        "سکته قلبی حاد وسیع (Massive Myocardial Infarction)"
+      ],
+      "selectedPrimaryDiagnosis": "معیارهای قلبی‌عروقی",
+      "selectedPrimaryDiagnosisSubcategories": [
+        "شوک (سردی اندام، تاخیر پرشدن مویرگی، فشار پایین)"
+      ],
+      "selectedComorbidity": "بیماری‌های عفونی مزمن",
+      "selectedComorbiditySubcategories": [
+        "HIV/AIDS"
+      ],
+      "selectedSurgicalHistory": " جراحی‌های چشم",
+      "selectedSurgicalHistorySubcategories": [
+        "عمل آب مروارید (Cataract Surgery)"
+      ],
+      "selectedMedication": "داروهای دیگر مهم و خاص",
+      "selectedMedicationSubcategories": [
+        "IVIG (ایمونوگلوبولین تزریقی) – در بیماری‌های خودایمنی"
+      ],
+      "selectedDrugAllergy": "بی‌حس‌کننده‌ها و بیهوشی",
+      "selectedDrugAllergySubcategories": [
+        "Midazolam / Diazepam (بیشتر حساسیت‌های خفیف یا واکنش‌های شبه آلرژیک)"
+      ],
+      "selectedIcuAdmissionReason": "وضعیت‌های خاص و نادر",
+      "selectedIcuAdmissionReasonSubcategories": [
+        "بحران میاستنی (Myasthenic Crisis)"
+      ]
     },
     {
-      "id": "9ee0",
-      "formData": ""
+      "id": "b182",
+      "firstName": "کامیار",
+      "lastName": "mad",
+      "idCode": "1111111111",
+      "medicalRecordNumber": "4444",
+      "age": "3",
+      "phoneNumber": "09301641943",
+      "birthDate": "1316//17",
+      "fullAddress": "dd",
+      "insuranceCompany": "نیروهای مسلح",
+      "insurancePolicyNumber": "5555555555",
+      "emergencyContactName": "e",
+      "emergencyContactPhone": "9174444444",
+      "secondEmergencyContactPhone": "9176666666",
+      "emergencyContactAddress": "dd",
+      "admissionWeight": "4",
+      "admissionHeight": "5",
+      "vitalSignsOnAdmission": "f",
+      "glasgowComaScale": "5",
+      "apacheScore": "5",
+      "selectedIcuReason": "دلایل قلبی‌عروقی (Cardiovascular Causes)",
+      "selectedIcuReasonSubcategories": [
+        "سکته قلبی حاد وسیع (Massive Myocardial Infarction)"
+      ],
+      "selectedPrimaryDiagnosis": "معیارهای قلبی‌عروقی",
+      "selectedPrimaryDiagnosisSubcategories": [
+        "شوک (سردی اندام، تاخیر پرشدن مویرگی، فشار پایین)"
+      ],
+      "selectedComorbidity": "بیماری‌های عفونی مزمن",
+      "selectedComorbiditySubcategories": [
+        "HIV/AIDS"
+      ],
+      "selectedSurgicalHistory": " جراحی‌های چشم",
+      "selectedSurgicalHistorySubcategories": [
+        "عمل آب مروارید (Cataract Surgery)"
+      ],
+      "selectedMedication": "داروهای دیگر مهم و خاص",
+      "selectedMedicationSubcategories": [
+        "IVIG (ایمونوگلوبولین تزریقی) – در بیماری‌های خودایمنی"
+      ],
+      "selectedDrugAllergy": "بی‌حس‌کننده‌ها و بیهوشی",
+      "selectedDrugAllergySubcategories": [
+        "Midazolam / Diazepam (بیشتر حساسیت‌های خفیف یا واکنش‌های شبه آلرژیک)"
+      ],
+      "selectedIcuAdmissionReason": "وضعیت‌های خاص و نادر",
+      "selectedIcuAdmissionReasonSubcategories": [
+        "بحران میاستنی (Myasthenic Crisis)"
+      ]
     }
   ]
 }
