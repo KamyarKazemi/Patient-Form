@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import axios from "axios";
-import { addPatientToStorage } from "./utils/exportToExcel";
 
 const FormContext = createContext();
 
@@ -952,7 +951,6 @@ function Provider({ children }) {
   const [vitalSignsError, setVitalSignsError] = useState(false);
   const [glasgowError, setGlasgowError] = useState(false);
   const [apacheError, setApacheError] = useState(false);
-  const [ageError, setAgeError] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -989,7 +987,7 @@ function Provider({ children }) {
   const handleAge = (e) => {
     const cleaned = e.target.value.replace(/\D/g, "").slice(0, 3);
     const age = parseInt(cleaned, 10);
-    setAgeError(age <= 0 || age > 120);
+    setIsAnyError(age < 0 || age > 120);
     setFormData((prev) => ({ ...prev, age: cleaned }));
   };
 
@@ -1019,13 +1017,13 @@ function Provider({ children }) {
 
   const handleWeight = (e) => {
     const value = e.target.value;
-    setWeightError(value <= 0 || value > 500);
+    setWeightError(value < 0 || value > 500);
     setFormData((prev) => ({ ...prev, admissionWeight: value }));
   };
 
   const handleHeight = (e) => {
     const value = e.target.value;
-    setHeightError(value <= 0 || value > 300);
+    setHeightError(value < 0 || value > 300);
     setFormData((prev) => ({ ...prev, admissionHeight: value }));
   };
 
@@ -1036,24 +1034,15 @@ function Provider({ children }) {
   };
 
   const handleGlasgowComaScale = (e) => {
-    const val = e.target.value.replace(/\D/g, "");
-
+    const val = (e.target.value, 10);
     setGlasgowError(val < 3 || val > 15);
     setFormData((prev) => ({ ...prev, glasgowComaScale: val }));
   };
 
   const handleApacheScore = (e) => {
-    const val = e.target.value.replace(/\D/g, "");
+    const val = (e.target.value, 10);
     setApacheError(val < 0 || val > 71);
     setFormData((prev) => ({ ...prev, apacheScore: val }));
-  };
-
-  const handleEmergencyContactName = (e) => {
-    const cleaned = e.target.value.replace(/[0-9]/g, "");
-    setFormData((prev) => ({
-      ...prev,
-      emergencyContactName: cleaned,
-    }));
   };
 
   const [years, setYears] = useState([]);
@@ -1078,41 +1067,20 @@ function Provider({ children }) {
     const year = e.target.value;
     setFormData((prev) => ({
       ...prev,
-      birthDate: `${year}/${selectedMonth || ""}/${
-        prev.birthDate?.split("/")?.[2] || ""
-      }`,
+      birthDate: `${year}/${selectedMonth || ""}`,
     }));
   };
 
   const handleMonthChange = (e) => {
-    const monthName = e.target.value;
-    setSelectedMonth(monthName);
-
-    const daysInPersianMonth = {
-      فروردین: 31,
-      اردیبهشت: 31,
-      خرداد: 31,
-      تیر: 31,
-      مرداد: 31,
-      شهریور: 31,
-      مهر: 30,
-      آبان: 30,
-      آذر: 30,
-      دی: 30,
-      بهمن: 30,
-      اسفند: 29, // optionally 30 in leap years — skip that logic for now
-    };
-
-    const daysCount = daysInPersianMonth[monthName] || 0;
-    setDays(Array.from({ length: daysCount }, (_, i) => i + 1));
+    const month = e.target.value;
+    setSelectedMonth(month);
+    const daysInMonth = month <= 6 ? 31 : month <= 11 ? 30 : 29;
+    setDays(Array.from({ length: daysInMonth }, (_, i) => i + 1));
   };
 
   const handleDayChange = (e) => {
     const day = e.target.value;
-    setFormData((prev) => {
-      const [year = "", month = ""] = prev.birthDate?.split("/") || [];
-      return { ...prev, birthDate: `${year}/${month}/${day}` };
-    });
+    setFormData((prev) => ({ ...prev, birthDate: `${prev.birthDate}/${day}` }));
   };
 
   const handleCheckboxChange = (category, value, isChecked) => {
@@ -1141,200 +1109,20 @@ function Provider({ children }) {
     }));
   };
 
-  // const postFormData = async () => {
-  //   try {
-  //     const {
-  //       firstName,
-  //       lastName,
-  //       idCode,
-  //       medicalRecordNumber,
-  //       age,
-  //       phoneNumber,
-  //       birthDate,
-  //       fullAddress,
-  //       insuranceCompany,
-  //       insurancePolicyNumber,
-  //       emergencyContactName,
-  //       emergencyContactPhone,
-  //       secondEmergencyContactPhone,
-  //       emergencyContactAddress,
-  //       admissionWeight,
-  //       admissionHeight,
-  //       vitalSignsOnAdmission,
-  //       glasgowComaScale,
-  //       apacheScore,
-
-  //       selectedIcuReason,
-  //       selectedIcuReasonSubcategories,
-  //       selectedPrimaryDiagnosis,
-  //       selectedPrimaryDiagnosisSubcategories,
-  //       selectedComorbidity,
-  //       selectedComorbiditySubcategories,
-  //       selectedSurgicalHistory,
-  //       selectedSurgicalHistorySubcategories,
-  //       selectedMedication,
-  //       selectedMedicationSubcategories,
-  //       selectedDrugAllergy,
-  //       selectedDrugAllergySubcategories,
-  //       selectedIcuAdmissionReason,
-  //       selectedIcuAdmissionReasonSubcategories,
-  //     } = formData;
-
-  //     const cleaned = {
-  //       firstName,
-  //       lastName,
-  //       idCode,
-  //       medicalRecordNumber,
-  //       age,
-  //       phoneNumber,
-  //       birthDate,
-  //       fullAddress,
-  //       insuranceCompany,
-  //       insurancePolicyNumber,
-  //       emergencyContactName,
-  //       emergencyContactPhone,
-  //       secondEmergencyContactPhone,
-  //       emergencyContactAddress,
-  //       admissionWeight,
-  //       admissionHeight,
-  //       vitalSignsOnAdmission,
-  //       glasgowComaScale,
-  //       apacheScore,
-  //       selectedIcuReason,
-  //       selectedIcuReasonSubcategories,
-  //       selectedPrimaryDiagnosis,
-  //       selectedPrimaryDiagnosisSubcategories,
-  //       selectedComorbidity,
-  //       selectedComorbiditySubcategories,
-  //       selectedSurgicalHistory,
-  //       selectedSurgicalHistorySubcategories,
-  //       selectedMedication,
-  //       selectedMedicationSubcategories,
-  //       selectedDrugAllergy,
-  //       selectedDrugAllergySubcategories,
-  //       selectedIcuAdmissionReason,
-  //       selectedIcuAdmissionReasonSubcategories,
-  //     };
-
-  //     const response = await axios.post(
-  //       "http://localhost:3001/PatientInformation",
-  //       cleaned
-  //     );
-  //     console.log("✅ Data submitted successfully:", response.data);
-  //     return { success: true };
-  //   } catch (error) {
-  //     console.error("❌ Submission failed:", error);
-  //     return { success: false, error };
-  //   }
-  // };
-
   const postFormData = async () => {
     try {
-      const {
-        firstName,
-        lastName,
-        idCode,
-        medicalRecordNumber,
-        age,
-        phoneNumber,
-        birthDate,
-        fullAddress,
-        insuranceCompany,
-        insurancePolicyNumber,
-        emergencyContactName,
-        emergencyContactPhone,
-        secondEmergencyContactPhone,
-        emergencyContactAddress,
-        admissionWeight,
-        admissionHeight,
-        vitalSignsOnAdmission,
-        glasgowComaScale,
-        apacheScore,
-
-        selectedIcuReason,
-        selectedIcuReasonSubcategories,
-        selectedPrimaryDiagnosis,
-        selectedPrimaryDiagnosisSubcategories,
-        selectedComorbidity,
-        selectedComorbiditySubcategories,
-        selectedSurgicalHistory,
-        selectedSurgicalHistorySubcategories,
-        selectedMedication,
-        selectedMedicationSubcategories,
-        selectedDrugAllergy,
-        selectedDrugAllergySubcategories,
-        selectedIcuAdmissionReason,
-        selectedIcuAdmissionReasonSubcategories,
-      } = formData;
-
-      const cleaned = {
-        firstName,
-        lastName,
-        idCode,
-        medicalRecordNumber,
-        age,
-        phoneNumber,
-        birthDate,
-        fullAddress,
-        insuranceCompany,
-        insurancePolicyNumber,
-        emergencyContactName,
-        emergencyContactPhone,
-        secondEmergencyContactPhone,
-        emergencyContactAddress,
-        admissionWeight,
-        admissionHeight,
-        vitalSignsOnAdmission,
-        glasgowComaScale,
-        apacheScore,
-
-        selectedIcuReason,
-        selectedIcuReasonSubcategories,
-        selectedPrimaryDiagnosis,
-        selectedPrimaryDiagnosisSubcategories,
-        selectedComorbidity,
-        selectedComorbiditySubcategories,
-        selectedSurgicalHistory,
-        selectedSurgicalHistorySubcategories,
-        selectedMedication,
-        selectedMedicationSubcategories,
-        selectedDrugAllergy,
-        selectedDrugAllergySubcategories,
-        selectedIcuAdmissionReason,
-        selectedIcuAdmissionReasonSubcategories,
-      };
-
       const response = await axios.post(
-        "http://localhost:3001/PatientInformation",
-        cleaned
+        "https://KamyarKazemi.github.io/PatientInformation",
+        formData
       );
-
       console.log("✅ Data submitted successfully:", response.data);
-
-      // ✅ Save to Excel after post
-      addPatientToStorage(cleaned);
-
       return { success: true };
     } catch (error) {
       console.error("❌ Submission failed:", error);
       return { success: false, error };
     }
   };
-
-  const hasErrors =
-    idError ||
-    phoneNumberError ||
-    medicalRecordError ||
-    insuranceError ||
-    emergencyContactError ||
-    secondEmergencyContactError ||
-    weightError ||
-    heightError ||
-    vitalSignsError ||
-    glasgowError ||
-    apacheError ||
-    ageError;
-
+  //hello
   return (
     <FormContext.Provider
       value={{
@@ -1378,10 +1166,6 @@ function Provider({ children }) {
         handleCheckboxChange,
         handleMainCategoryChange,
         def,
-        ageError,
-        handleEmergencyContactName,
-        setIsAnyError,
-        hasErrors,
       }}
     >
       {children}
