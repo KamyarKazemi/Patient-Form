@@ -31,7 +31,6 @@ function FirstPage() {
     vitalSignsError,
     glasgowError,
     apacheError,
-    isAnyError,
     handleYearChange,
     years,
     handleMonthChange,
@@ -40,13 +39,17 @@ function FirstPage() {
     handleDayChange,
     days,
     def,
+    ageError,
+    hasErrors,
+    setIsAnyError,
   } = useContext(FormContext);
 
   const navigate = useNavigate();
 
   const handleForm = (e) => {
     e.preventDefault();
-    if (isAnyError) {
+    if (hasErrors) {
+      setIsAnyError(true);
       alert("لطفا اطلاعات را به درستی وارد کنید!");
       return;
     }
@@ -127,6 +130,11 @@ function FirstPage() {
           className="form-input"
           required
         />
+        {ageError ? (
+          <div className="idError">
+            <p>سن نامعتبر است</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">

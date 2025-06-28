@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import axios from "axios";
+import { addPatientToStorage } from "./utils/exportToExcel";
 
 const FormContext = createContext();
 
@@ -879,9 +880,10 @@ function Provider({ children }) {
       "تامین اجتماعی",
       "خدمات درمانی",
       "نیروهای مسلح",
-      "امام خمینی",
+      "کمیته امام خمینی",
       "بیمه خصوصی",
       "فاقد بیمه",
+      "سلامت ایرانیان",
     ],
 
     // Emergency Contact
@@ -940,6 +942,7 @@ function Provider({ children }) {
 
   const [isAnyError, setIsAnyError] = useState(false);
   const [idError, setIdError] = useState(false);
+  const [ageError, setAgeError] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [medicalRecordError, setMedicalRecordError] = useState(false);
   const [insuranceError, setInsuranceError] = useState(false);
@@ -987,7 +990,8 @@ function Provider({ children }) {
   const handleAge = (e) => {
     const cleaned = e.target.value.replace(/\D/g, "").slice(0, 3);
     const age = parseInt(cleaned, 10);
-    setIsAnyError(age < 0 || age > 120);
+    setIsAnyError(age <= 0 || age > 120);
+    setAgeError(age <= 0 || age > 120);
     setFormData((prev) => ({ ...prev, age: cleaned }));
   };
 
@@ -1017,13 +1021,13 @@ function Provider({ children }) {
 
   const handleWeight = (e) => {
     const value = e.target.value;
-    setWeightError(value < 0 || value > 500);
+    setWeightError(value <= 0 || value > 500);
     setFormData((prev) => ({ ...prev, admissionWeight: value }));
   };
 
   const handleHeight = (e) => {
     const value = e.target.value;
-    setHeightError(value < 0 || value > 300);
+    setHeightError(value <= 0 || value > 300);
     setFormData((prev) => ({ ...prev, admissionHeight: value }));
   };
 
@@ -1034,13 +1038,13 @@ function Provider({ children }) {
   };
 
   const handleGlasgowComaScale = (e) => {
-    const val = (e.target.value, 10);
+    const val = e.target.value;
     setGlasgowError(val < 3 || val > 15);
     setFormData((prev) => ({ ...prev, glasgowComaScale: val }));
   };
 
   const handleApacheScore = (e) => {
-    const val = (e.target.value, 10);
+    const val = e.target.value;
     setApacheError(val < 0 || val > 71);
     setFormData((prev) => ({ ...prev, apacheScore: val }));
   };
@@ -1067,20 +1071,41 @@ function Provider({ children }) {
     const year = e.target.value;
     setFormData((prev) => ({
       ...prev,
-      birthDate: `${year}/${selectedMonth || ""}`,
+      birthDate: `${year}/${selectedMonth || ""}/${
+        prev.birthDate?.split("/")?.[2] || ""
+      }`,
     }));
   };
 
   const handleMonthChange = (e) => {
-    const month = e.target.value;
-    setSelectedMonth(month);
-    const daysInMonth = month <= 6 ? 31 : month <= 11 ? 30 : 29;
-    setDays(Array.from({ length: daysInMonth }, (_, i) => i + 1));
+    const monthName = e.target.value;
+    setSelectedMonth(monthName);
+
+    const daysInPersianMonth = {
+      فروردین: 31,
+      اردیبهشت: 31,
+      خرداد: 31,
+      تیر: 31,
+      مرداد: 31,
+      شهریور: 31,
+      مهر: 30,
+      آبان: 30,
+      آذر: 30,
+      دی: 30,
+      بهمن: 30,
+      اسفند: 29, // optionally 30 in leap years — skip that logic for now
+    };
+
+    const daysCount = daysInPersianMonth[monthName] || 0;
+    setDays(Array.from({ length: daysCount }, (_, i) => i + 1));
   };
 
   const handleDayChange = (e) => {
     const day = e.target.value;
-    setFormData((prev) => ({ ...prev, birthDate: `${prev.birthDate}/${day}` }));
+    setFormData((prev) => {
+      const [year = "", month = ""] = prev.birthDate?.split("/") || [];
+      return { ...prev, birthDate: `${year}/${month}/${day}` };
+    });
   };
 
   const handleCheckboxChange = (category, value, isChecked) => {
@@ -1109,13 +1134,28 @@ function Provider({ children }) {
     }));
   };
 
+  const hasErrors =
+    idError ||
+    phoneNumberError ||
+    medicalRecordError ||
+    insuranceError ||
+    emergencyContactError ||
+    secondEmergencyContactError ||
+    weightError ||
+    heightError ||
+    vitalSignsError ||
+    glasgowError ||
+    apacheError ||
+    ageError;
+
   const postFormData = async () => {
     try {
       const response = await axios.post(
-        "https://KamyarKazemi.github.io/PatientInformation",
+        "http://localhost:3001/PatientInformation",
         formData
       );
       console.log("✅ Data submitted successfully:", response.data);
+      addPatientToStorage(formData);
       return { success: true };
     } catch (error) {
       console.error("❌ Submission failed:", error);
@@ -1167,6 +1207,9 @@ function Provider({ children }) {
         handleCheckboxChange,
         handleMainCategoryChange,
         def,
+        ageError,
+        hasErrors,
+        setIsAnyError,
       }}
     >
       {children}

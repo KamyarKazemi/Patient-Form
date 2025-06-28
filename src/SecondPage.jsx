@@ -138,7 +138,7 @@ function SecondPage() {
             }
             className="form-input"
           >
-            <option value="">انتخاب کنید</option>
+            <option value="">ندارد</option>
             {def.comorbidities.map((item, i) => (
               <option key={i} value={item.comorbiditie}>
                 {item.comorbiditie}
@@ -183,7 +183,7 @@ function SecondPage() {
             }
             className="form-input"
           >
-            <option value="">انتخاب کنید</option>
+            <option value="">ندارد</option>
             {def.surgicalHistories.map((item, i) => (
               <option key={i} value={item.history}>
                 {item.history}
@@ -230,7 +230,7 @@ function SecondPage() {
             }
             className="form-input"
           >
-            <option value="">انتخاب کنید</option>
+            <option value="">ندارد</option>
             {def.usedDrugs.map((item, i) => (
               <option key={i} value={item.drug}>
                 {item.drug}
@@ -273,7 +273,7 @@ function SecondPage() {
             }
             className="form-input"
           >
-            <option value="">انتخاب کنید</option>
+            <option value="">ندارد</option>
             {def.drugAllergies.map((item, i) => (
               <option key={i} value={item.allergy}>
                 {item.allergy}

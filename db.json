@@ -29,7 +29,9 @@
         "شوک (سردی اندام، تاخیر پرشدن مویرگی، فشار پایین)"
       ],
       "selectedComorbidity": "بیماری‌های عفونی مزمن",
-      "selectedComorbiditySubcategories": ["HIV/AIDS"],
+      "selectedComorbiditySubcategories": [
+        "HIV/AIDS"
+      ],
       "selectedSurgicalHistory": " جراحی‌های چشم",
       "selectedSurgicalHistorySubcategories": [
         "عمل آب مروارید (Cataract Surgery)"
@@ -77,7 +79,9 @@
         "شوک (سردی اندام، تاخیر پرشدن مویرگی، فشار پایین)"
       ],
       "selectedComorbidity": "بیماری‌های عفونی مزمن",
-      "selectedComorbiditySubcategories": ["HIV/AIDS"],
+      "selectedComorbiditySubcategories": [
+        "HIV/AIDS"
+      ],
       "selectedSurgicalHistory": " جراحی‌های چشم",
       "selectedSurgicalHistorySubcategories": [
         "عمل آب مروارید (Cataract Surgery)"
@@ -94,6 +98,91 @@
       "selectedIcuAdmissionReasonSubcategories": [
         "بحران میاستنی (Myasthenic Crisis)"
       ]
+    },
+    {
+      "id": "685c",
+      "firstName": "",
+      "lastName": "",
+      "idCode": "",
+      "medicalRecordNumber": "",
+      "age": "",
+      "phoneNumber": "",
+      "birthDate": "",
+      "fullAddress": "",
+      "insuranceCompany": "",
+      "insurancePolicyNumber": "",
+      "emergencyContactName": "",
+      "emergencyContactPhone": "",
+      "secondEmergencyContactPhone": "",
+      "emergencyContactAddress": "",
+      "admissionWeight": "",
+      "admissionHeight": "",
+      "vitalSignsOnAdmission": "",
+      "glasgowComaScale": "",
+      "apacheScore": "",
+      "selectedIcuReason": "",
+      "selectedIcuSubReasons": [],
+      "selectedIcuReasonSubcategories": [],
+      "selectedPrimaryDiagnosisSubcategories": [],
+      "selectedComorbiditySubcategories": [],
+      "selectedSurgicalHistorySubcategories": [],
+      "selectedMedicationSubcategories": [],
+      "selectedDrugAllergySubcategories": [],
+      "selectedIcuAdmissionReasonSubcategories": [
+        "بحران میاستنی (Myasthenic Crisis)"
+      ],
+      "selectedPrimaryDiagnosis": "",
+      "selectedComorbidity": "",
+      "selectedComorbiditiesSubcategories": [],
+      "selectedSurgicalHistory": "",
+      "selectedMedication": "",
+      "selectedDrugAllergy": "",
+      "selectedAllergySubcategories": [],
+      "selectedIcuAdmissionReason": "وضعیت‌های خاص و نادر",
+      "selectedAdmissionReasonSubcategories": []
+    },
+    {
+      "id": "dd44",
+      "firstName": "",
+      "lastName": "",
+      "idCode": "",
+      "medicalRecordNumber": "",
+      "age": "",
+      "phoneNumber": "",
+      "birthDate": "",
+      "fullAddress": "",
+      "insuranceCompany": "",
+      "insurancePolicyNumber": "",
+      "emergencyContactName": "",
+      "emergencyContactPhone": "",
+      "secondEmergencyContactPhone": "",
+      "emergencyContactAddress": "",
+      "admissionWeight": "",
+      "admissionHeight": "",
+      "vitalSignsOnAdmission": "",
+      "glasgowComaScale": "",
+      "apacheScore": "",
+      "selectedIcuReason": "",
+      "selectedIcuSubReasons": [],
+      "selectedIcuReasonSubcategories": [],
+      "selectedPrimaryDiagnosisSubcategories": [],
+      "selectedComorbiditySubcategories": [],
+      "selectedSurgicalHistorySubcategories": [],
+      "selectedMedicationSubcategories": [],
+      "selectedDrugAllergySubcategories": [],
+      "selectedIcuAdmissionReasonSubcategories": [
+        "بحران میاستنی (Myasthenic Crisis)",
+        "نارسایی کبدی حاد (Acute Liver Failure)"
+      ],
+      "selectedPrimaryDiagnosis": "",
+      "selectedComorbidity": "",
+      "selectedComorbiditiesSubcategories": [],
+      "selectedSurgicalHistory": "",
+      "selectedMedication": "",
+      "selectedDrugAllergy": "",
+      "selectedAllergySubcategories": [],
+      "selectedIcuAdmissionReason": "وضعیت‌های خاص و نادر",
+      "selectedAdmissionReasonSubcategories": []
     }
   ]
 }
