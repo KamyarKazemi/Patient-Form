@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import FormContext from "./FormContext";
 
@@ -42,6 +42,8 @@ function FirstPage() {
     ageError,
     hasErrors,
     setIsAnyError,
+    handleEmergencyContactName,
+    emergancyContactNameError,
   } = useContext(FormContext);
 
   const navigate = useNavigate();
@@ -68,7 +70,7 @@ function FirstPage() {
       <h2>اطلاعات هویتی بیمار</h2>
 
       <div className="input-group">
-        <label>نام</label>
+        <label className="form-label">نام</label>
         <input
           name="firstName"
           value={formData.firstName}
@@ -79,7 +81,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>نام خانوادگی</label>
+        <label className="form-label">نام خانوادگی</label>
         <input
           name="lastName"
           value={formData.lastName}
@@ -90,7 +92,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>کد ملی</label>
+        <label className="form-label">کد ملی</label>
         <input
           name="idCode"
           value={formData.idCode}
@@ -100,13 +102,13 @@ function FirstPage() {
         />
         {idError ? (
           <div className="idError">
-            <p>کد ملی نامعتبر است</p>
+            <p>کد ملی باید 10 رقم باشد</p>
           </div>
         ) : null}
       </div>
 
       <div className="input-group">
-        <label>شماره پرونده پزشکی</label>
+        <label className="form-label">شماره پرونده پزشکی</label>
         <input
           name="medicalRecordNumber"
           value={formData.medicalRecordNumber}
@@ -122,7 +124,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>سن</label>
+        <label className="form-label">سن</label>
         <input
           name="age"
           value={formData.age}
@@ -138,7 +140,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>شماره تماس</label>
+        <label className="form-label">شماره تماس</label>
         <input
           name="phoneNumber"
           value={formData.phoneNumber}
@@ -154,7 +156,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>تاریخ تولد (سال، ماه، روز)</label>
+        <label className="form-label-2">تاریخ تولد (سال، ماه، روز)</label>
         <select onChange={handleYearChange} className="form-input">
           {years.map((y) => (
             <option key={y}>{y}</option>
@@ -177,7 +179,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>آدرس کامل</label>
+        <label className="form-label">آدرس کامل</label>
         <textarea
           name="fullAddress"
           value={formData.fullAddress}
@@ -190,7 +192,7 @@ function FirstPage() {
       <h2>اطلاعات بیمه</h2>
 
       <div className="input-group">
-        <label>شرکت بیمه</label>
+        <label className="form-label">شرکت بیمه</label>
         <select
           name="insuranceCompany"
           value={formData.insuranceCompany}
@@ -204,7 +206,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>شماره بیمه‌نامه</label>
+        <label className="form-label">شماره بیمه‌نامه</label>
         <input
           name="insurancePolicyNumber"
           value={formData.insurancePolicyNumber}
@@ -221,17 +223,22 @@ function FirstPage() {
       <h2>تماس اضطراری</h2>
 
       <div className="input-group">
-        <label>نام تماس اضطراری</label>
+        <label className="form-label">نام تماس اضطراری</label>
         <input
           name="emergencyContactName"
           value={formData.emergencyContactName}
-          onChange={handleInputChange}
+          onChange={handleEmergencyContactName}
           className="form-input"
         />
+        {emergancyContactNameError ? (
+          <div className="idError">
+            <p>نا معتبر</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="input-group">
-        <label>شماره تماس اضطراری</label>
+        <label className="form-label">شماره تماس اضطراری</label>
         <input
           name="emergencyContactPhone"
           value={formData.emergencyContactPhone}
@@ -240,13 +247,13 @@ function FirstPage() {
         />
         {emergencyContactError ? (
           <div className="idError">
-            <p>شماره تماس اضطراری نامعتبر است</p>
+            <p>شماره تماس نامعتبر است</p>
           </div>
         ) : null}
       </div>
 
       <div className="input-group">
-        <label>شماره تماس اضطراری دوم</label>
+        <label className="form-label">شماره تماس اضطراری دوم</label>
         <input
           name="secondEmergencyContactPhone"
           value={formData.secondEmergencyContactPhone}
@@ -255,13 +262,13 @@ function FirstPage() {
         />
         {secondEmergencyContactError ? (
           <div className="idError">
-            <p>شماره تماس اضطراری نامعتبر است</p>
+            <p>شماره تماس نامعتبر است</p>
           </div>
         ) : null}
       </div>
 
       <div className="input-group">
-        <label>آدرس تماس اضطراری</label>
+        <label className="form-label">آدرس تماس اضطراری</label>
         <textarea
           name="emergencyContactAddress"
           value={formData.emergencyContactAddress}
@@ -273,7 +280,7 @@ function FirstPage() {
       <h2>ارزیابی بالینی</h2>
 
       <div className="input-group">
-        <label>وزن پذیرش</label>
+        <label className="form-label">وزن پذیرش</label>
         <input
           name="admissionWeight"
           value={formData.admissionWeight}
@@ -288,7 +295,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>قد پذیرش</label>
+        <label className="form-label">قد پذیرش</label>
         <input
           name="admissionHeight"
           value={formData.admissionHeight}
@@ -303,7 +310,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>علائم حیاتی</label>
+        <label className="form-label">علائم حیاتی</label>
         <textarea
           name="vitalSignsOnAdmission"
           value={formData.vitalSignsOnAdmission}
@@ -318,7 +325,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>GCS</label>
+        <label className="form-label">GCS</label>
         <input
           name="glasgowComaScale"
           value={formData.glasgowComaScale}
@@ -333,7 +340,7 @@ function FirstPage() {
       </div>
 
       <div className="input-group">
-        <label>APACHE II</label>
+        <label className="form-label">APACHE II</label>
         <input
           name="apacheScore"
           value={formData.apacheScore}

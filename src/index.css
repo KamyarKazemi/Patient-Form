@@ -65,6 +65,12 @@ body {
   font-size: 14px;
 }
 
+.form-label-2 {
+  color: #4a5568;
+  font-weight: 600;
+  font-size: 14px;
+}
+
 .date-label {
   margin-bottom: 12px;
 }
@@ -165,7 +171,6 @@ canvas {
   border-right: 4px solid #e53e3e;
 }
 
-/* Enhanced Select Styling */
 select.form-input {
   cursor: pointer;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a3b1c6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -225,7 +230,6 @@ select.form-input option {
   margin: 20px 0;
 }
 
-/* Improved Mobile Responsiveness */
 @media (max-width: 768px) {
   .container {
     padding: 25px;
@@ -304,7 +308,6 @@ select.form-input option {
   }
 }
 
-/* Custom Scrollbar for Form Container */
 .container::-webkit-scrollbar {
   width: 8px;
 }
@@ -323,19 +326,16 @@ select.form-input option {
   background: #8a9ba8;
 }
 
-/* Section Spacing */
 .input-group:last-of-type {
   margin-bottom: 30px;
 }
 
-/* Enhanced Focus States */
 .form-input:focus,
 select.form-input:focus {
   box-shadow: inset 2px 2px 4px #a3b1c6, inset -2px -2px 4px #ffffff,
     0 0 0 3px rgba(109, 117, 130, 0.1);
 }
 
-/* Required Field Indicator */
 .form-input:required {
   position: relative;
 }

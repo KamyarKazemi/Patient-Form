@@ -875,7 +875,6 @@ function Provider({ children }) {
       },
     ],
 
-    // Insurance Information
     insuranceCompanyOptions: [
       "تامین اجتماعی",
       "خدمات درمانی",
@@ -885,8 +884,6 @@ function Provider({ children }) {
       "فاقد بیمه",
       "سلامت ایرانیان",
     ],
-
-    // Emergency Contact
 
     emergencyContactRelationshipOptions: [
       "همسر",
@@ -912,7 +909,6 @@ function Provider({ children }) {
       "محافظتی",
     ],
 
-    // Administrative Information
     admissionSourceOptions: [
       "اورژانس",
       "انتقال از بخش",
@@ -946,6 +942,8 @@ function Provider({ children }) {
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [medicalRecordError, setMedicalRecordError] = useState(false);
   const [insuranceError, setInsuranceError] = useState(false);
+  const [emergancyContactNameError, setEmergencyContactNameError] =
+    useState(false);
   const [emergencyContactError, setEmergencyContactError] = useState(false);
   const [secondEmergencyContactError, setSecondEmergencyContactError] =
     useState(false);
@@ -961,22 +959,30 @@ function Provider({ children }) {
   };
 
   const handleIdCode = (e) => {
-    const cleaned = e.target.value.replace(/\D/g, "");
+    const cleaned = e.target.value.replace(/\D/g, "").slice(0, 10);
     setIdError(cleaned.length !== 10);
     setFormData((prev) => ({ ...prev, idCode: cleaned }));
   };
 
   const handleMedicalRecordNumber = (e) => {
-    const cleaned = e.target.value.replace(/[^a-zA-Z0-9]/g, "");
+    const cleaned = e.target.value.replace(/[^a-zA-Z0-9\u06F0-\u06F9]/g, "");
+
     setMedicalRecordError(cleaned.length < 4 || cleaned.length > 20);
     setFormData((prev) => ({ ...prev, medicalRecordNumber: cleaned }));
   };
 
   const handlePhoneNumber = (e) => {
-    const input = e.target.value.replace(/\D/g, "").slice(0, 11);
+    const input = e.target.value
+      .replace(/[\u06F0-\u06F9]/g, (d) =>
+        String.fromCharCode(d.charCodeAt(0) - 1728)
+      )
+      .replace(/\D/g, "")
+      .slice(0, 11);
+
     const isValid =
       (input.length === 11 && /^09\d{9}$/.test(input)) ||
       (input.length === 10 && /^9\d{9}$/.test(input));
+
     setPhoneNumberError(!isValid);
     setFormData((prev) => ({ ...prev, phoneNumber: input }));
   };
@@ -988,7 +994,13 @@ function Provider({ children }) {
   };
 
   const handleAge = (e) => {
-    const cleaned = e.target.value.replace(/\D/g, "").slice(0, 3);
+    const cleaned = e.target.value
+      .replace(/[\u06F0-\u06F9]/g, (d) =>
+        String.fromCharCode(d.charCodeAt(0) - 1728)
+      )
+      .replace(/\D/g, "")
+      .slice(0, 3);
+
     const age = parseInt(cleaned, 10);
     setIsAnyError(age <= 0 || age > 120);
     setAgeError(age <= 0 || age > 120);
@@ -996,37 +1008,75 @@ function Provider({ children }) {
   };
 
   const handleInsurancePolicyNumber = (e) => {
-    const cleaned = e.target.value.replace(/[^a-zA-Z0-9]/g, "");
+    const cleaned = e.target.value
+      .replace(/[\u06F0-\u06F9]/g, (d) =>
+        String.fromCharCode(d.charCodeAt(0) - 1728)
+      )
+      .replace(/[^a-zA-Z0-9]/g, "")
+      .slice(0, 10);
+
     setInsuranceError(cleaned.length !== 10);
     setFormData((prev) => ({ ...prev, insurancePolicyNumber: cleaned }));
   };
 
+  const handleEmergencyContactName = (e) => {
+    const cleaned = e.target.value.replace(/[^a-zA-Zآ-ی\s]/g, "");
+    setEmergencyContactNameError(!cleaned);
+    setFormData((prev) => ({ ...prev, emergencyContactName: cleaned }));
+  };
+
   const handleEmergencyContactPhone = (e) => {
-    const input = e.target.value.replace(/\D/g, "").slice(0, 11);
+    const input = e.target.value
+      .replace(/[\u06F0-\u06F9]/g, (d) =>
+        String.fromCharCode(d.charCodeAt(0) - 1728)
+      )
+      .replace(/\D/g, "")
+      .slice(0, 11);
+
     const isValid =
       (input.length === 11 && /^09\d{9}$/.test(input)) ||
       (input.length === 10 && /^9\d{9}$/.test(input));
+
     setEmergencyContactError(!isValid);
     setFormData((prev) => ({ ...prev, emergencyContactPhone: input }));
   };
 
   const handleSecondEmergencyContactPhone = (e) => {
-    const input = e.target.value.replace(/\D/g, "").slice(0, 11);
+    const input = e.target.value
+      .replace(/[\u06F0-\u06F9]/g, (d) =>
+        String.fromCharCode(d.charCodeAt(0) - 1728)
+      )
+      .replace(/\D/g, "")
+      .slice(0, 11);
+
     const isValid =
       (input.length === 11 && /^09\d{9}$/.test(input)) ||
       (input.length === 10 && /^9\d{9}$/.test(input));
+
     setSecondEmergencyContactError(!isValid);
     setFormData((prev) => ({ ...prev, secondEmergencyContactPhone: input }));
   };
 
   const handleWeight = (e) => {
-    const value = e.target.value;
+    const value = e.target.value
+      .replace(/[\u06F0-\u06F9]/g, (d) =>
+        String.fromCharCode(d.charCodeAt(0) - 1728)
+      )
+      .replace(/\D/g, "")
+      .slice(0, 3);
+
     setWeightError(value <= 0 || value > 500);
     setFormData((prev) => ({ ...prev, admissionWeight: value }));
   };
 
   const handleHeight = (e) => {
-    const value = e.target.value;
+    const value = e.target.value
+      .replace(/[\u06F0-\u06F9]/g, (d) =>
+        String.fromCharCode(d.charCodeAt(0) - 1728)
+      )
+      .replace(/\D/g, "")
+      .slice(0, 3);
+
     setHeightError(value <= 0 || value > 300);
     setFormData((prev) => ({ ...prev, admissionHeight: value }));
   };
@@ -1038,13 +1088,25 @@ function Provider({ children }) {
   };
 
   const handleGlasgowComaScale = (e) => {
-    const val = e.target.value;
+    const val = e.target.value
+      .replace(/[\u06F0-\u06F9]/g, (d) =>
+        String.fromCharCode(d.charCodeAt(0) - 1728)
+      )
+      .replace(/\D/g, "")
+      .slice(0, 2);
+
     setGlasgowError(val < 3 || val > 15);
     setFormData((prev) => ({ ...prev, glasgowComaScale: val }));
   };
 
   const handleApacheScore = (e) => {
-    const val = e.target.value;
+    const val = e.target.value
+      .replace(/[\u06F0-\u06F9]/g, (d) =>
+        String.fromCharCode(d.charCodeAt(0) - 1728)
+      )
+      .replace(/\D/g, "")
+      .slice(0, 2);
+
     setApacheError(val < 0 || val > 71);
     setFormData((prev) => ({ ...prev, apacheScore: val }));
   };
@@ -1093,7 +1155,7 @@ function Provider({ children }) {
       آذر: 30,
       دی: 30,
       بهمن: 30,
-      اسفند: 29, // optionally 30 in leap years — skip that logic for now
+      اسفند: 29,
     };
 
     const daysCount = daysInPersianMonth[monthName] || 0;
@@ -1163,7 +1225,6 @@ function Provider({ children }) {
     }
   };
 
-  //hello
   return (
     <FormContext.Provider
       value={{
@@ -1210,6 +1271,8 @@ function Provider({ children }) {
         ageError,
         hasErrors,
         setIsAnyError,
+        handleEmergencyContactName,
+        emergancyContactNameError,
       }}
     >
       {children}

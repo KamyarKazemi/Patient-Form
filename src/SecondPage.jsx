@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import FormContext from "./FormContext";
 import { exportPatientsForToday } from "./utils/exportToExcel";
+import { useNavigate } from "react-router-dom";
 
 function SecondPage() {
   const {
@@ -12,6 +13,12 @@ function SecondPage() {
     setIsAnyError,
     hasErrors,
   } = useContext(FormContext);
+
+  const navigate = useNavigate();
+
+  const handlePreviousState = () => {
+    navigate("/");
+  };
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -36,9 +43,8 @@ function SecondPage() {
         <h1>مرحله دوم</h1>
         <h2 className="h2-form">اطلاعات پزشکی بیمار</h2>
 
-        {/* ICU Reason */}
         <div className="input-group">
-          <label>علت ارجاع به ICU</label>
+          <label className="form-label">علت ارجاع به ICU</label>
           <select
             value={formData.selectedIcuReason}
             onChange={(e) =>
@@ -79,9 +85,8 @@ function SecondPage() {
           </div>
         )}
 
-        {/* Primary Diagnosis */}
         <div className="input-group">
-          <label>تشخیص اولیه پزشک</label>
+          <label className="form-label">تشخیص اولیه پزشک</label>
           <select
             value={formData.selectedPrimaryDiagnosis}
             onChange={(e) =>
@@ -128,9 +133,8 @@ function SecondPage() {
           </div>
         )}
 
-        {/* Comorbidities */}
         <div className="input-group">
-          <label>سابقه بیماری زمینه‌ای</label>
+          <label className="form-label">سابقه بیماری زمینه‌ای</label>
           <select
             value={formData.selectedComorbidity}
             onChange={(e) =>
@@ -173,9 +177,8 @@ function SecondPage() {
           </div>
         )}
 
-        {/* Surgical History */}
         <div className="input-group">
-          <label>سوابق جراحی</label>
+          <label className="form-label">سوابق جراحی</label>
           <select
             value={formData.selectedSurgicalHistory}
             onChange={(e) =>
@@ -220,9 +223,8 @@ function SecondPage() {
           </div>
         )}
 
-        {/* Medications */}
         <div className="input-group">
-          <label>داروهای مصرفی</label>
+          <label className="form-label">داروهای مصرفی</label>
           <select
             value={formData.selectedMedication}
             onChange={(e) =>
@@ -263,9 +265,8 @@ function SecondPage() {
           </div>
         )}
 
-        {/* Drug Allergies */}
         <div className="input-group">
-          <label>آلرژی دارویی</label>
+          <label className="form-label">آلرژی دارویی</label>
           <select
             value={formData.selectedDrugAllergy}
             onChange={(e) =>
@@ -306,9 +307,8 @@ function SecondPage() {
           </div>
         )}
 
-        {/* ICU Admission Reason */}
         <div className="input-group">
-          <label>دلایل بستری ICU</label>
+          <label className="form-label">دلایل بستری ICU</label>
           <select
             value={formData.selectedIcuAdmissionReason}
             onChange={(e) =>
@@ -359,6 +359,9 @@ function SecondPage() {
           ارسال اطلاعات
         </button>
       </form>
+      <button className="form-button" onClick={handlePreviousState}>
+        مرحله قبل
+      </button>
       <button
         type="button"
         onClick={exportPatientsForToday}
