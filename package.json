@@ -1,9 +1,8 @@
 {
-  "name": "json-server-railway",
+  "name": "my-json-server",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://KamyarKazemi.github.io",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,7 +11,7 @@
     "server": "json-server -p 3001 --watch db.json",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "start": "json-server --watch db.json --host 0.0.0.0 --port 3000 --cors"
+    "start": "json-server --watch db.json --port 3000"
   },
   "dependencies": {
     "axios": "^1.10.0",
