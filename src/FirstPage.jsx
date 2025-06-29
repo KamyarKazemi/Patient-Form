@@ -5,6 +5,7 @@ import FormContext from "./FormContext";
 function FirstPage() {
   const {
     setYears,
+    handleBedNum,
     formData,
     handleInputChange,
     handleIdCode,
@@ -44,6 +45,7 @@ function FirstPage() {
     setIsAnyError,
     handleEmergencyContactName,
     emergancyContactNameError,
+    handleDoctor,
   } = useContext(FormContext);
 
   const navigate = useNavigate();
@@ -352,6 +354,28 @@ function FirstPage() {
             <p>امتیاز APACHE II باید بین 0 تا 71 باشد</p>
           </div>
         ) : null}
+      </div>
+
+      <div className="input-group">
+        <label className="form-label">پزشک ارجاع دهنده</label>
+        <input
+          type="text"
+          className="form-input"
+          value={formData.referringDoctor}
+          onChange={handleDoctor}
+          required
+        />
+      </div>
+
+      <div className="input-group">
+        <label className="form-label">شماره تخت</label>
+        <input
+          type="number"
+          className="form-input"
+          value={formData.bedNumber}
+          onChange={handleBedNum}
+          required
+        />
       </div>
 
       <button type="submit" className="form-button">

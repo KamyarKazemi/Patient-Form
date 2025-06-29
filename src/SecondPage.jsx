@@ -12,6 +12,7 @@ function SecondPage() {
     def,
     setIsAnyError,
     hasErrors,
+    handleInputChange,
   } = useContext(FormContext);
 
   const navigate = useNavigate();
@@ -354,6 +355,40 @@ function SecondPage() {
               ))}
           </div>
         )}
+
+        <div className="input-group">
+          <label className="form-label">گروه خونی</label>
+          <select
+            name="bloodType"
+            value={formData.bloodType}
+            onChange={handleInputChange}
+            className="form-input"
+          >
+            <option value="">انتخاب کنید</option>
+            {def.bloodTypes.map((type, i) => (
+              <option key={i} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="input-group">
+          <label className="form-label">نحوه ورود بیمار</label>
+          <select
+            name="modeOfArrival"
+            value={formData.modeOfArrival}
+            onChange={handleInputChange}
+            className="form-input"
+          >
+            <option value="">انتخاب کنید</option>
+            {def.modeOfArrival.map((mode, i) => (
+              <option key={i} value={mode}>
+                {mode}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <button className="form-button" type="submit">
           ارسال اطلاعات

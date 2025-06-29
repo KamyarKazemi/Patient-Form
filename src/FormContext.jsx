@@ -49,12 +49,38 @@ const defaultFormData = {
 
   selectedIcuAdmissionReason: "",
   selectedAdmissionReasonSubcategories: [],
+  bloodType: "",
+  modeOfArrival: "",
+  referringDoctor: "",
+  bedNumber: "",
 };
 
 function Provider({ children }) {
   const [formData, setFormData] = useState(defaultFormData);
 
   const def = {
+    bloodTypes: [
+      "A مثبت",
+      "A منفی",
+      "B مثبت",
+      "B منفی",
+      "AB مثبت",
+      "AB منفی",
+      "O مثبت",
+      "O منفی",
+    ],
+
+    modeOfArrival: [
+      "آمبولانس",
+      "ارجاع از بخش دیگر",
+      "مراجعه حضوری",
+      "انتقال از بیمارستان دیگر",
+      "ارجاع از درمانگاه",
+      "حضور با نیروهای اورژانس",
+      "انتقال هوایی",
+      "ارجاع توسط پزشک خانوادگی",
+    ],
+
     baseIcuReason: [
       {
         symptom: "سایر دلایل عمومی (Miscellaneous)",
@@ -959,9 +985,23 @@ function Provider({ children }) {
   };
 
   const handleIdCode = (e) => {
-    const cleaned = e.target.value.replace(/\D/g, "").slice(0, 10);
+    const cleaned = e.target.value
+      .replace(/[\u06F0-\u06F9]/g, (d) =>
+        String.fromCharCode(d.charCodeAt(0) - 1728)
+      )
+      .replace(/\D/g, "")
+      .slice(0, 10);
+
     setIdError(cleaned.length !== 10);
     setFormData((prev) => ({ ...prev, idCode: cleaned }));
+  };
+
+  const handleBedNum = (e) => {
+    const cleaned = e.target.value.replace(/[\u06F0-\u06F9]/g, (d) =>
+      String.fromCharCode(d.charCodeAt(0) - 1728)
+    );
+
+    setFormData((prev) => ({ ...prev, bedNumber: cleaned }));
   };
 
   const handleMedicalRecordNumber = (e) => {
@@ -1023,6 +1063,10 @@ function Provider({ children }) {
     const cleaned = e.target.value.replace(/[^a-zA-Zآ-ی\s]/g, "");
     setEmergencyContactNameError(!cleaned);
     setFormData((prev) => ({ ...prev, emergencyContactName: cleaned }));
+  };
+  const handleDoctor = (e) => {
+    const cleaned = e.target.value.replace(/[^a-zA-Zآ-ی\s]/g, "");
+    setFormData((prev) => ({ ...prev, referringDoctor: cleaned }));
   };
 
   const handleEmergencyContactPhone = (e) => {
@@ -1171,7 +1215,11 @@ function Provider({ children }) {
   };
 
   const handleCheckboxChange = (category, value, isChecked) => {
-    const fieldName = `selected${category}Subcategories`;
+    const fieldName =
+      category === "bloodTypes"
+        ? "bloodTypes"
+        : `selected${category}Subcategories`;
+
     setFormData((prev) => {
       const currentSelections = prev[fieldName] || [];
       if (isChecked) {
@@ -1273,6 +1321,8 @@ function Provider({ children }) {
         setIsAnyError,
         handleEmergencyContactName,
         emergancyContactNameError,
+        handleDoctor,
+        handleBedNum,
       }}
     >
       {children}

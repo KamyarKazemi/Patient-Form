@@ -69,6 +69,10 @@ export const exportPatientsForToday = async () => {
       selectedDrugAllergySubcategories: "جزئیات آلرژی",
       selectedIcuAdmissionReason: "دلایل بستری ICU",
       selectedIcuAdmissionReasonSubcategories: "جزئیات بستری ICU",
+      bloodType: "گروه خونی",
+      modeOfArrival: "شیوه ورود",
+      referringDoctor: "پزشک ارجاع دهنده",
+      bedNumber: "شماره تخت",
     };
 
     const formatted = patients.map((p) => {
