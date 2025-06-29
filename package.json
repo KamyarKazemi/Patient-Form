@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://KamyarKazemi.github.io",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,7 +11,7 @@
     "preview": "vite preview",
     "server": "json-server -p 3001 --watch db.json",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b main -d dist -t",
+    "deploy": "gh-pages -d dist",
     "start": "json-server --watch db.json --host 0.0.0.0 --port 3000 --cors"
   },
   "dependencies": {
